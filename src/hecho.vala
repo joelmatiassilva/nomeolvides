@@ -17,14 +17,15 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class hecho : GLib.Object {
+public class Hecho : GLib.Object {
 	private string m_nombre { get; set; }
 	private string m_descripcion { get; set; }
 
 
 	// Constructor
-		public hecho () {
-
+		public Hecho (string nombre, string descripcion) {
+			this.m_nombre = nombre;
+			this.m_descripcion = descripcion;
 	}
 
 }

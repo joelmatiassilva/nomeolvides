@@ -20,7 +20,7 @@
 using GLib;
 using Gtk;
 
-public class Main : Object 
+public class Nomeolvides.App : Gtk.Application 
 {
 
 	/* 
@@ -32,8 +32,10 @@ public class Main : Object
 
 	/* ANJUTA: Widgets declaration for nomeolvides.ui - DO NOT REMOVE */
 
+	public static App app;
+	public Nomeolvides.Window window;
 
-	public Main ()
+/*	public Main ()
 	{
 
 		try 
@@ -43,7 +45,7 @@ public class Main : Object
 			builder.connect_signals (this);
 
 			var window = builder.get_object ("window") as Window;
-			/* ANJUTA: Widgets initialization for nomeolvides.ui - DO NOT REMOVE */
+			/* ANJUTA: Widgets initialization for nomeolvides.ui - DO NOT REMOVE *//*
 			window.show_all ();
 		} 
 		catch (Error e) {
@@ -52,20 +54,44 @@ public class Main : Object
 
 	}
 
+	*/
+
+	private void create_window ()
+	{
+		var action = new GLib.SimpleAction ("quit",null);
+		action.activate.connect (() => { window.destroy(); });
+		this.add_action (action);
+
+		window = new Nomeolvides.Window (this);
+		window.set_application (this);
+		window.set_title ("Nomeolvides");
+		window.set_default_size (500,250);
+		window.hide_titlebar_when_maximized = true;
+
+		var button = new Button.with_label ("Clickeame gil!");
+		button.clicked.connect( () => { button.label = "Maximizame!"; });
+
+		window.add (button);
+
+		window.show_all();
+	}
+
+	public override void activate ()
+	{
+		create_window ();
+
+		app.window.show();
+	}
+
 	[CCode (instance_pos = -1)]
 	public void on_destroy (Widget window) 
 	{
 		Gtk.main_quit();
 	}
 
-	static int main (string[] args) 
+	public App ()
 	{
-		Gtk.init (ref args);
-		var app = new Main ();
-
-		Gtk.main ();
-		
-		return 0;
+		app = this;
 	}
 }
 

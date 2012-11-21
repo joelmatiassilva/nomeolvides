@@ -64,28 +64,20 @@ public class Nomeolvides.App : Gtk.Application
 
 		window = new Nomeolvides.Window (this);
 		window.set_application (this);
-		window.set_title ("Nomeolvides");
+		window.set_title ("No me olvides - ");
 		window.set_default_size (500,250);
 		window.hide_titlebar_when_maximized = true;
 
-		var toolbar = new Toolbar();
-		toolbar.get_style_context().add_class(STYLE_CLASS_PRIMARY_TOOLBAR);
+		var panel = new Nomeolvides.Panel();
+		window.add (panel);
+//		var button = new Button.with_label ("Clickeame gil!");
+//		button.clicked.connect( () => { button.label = "Maximizame!"; });
 
-		var add_button = new ToolButton.from_stock (Stock.ADD);
-		add_button.is_important = true;
-		//add_button.clicked.connect (on_add_clicked);
-
-		toolbar.add (add_button);
+		panel.grid.attach (button,0,0,0,0);
 		
-
-		var button = new Button.with_label ("Clickeame gil!");
-		button.clicked.connect( () => { button.label = "Maximizame!"; });
-
-		Box grid = new Box (Orientation.VERTICAL, 0);
-		grid.pack_start (toolbar, false, true, 0);
-		grid.pack_start (button, false, false, 0);
-			
-		window.add (grid);
+		var botton = new Button.with_label ("no me clickees gil!");
+		panel.attach (botton,0,0,1,1);
+		//window.add (button);
 
 		window.show_all();
 	}
@@ -108,4 +100,3 @@ public class Nomeolvides.App : Gtk.Application
 		app = this;
 	}
 }
-

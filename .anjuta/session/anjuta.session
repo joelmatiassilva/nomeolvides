@@ -1,0 +1,28 @@
+[Anjuta]
+Maximized=1
+Geometry=1920x1025+0+27
+
+[Project Manager]
+Expand=nomeolvides%%%nomeolvides//src%%%nomeolvides//src//nomeolvides%%%nomeolvides//src//ui%%%nomeolvides//nomeolvidesdoc%%%nomeolvides//NOMEOLVIDES
+
+[File Loader]
+Files=../../src/main.vala#1%%%../../src/nomeolvides-window.vala#26%%%../../src/nomeolvides-app.vala#76%%%../../src/config.vapi#1%%%../../src/panel.vala#29%%%../../Makefile.am#13
+
+[Document Manager]
+bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n
+
+[Execution]
+Program uri=../../src/nomeolvides
+Run in terminal=2
+Working directories=../../../nomeolvides
+
+[Build]
+Configuration list=1:Default:%%%1:Debug:Debug%%%1:Profiling:Profiling%%%1:Optimized:Optimized
+Selected Configuration=Default
+BuildArgs/Default=--enable-maintainer-mode
+BuildArgs/Debug=--enable-maintainer-mode 'CFLAGS=-g -O0' 'CXXFLAGS=-g -O0' 'JFLAGS=-g -O0' 'FFLAGS=-g -O0'
+BuildArgs/Profiling=--enable-maintainer-mode 'CFLAGS=-g -pg' 'CXXFLAGS=-g -pg' 'JFLAGS=-g -pg' 'FFLAGS=-g -pg'
+BuildArgs/Optimized=--enable-maintainer-mode 'CFLAGS=-O2' 'CXXFLAGS=-O2' 'JFLAGS=-O2' 'FFLAGS=-O2'
+
+[Debugger]
+Stop at beginning=2

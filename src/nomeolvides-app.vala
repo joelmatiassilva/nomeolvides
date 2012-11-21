@@ -64,14 +64,20 @@ public class Nomeolvides.App : Gtk.Application
 
 		window = new Nomeolvides.Window (this);
 		window.set_application (this);
-		window.set_title ("Nomeolvides");
+		window.set_title ("No me olvides - ");
 		window.set_default_size (500,250);
 		window.hide_titlebar_when_maximized = true;
 
-		var button = new Button.with_label ("Clickeame gil!");
-		button.clicked.connect( () => { button.label = "Maximizame!"; });
+		var panel = new Nomeolvides.Panel();
+		window.add (panel);
+//		var button = new Button.with_label ("Clickeame gil!");
+//		button.clicked.connect( () => { button.label = "Maximizame!"; });
 
-		window.add (button);
+		panel.grid.attach (button,0,0,0,0);
+		
+		var botton = new Button.with_label ("no me clickees gil!");
+		panel.attach (botton,0,0,1,1);
+		//window.add (button);
 
 		window.show_all();
 	}

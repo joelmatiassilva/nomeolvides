@@ -1,10 +1,12 @@
 [Anjuta]
 Maximized=1
-Geometry=1024x541+0+24
+Geometry=1920x1025+0+27
 
 [Project Manager]
-Shortcut=nomeolvides
-Expand=nomeolvides
+Expand=nomeolvides%%%nomeolvides//src%%%nomeolvides//src//nomeolvides%%%nomeolvides//src//ui%%%nomeolvides//nomeolvidesdoc%%%nomeolvides//NOMEOLVIDES
+
+[File Loader]
+Files=../../src/main.vala#1%%%../../src/nomeolvides-window.vala#26%%%../../src/nomeolvides-app.vala#76%%%../../src/config.vapi#1%%%../../src/panel.vala#29%%%../../Makefile.am#13
 
 [Document Manager]
 bookmarks=<?xml version="1.0" encoding="UTF-8"?>\n<bookmarks/>\n

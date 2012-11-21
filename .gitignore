@@ -62,3 +62,6 @@ Makefile.in
 nomeolvides
 nomeolvides.o
 nomeolvides_vala.stamp
+*~
+.anjuta/*
+.anjuta_sym_db.db

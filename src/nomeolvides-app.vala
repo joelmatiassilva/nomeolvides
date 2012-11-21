@@ -34,7 +34,7 @@ public class Nomeolvides.App : Gtk.Application
 
 	public static App app;
 	public Nomeolvides.Window window;
-
+	private TextView hechos_text_view;
 /*	public Main ()
 	{
 
@@ -68,16 +68,23 @@ public class Nomeolvides.App : Gtk.Application
 		window.set_default_size (500,250);
 		window.hide_titlebar_when_maximized = true;
 
-		var panel = new Nomeolvides.Panel();
-		window.add (panel);
-//		var button = new Button.with_label ("Clickeame gil!");
-//		button.clicked.connect( () => { button.label = "Maximizame!"; });
+		var toolbar = new Toolbar ();
+		toolbar.get_style_context().add_class (STYLE_CLASS_PRIMARY_TOOLBAR);
 
-		panel.grid.attach (button,0,0,0,0);
-		
-		var botton = new Button.with_label ("no me clickees gil!");
-		panel.attach (botton,0,0,1,1);
-		//window.add (button);
+		var add_button = new ToolButton.from_stock (Stock.ADD);
+		add_button.is_important = true;
+
+		toolbar.add (add_button);
+
+		this.hechos_text_view = new TextView ();
+		this.hechos_text_view.editable = false;
+		this.hechos_text_view.cursor_visible = false;
+
+		var vbox = new Box (Orientation.VERTICAL,0);
+		vbox.pack_start (toolbar, false, true, 0);
+		vbox.pack_start (this.hechos_text_view, true, true, 0);
+
+		window.add (vbox);
 
 		window.show_all();
 	}

@@ -68,10 +68,24 @@ public class Nomeolvides.App : Gtk.Application
 		window.set_default_size (500,250);
 		window.hide_titlebar_when_maximized = true;
 
+		var toolbar = new Toolbar();
+		toolbar.get_style_context().add_class(STYLE_CLASS_PRIMARY_TOOLBAR);
+
+		var add_button = new ToolButton.from_stock (Stock.ADD);
+		add_button.is_important = true;
+		//add_button.clicked.connect (on_add_clicked);
+
+		toolbar.add (add_button);
+		
+
 		var button = new Button.with_label ("Clickeame gil!");
 		button.clicked.connect( () => { button.label = "Maximizame!"; });
 
-		window.add (button);
+		Box grid = new Box (Orientation.VERTICAL, 0);
+		grid.pack_start (toolbar, false, true, 0);
+		grid.pack_start (button, false, false, 0);
+			
+		window.add (grid);
 
 		window.show_all();
 	}

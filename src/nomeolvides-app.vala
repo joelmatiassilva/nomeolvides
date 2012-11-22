@@ -73,6 +73,7 @@ public class Nomeolvides.App : Gtk.Application
 
 		var add_button = new ToolButton.from_stock (Stock.ADD);
 		add_button.is_important = true;
+		add_button.clicked.connect (add_hecho);
 
 		toolbar.add (add_button);
 
@@ -100,6 +101,13 @@ public class Nomeolvides.App : Gtk.Application
 	public void on_destroy (Widget window) 
 	{
 		Gtk.main_quit();
+	}
+
+	public void add_hecho ()
+	{
+		var add_dialog = new Add_dialog();
+		add_dialog.show();
+
 	}
 
 	public App ()

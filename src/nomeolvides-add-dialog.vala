@@ -31,21 +31,37 @@ public class Nomeolvides.Add_dialog : Dialog
 		var nombre_label = new Label.with_mnemonic ("Nombre: ");
 		var descripcion_entry = new Entry ();
 		var descripcion_label = new Label.with_mnemonic ("Descripcion: ");
-		var boton_agregar = new Button.with_label ("Agregar");
+/*		var boton_agregar = new Button.with_label ("Agregar");
 		var boton_cancelar = new Button.with_label ("Cancelar");
-
+*/
+		var boton_cancelar = add_button (Stock.CANCEL , ResponseType.CLOSE);
+		var boton_agregar = add_button (Stock.ADD , ResponseType.APPLY);
+		
 		var grid = new Grid ();
 
 		grid.attach (nombre_label, 0, 0, 1, 1);
 	    grid.attach (nombre_entry, 1, 0, 1, 1);
 		grid.attach (descripcion_label, 0, 1, 1, 1);
 		grid.attach (descripcion_entry, 1, 1, 1, 1);
-		grid.attach (boton_cancelar, 0, 2, 1, 1);
-		grid.attach (boton_agregar, 1, 2, 1, 1);
+		//grid.attach (boton_cancelar, 0, 2, 1, 1);
+		//grid.attach (boton_agregar, 1, 2, 1, 1);		
 
 		var contenido = this.get_content_area () as Box;
 		contenido.pack_start (grid, false, true, 0);
 
+		this.response.connect (on_response);
 		this.show_all ();
 	}
+
+
+	private void on_response (Dialog source, int response_id) {
+        switch (response_id) {
+        case ResponseType.APPLY:
+            //on_find_clicked ();
+            break;
+        case ResponseType.CLOSE:
+            destroy ();
+            break;
+        }
+    }
 }

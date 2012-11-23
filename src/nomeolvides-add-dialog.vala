@@ -25,15 +25,18 @@ public class Nomeolvides.Add_dialog : Dialog
 {
 	private Entry nombre_entry;
 	private Entry descripcion_entry;
+	public Hecho respuesta {get; private set;}
 	
 	public Add_dialog ()
 	{
 		this.set_title ("Añadir un Heho Histórico");
+		this.resizable = false;
+		this.modal = true;		
 		
 		var nombre_label = new Label.with_mnemonic ("Nombre: ");
 		var descripcion_label = new Label.with_mnemonic ("Descripcion: ");
-		var boton_cancelar = add_button (Stock.CANCEL , ResponseType.CLOSE);
-		var boton_agregar = add_button (Stock.ADD , ResponseType.APPLY);
+		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
+		this.add_button (Stock.ADD , ResponseType.APPLY);
 		
 		this.nombre_entry = new Entry ();
 		this.descripcion_entry = new Entry ();
@@ -48,6 +51,7 @@ public class Nomeolvides.Add_dialog : Dialog
 		contenido.pack_start (grid, false, true, 0);
 
 		this.response.connect (on_response);
+
 		this.show_all ();
 	}
 
@@ -65,7 +69,8 @@ public class Nomeolvides.Add_dialog : Dialog
 
 	private void aplicar () {
 		if(this.nombre_entry.get_text_length () > 0) {
-			this.descripcion_entry.set_text(this.nombre_entry.get_text ());
+		this.respuesta  = new Hecho (this.nombre_entry.get_text (), 
+									 this.descripcion_entry.get_text ());
 		}
 	
 	}

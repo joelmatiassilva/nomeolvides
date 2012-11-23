@@ -35,26 +35,6 @@ public class Nomeolvides.App : Gtk.Application
 	public static App app;
 	public Nomeolvides.Window window;
 	private TextView hechos_text_view;
-/*	public Main ()
-	{
-
-		try 
-		{
-			var builder = new Builder ();
-			builder.add_from_file (UI_FILE);
-			builder.connect_signals (this);
-
-			var window = builder.get_object ("window") as Window;
-			/* ANJUTA: Widgets initialization for nomeolvides.ui - DO NOT REMOVE *//*
-			window.show_all ();
-		} 
-		catch (Error e) {
-			stderr.printf ("Could not load UI: %s\n", e.message);
-		} 
-
-	}
-
-	*/
 
 	private void create_window ()
 	{
@@ -108,6 +88,11 @@ public class Nomeolvides.App : Gtk.Application
 		var add_dialog = new Add_dialog();
 		add_dialog.show();
 
+		if (add_dialog.run() == ResponseType.APPLY)
+		{
+			this.hechos_text_view.buffer.text = add_dialog.respuesta.nombre;
+			add_dialog.destroy();
+		}		
 	}
 
 	public App ()

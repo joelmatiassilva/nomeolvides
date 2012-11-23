@@ -90,7 +90,7 @@ public class Nomeolvides.App : Gtk.Application
 
 		if (add_dialog.run() == ResponseType.APPLY)
 		{
-			this.hechos_text_view.buffer.text = add_dialog.respuesta.nombre;
+			this.hechos_text_view.buffer.text += add_dialog.respuesta.nombre + ": " + add_dialog.respuesta.descripcion + "\n";
 			add_dialog.destroy();
 		}		
 	}

@@ -34,7 +34,7 @@ public class Nomeolvides.App : Gtk.Application
 
 	public static App app;
 	public Nomeolvides.Window window;
-	private TextView hechos_text_view;
+	private TextViewHecho hechos_text_view;
 
 	private void create_window ()
 	{
@@ -57,9 +57,7 @@ public class Nomeolvides.App : Gtk.Application
 
 		toolbar.add (add_button);
 
-		this.hechos_text_view = new TextView ();
-		this.hechos_text_view.editable = false;
-		this.hechos_text_view.cursor_visible = false;
+		this.hechos_text_view = new TextViewHecho ();
 
 		var vbox = new Box (Orientation.VERTICAL,0);
 		vbox.pack_start (toolbar, false, true, 0);
@@ -90,7 +88,7 @@ public class Nomeolvides.App : Gtk.Application
 
 		if (add_dialog.run() == ResponseType.APPLY)
 		{
-			this.hechos_text_view.buffer.text += add_dialog.respuesta.nombre + ": " + add_dialog.respuesta.descripcion + "\n";
+			this.hechos_text_view.agregarHecho (add_dialog.respuesta);
 			add_dialog.destroy();
 		}		
 	}

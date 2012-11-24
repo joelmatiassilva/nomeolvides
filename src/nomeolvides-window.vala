@@ -21,7 +21,7 @@ using Gtk;
 
 public class Nomeolvides.Window : Gtk.ApplicationWindow
 {
-	public Box box { get; private set; }
+	public Box main_box { get; private set; }
 	private Main_toolbar toolbar;
 	private TextViewHecho hechos_text_view;
 	
@@ -31,18 +31,25 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		this.set_application (app);
 		this.set_title ("No me olvides - ");
 		this.set_position (WindowPosition.CENTER);
-		this.set_default_size (500,250);
+		this.set_default_size (800,650);
+		this.set_size_request (500,350);
 		this.hide_titlebar_when_maximized = true;
 
-		box = new Box (Orientation.VERTICAL,0);
-		this.add (box);
+		main_box = new Box (Orientation.VERTICAL,0);
+		this.add (main_box);
 		
 		this.toolbar = new Nomeolvides.Main_toolbar ();
-		botones_toolbar ();
+		this.botones_toolbar ();
+
+		var label_provisorio = new Label ("Provisorio, acá va un list");		
 		this.hechos_text_view = new TextViewHecho ();
 
-		this.box.pack_start (toolbar, false, true, 0);
-		this.box.pack_start (this.hechos_text_view, true, true, 0);
+		var list_view_box = new Box (Orientation.HORIZONTAL,0);
+		list_view_box.pack_start (label_provisorio, false, false, 0);
+		list_view_box.pack_start (this.hechos_text_view, true, true, 0);
+
+		this.main_box.pack_start (toolbar, false, true, 0);		
+		this.main_box.pack_start (list_view_box, true, true, 0);
 	}
 
 	private void botones_toolbar()

@@ -34,7 +34,6 @@ public class Nomeolvides.App : Gtk.Application
 
 	public static App app;
 	public Nomeolvides.Window window;
-	private TextViewHecho hechos_text_view;
 
 	private void create_window ()
 	{
@@ -43,27 +42,6 @@ public class Nomeolvides.App : Gtk.Application
 		this.add_action (action);
 
 		window = new Nomeolvides.Window (this);
-		window.set_application (this);
-		window.set_title ("No me olvides - ");
-		window.set_default_size (500,250);
-		window.hide_titlebar_when_maximized = true;
-
-		var toolbar = new Toolbar ();
-		toolbar.get_style_context().add_class (STYLE_CLASS_PRIMARY_TOOLBAR);
-
-		var add_button = new ToolButton.from_stock (Stock.ADD);
-		add_button.is_important = true;
-		add_button.clicked.connect (add_hecho);
-
-		toolbar.add (add_button);
-
-		this.hechos_text_view = new TextViewHecho ();
-
-		var vbox = new Box (Orientation.VERTICAL,0);
-		vbox.pack_start (toolbar, false, true, 0);
-		vbox.pack_start (this.hechos_text_view, true, true, 0);
-
-		window.add (vbox);
 
 		window.show_all();
 	}
@@ -75,23 +53,6 @@ public class Nomeolvides.App : Gtk.Application
 		app.window.show();
 	}
 
-	[CCode (instance_pos = -1)]
-	public void on_destroy (Widget window) 
-	{
-		Gtk.main_quit();
-	}
-
-	public void add_hecho ()
-	{
-		var add_dialog = new Add_dialog();
-		add_dialog.show();
-
-		if (add_dialog.run() == ResponseType.APPLY)
-		{
-			this.hechos_text_view.agregarHecho (add_dialog.respuesta);
-			add_dialog.destroy();
-		}		
-	}
 
 	public App ()
 	{

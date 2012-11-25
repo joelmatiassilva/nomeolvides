@@ -29,7 +29,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	{   
 		Object (application: app);
 		this.set_application (app);
-		this.set_title ("No me olvides - ");
+		this.set_title ("Nomeolvides - ");
 		this.set_position (WindowPosition.CENTER);
 		this.set_default_size (500,250);
 		this.hide_titlebar_when_maximized = true;

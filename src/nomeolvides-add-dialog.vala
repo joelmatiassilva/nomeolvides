@@ -51,7 +51,7 @@ public class Nomeolvides.Add_dialog : Dialog
 		contenido.pack_start (grid, false, true, 0);
 
 		this.response.connect (on_response);
-
+		
 		this.show_all ();
 	}
 

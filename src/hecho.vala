@@ -30,5 +30,15 @@ public class Hecho : GLib.Object
 		this.descripcion = descripcion;
 	}
 
+	public string aJson () {
+		string retorno = "{\"Hecho\": {";
+
+		retorno += "\"nombre\":\"" + this.nombre + "\",";
+		retorno += "\"descripcion\":\"" + this.descripcion + "\"";
+
+		retorno +="}}";	
+
+		return retorno;
+	}
 }
 

@@ -2,6 +2,34 @@
 n.n.n / 2012-11-24 
 ==================
 
+  * Merge branch 'master' of https://github.com/LonkoSoft/nomeolvides
+  *  * se cambió el nombre del archivo src/text-view-hecho.vala para estar acorde con el resto de los archivos  * se agregó la funcion Nomeolvides.Hecho.aJson () que traduce el objeto a un string en formato JSON
+  * LIMPIEZA DEL CÓDIGO II
+  * LIMPIEZA DEL CÓDIGO
+  *  * se creo la clase Nomeolvides.TextViewHecho, para guardar y mostrar los hechos
+  *  * Ahora se agrega el hecho con el siguiente formato "NOMBRE: DESCRIPCION\n" al final del buffer de texto
+  * La clase hecho ahora es Hecho para que sea coherente con el resto de las clases. La clase add dialog tiene una variable miembro pública de tipo Hecho llamada respuesta. La función aplicar de add_dialog ahora crea un objeto Hecho con los valores de los entry y lo guarda en la variable miembro respuesta. La función add_hecho de la clase App ahora toma el nombre del Hecho si se creé en el dialogo para agregar y lo copia en el buffer del text_view para que se muestre en pantalla.
+  *  * pruebas con el método Nomeolvides.Add_dialog.aplicar()
+  *  * los botones de Nomeolvides.Add_dialog ahora se crean uitilzando el método add_button()  * se agregó una función para procesar las respuestas, y ahora se puede cerrar el diálogo con el boton cancelar
+  * Se agregó el boceto de dialogo para agregar hechos.
+  * Se agrregó la variable grid a la interface publica de Nomeolvides.Panel. Además de inició la tentativa de gui en Nomeolvides.App. Además de removieron del repositorio los archivos de ocultos anjuta, agregados por error y se añadieron a la lista de ignorados por git.
+  * Merge branch 'master' of https://github.com/LonkoSoft/nomeolvides
+  * agregado panel.vala
+  * Merge branch 'master' of https://github.com/LonkoSoft/nomeolvides
+  * Se agregaron los archivos cultos .anjuta/* y anjuta_sym_db.db a .gitignore. Se siguen probando iu para la ventana principal de la app
+  * pruebas con gtk
+  * Se cambió la estructura de la aplicación. Separando la funcion main de la misma y manejando el uso de la aplicación desde otro archivo
+  * Se modificó la clase hecho, para que funciones correctamente
+  * prueba 1
+  * se agregaron archivos faltantes al repo
+  * creacion de UI básica para pruebas
+  * se añadio la clase hecho
+  * proyecto inicial de anjuta
+  * Initial commit
+
+n.n.n / 2012-11-24 
+==================
+
   * LIMPIEZA DEL CÓDIGO
   *  * se creo la clase Nomeolvides.TextViewHecho, para guardar y mostrar los hechos
   *  * Ahora se agrega el hecho con el siguiente formato "NOMBRE: DESCRIPCION\n" al final del buffer de texto

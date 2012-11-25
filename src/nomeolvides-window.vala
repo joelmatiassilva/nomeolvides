@@ -25,33 +25,33 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	private Main_toolbar toolbar;
 	private TextViewHecho hechos_text_view;
 	
-	public Window (Gtk.Application app )
+	public Window (Gtk.Application app)
 	{   
-		Object (application: app);
-		this.set_application (app);
-		this.set_title ("No me olvides - ");
-		this.set_position (WindowPosition.CENTER);
-		this.set_default_size (500,250);
+		Object(application: app);
+		this.set_application(app);
+		this.set_title("No me olvides - ");
+		this.set_position(WindowPosition.CENTER);
+		this.set_default_size(500,250);
 		this.hide_titlebar_when_maximized = true;
 
-		box = new Box (Orientation.VERTICAL,0);
-		this.add (box);
+		box = new Box(Orientation.VERTICAL,0);
+		this.add(box);
 		
-		this.toolbar = new Nomeolvides.Main_toolbar ();
-		botones_toolbar ();
-		this.hechos_text_view = new TextViewHecho ();
+		this.toolbar = new Nomeolvides.Main_toolbar();
+		botones_toolbar();
+		this.hechos_text_view = new TextViewHecho();
 
-		this.box.pack_start (toolbar, false, true, 0);
-		this.box.pack_start (this.hechos_text_view, true, true, 0);
+		this.box.pack_start(toolbar, false, true, 0);
+		this.box.pack_start(this.hechos_text_view, true, true, 0);
 	}
 
-	private void botones_toolbar()
+	private void botones_toolbar ()
 	{
-		var add_button = new ToolButton.from_stock (Stock.ADD);
+		var add_button = new ToolButton.from_stock(Stock.ADD);
 		add_button.is_important = true;
-		add_button.clicked.connect (this.add_hecho);
+		add_button.clicked.connect(this.add_hecho);
 
-		this.toolbar.add (add_button);
+		this.toolbar.add(add_button);
 	}
 
 	public void add_hecho ()
@@ -61,7 +61,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 		if (add_dialog.run() == ResponseType.APPLY)
 		{
-			this.hechos_text_view.agregarHecho (add_dialog.respuesta);
+			this.hechos_text_view.agregarHecho(add_dialog.respuesta);
 			add_dialog.destroy();
 		}		
 	}

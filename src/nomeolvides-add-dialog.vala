@@ -25,7 +25,7 @@ public class Nomeolvides.Add_dialog : Dialog
 {
 	private Entry nombre_entry;
 	private Entry descripcion_entry;
-	public Hecho respuesta {get; private set;}
+	public Hecho respuesta { get; private set; }
 	
 	public Add_dialog ()
 	{
@@ -33,45 +33,48 @@ public class Nomeolvides.Add_dialog : Dialog
 		this.resizable = false;
 		this.modal = true;		
 		
-		var nombre_label = new Label.with_mnemonic ("Nombre: ");
-		var descripcion_label = new Label.with_mnemonic ("Descripcion: ");
-		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
-		this.add_button (Stock.ADD , ResponseType.APPLY);
+		var nombre_label = new Label.with_mnemonic("Nombre: ");
+		var descripcion_label = new Label.with_mnemonic("Descripcion: ");
+		this.add_button(Stock.CANCEL , ResponseType.CLOSE);
+		this.add_button(Stock.ADD , ResponseType.APPLY);
 		
-		this.nombre_entry = new Entry ();
-		this.descripcion_entry = new Entry ();
+		this.nombre_entry = new Entry();
+		this.descripcion_entry = new Entry();
 
-		var grid = new Grid ();
-		grid.attach (nombre_label, 0, 0, 1, 1);
-	    grid.attach (nombre_entry, 1, 0, 1, 1);
-		grid.attach (descripcion_label, 0, 1, 1, 1);
-		grid.attach (descripcion_entry, 1, 1, 1, 1);
+		var grid = new Grid();
+		grid.attach(nombre_label, 0, 0, 1, 1);
+	    grid.attach(nombre_entry, 1, 0, 1, 1);
+		grid.attach(descripcion_label, 0, 1, 1, 1);
+		grid.attach(descripcion_entry, 1, 1, 1, 1);
 		
-		var contenido = this.get_content_area () as Box;
-		contenido.pack_start (grid, false, true, 0);
+		var contenido = this.get_content_area() as Box;
+		contenido.pack_start(grid, false, true, 0);
 
-		this.response.connect (on_response);
+		this.response.connect(on_response);
 
 		this.show_all ();
 	}
 
 
-	private void on_response (Dialog source, int response_id) {
-        switch (response_id) {
-        case ResponseType.APPLY:
-            aplicar ();
-            break;
-        case ResponseType.CLOSE:
-            destroy ();
-            break;
+	private void on_response (Dialog source, int response_id)
+	{
+        switch (response_id)
+		{
+    		case ResponseType.APPLY:
+        		aplicar();
+       			break;
+    		case ResponseType.CLOSE:
+        		destroy();
+        		break;
         }
     }
 
-	private void aplicar () {
-		if(this.nombre_entry.get_text_length () > 0) {
-		this.respuesta  = new Hecho (this.nombre_entry.get_text (), 
-									 this.descripcion_entry.get_text ());
-		}
-	
+	private void aplicar ()
+	{
+		if(this.nombre_entry.get_text_length() > 0)
+		{
+			this.respuesta  = new Hecho (this.nombre_entry.get_text(), 
+			            				 this.descripcion_entry.get_text());
+		}	
 	}
 }

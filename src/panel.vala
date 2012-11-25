@@ -19,18 +19,16 @@
 using Gtk;
 
 
-public class Nomeolvides.Panel : Frame {
-
-		public Grid grid;	
+public class Nomeolvides.Panel : Frame
+{
+	public Grid grid;	
 
 	// Constructor
-		public Panel () {
-			
-		    grid = new Grid ();
-    		grid.set_orientation (Orientation.VERTICAL);
-    		this.add (grid);
-
+	public Panel ()
+	{	
+		grid = new Grid();
+    	grid.set_orientation(Orientation.VERTICAL);
+    	this.add(grid);
 	}
 
 }
-

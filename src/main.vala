@@ -26,11 +26,11 @@ public static int main (string[] args)
 	//Intl.bind_textdomain_codeset (Config.GETTEXT_PACKAGE,"UTF-8");
 	//Intl.textdomain (Config.GETTEXT_PACKAGE);
 	
-	Gtk.init (ref args);
+	Gtk.init(ref args);
 	//Notify.init (_("Nomeolvides")); 
 		
-	var app = new App ();
-	app.run (args);
+	var app = new App();
+	app.run(args);
 	app = null;
 		
 	return 0;

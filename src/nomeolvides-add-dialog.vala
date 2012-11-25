@@ -50,13 +50,9 @@ public class Nomeolvides.Add_dialog : Dialog
 		var contenido = this.get_content_area() as Box;
 		contenido.pack_start(grid, false, true, 0);
 
-<<<<<<< HEAD
-		this.response.connect (on_response);
-		
-=======
 		this.response.connect(on_response);
 
->>>>>>> f9cd76d21309a63c002b49338d2db17fe3bd406e
+
 		this.show_all ();
 	}
 

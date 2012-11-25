@@ -22,29 +22,35 @@ public class Nomeolvides.TextViewHecho : TextView {
 
 	private Array<Hecho> hechos;
 
-	public TextViewHecho () {
+	public TextViewHecho ()
+	{
 
-		this.hechos = new Array<Hecho> ();
+		this.hechos = new Array<Hecho>();
 		this.editable = false;
 		this.cursor_visible = false;
 	}
 
-	public void mostrar () {
+	public void mostrar ()
+	{
 		int i;
 		string temp = "" ;
 		
 		for (i=0; i < this.hechos.length; i++) {
-//			temp += this.hechos.index(i).nombre + ": " + this.hechos.index(i).descripcion + "\n";
+
 			temp += this.hechos.index(i).aJson() + "\n";
+
+/*			temp += this.hechos.index(i).nombre + ": "
+				 + this.hechos.index(i).descripcion + "\n";
+*/
 		}
 		this.buffer.text = temp;
 	}
 
-	public void agregarHecho (Hecho nuevo) {
+	public void agregarHecho (Hecho nuevo)
+	{
 
-		this.hechos.append_val (nuevo);
-		this.mostrar ();
-
+		this.hechos.append_val(nuevo);
+		this.mostrar();
 	}
 
 }

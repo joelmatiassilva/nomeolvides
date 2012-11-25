@@ -23,6 +23,6 @@ public class Nomeolvides.Main_toolbar : Toolbar
 {
 	public Main_toolbar ()
 	{
-		this.get_style_context().add_class (STYLE_CLASS_PRIMARY_TOOLBAR);
+		this.get_style_context().add_class(STYLE_CLASS_PRIMARY_TOOLBAR);
 	}
 }

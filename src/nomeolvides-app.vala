@@ -37,18 +37,18 @@ public class Nomeolvides.App : Gtk.Application
 
 	private void create_window ()
 	{
-		var action = new GLib.SimpleAction ("quit",null);
-		action.activate.connect (() => { window.destroy(); });
+		var action = new GLib.SimpleAction("quit",null);
+		action.activate.connect(() => { window.destroy(); });
 		this.add_action (action);
 
-		window = new Nomeolvides.Window (this);
+		window = new Nomeolvides.Window(this);
 
 		window.show_all();
 	}
 
 	public override void activate ()
 	{
-		create_window ();
+		create_window();
 
 		app.window.show();
 	}

@@ -41,4 +41,3 @@ public class Hecho : GLib.Object
 		return retorno;
 	}
 }
-

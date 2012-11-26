@@ -43,8 +43,12 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		botones_toolbar();
 		this.hechos_text_view = new TextViewHecho();
 
+		var scroll = new ScrolledWindow (null, null);
+        scroll.set_policy (PolicyType.AUTOMATIC, PolicyType.AUTOMATIC);
+        scroll.add (this.hechos_text_view);
+
 		this.box.pack_start(toolbar, false, true, 0);
-		this.box.pack_start(this.hechos_text_view, true, true, 0);
+		this.box.pack_start(scroll, true, true, 0);
 	}
 
 	private void botones_toolbar ()
@@ -54,6 +58,12 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		add_button.clicked.connect(this.add_hecho);
 
 		this.toolbar.add(add_button);
+
+		var open_button = new ToolButton.from_stock(Stock.OPEN);
+		open_button.is_important = true;
+		open_button.clicked.connect(this.open_file);
+
+		this.toolbar.add(open_button);
 	}
 
 	public void add_hecho ()
@@ -66,5 +76,20 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 			this.hechos_text_view.agregarHecho(add_dialog.respuesta);
 			add_dialog.destroy();
 		}		
+	}
+
+	public void open_file ()
+	{
+		string todo;
+		string[] lineas;
+		Hecho nuevoHecho;
+		int i;
+
+		FileUtils.get_contents ("/home/berel/git/nomeolvides/src/hechos.json", out todo);
+		lineas = todo.split_set ("\n");
+		for (i=0; i < (lineas.length - 1); i++) {
+        	nuevoHecho = new Hecho.json(lineas[i]);
+			this.hechos_text_view.agregarHecho(nuevoHecho);
+		}
 	}
 }

@@ -21,10 +21,11 @@ using Gtk;
 public class Nomeolvides.TextViewHecho : TextView {
 
 	private Array<Hecho> hechos;
+	private int cantHechos;
 
 	public TextViewHecho ()
 	{
-
+		this.cantHechos=0;
 		this.hechos = new Array<Hecho>();
 		this.editable = false;
 		this.cursor_visible = false;
@@ -37,7 +38,8 @@ public class Nomeolvides.TextViewHecho : TextView {
 		
 		for (i=0; i < this.hechos.length; i++) {
 
-			temp += this.hechos.index(i).nombre + ": "
+			temp += (i+1).to_string() + ") " 
+				 + this.hechos.index(i).nombre + ": "
 				 + this.hechos.index(i).descripcion + "\n";
 
 		}
@@ -46,7 +48,7 @@ public class Nomeolvides.TextViewHecho : TextView {
 
 	public void agregarHecho (Hecho nuevo)
 	{
-
+		this.cantHechos++;
 		this.hechos.append_val(nuevo);
 		this.mostrar();
 	}

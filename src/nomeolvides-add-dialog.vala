@@ -76,6 +76,6 @@ public class Nomeolvides.Add_dialog : Dialog
 		{
 			this.respuesta  = new Hecho (this.nombre_entry.get_text(), 
 			            				 this.descripcion_entry.get_text());
-		}	
+		}
 	}
 }

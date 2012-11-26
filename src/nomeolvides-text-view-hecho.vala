@@ -37,11 +37,9 @@ public class Nomeolvides.TextViewHecho : TextView {
 		
 		for (i=0; i < this.hechos.length; i++) {
 
-			temp += this.hechos.index(i).aJson() + "\n";
-
-/*			temp += this.hechos.index(i).nombre + ": "
+			temp += this.hechos.index(i).nombre + ": "
 				 + this.hechos.index(i).descripcion + "\n";
-*/
+
 		}
 		this.buffer.text = temp;
 	}

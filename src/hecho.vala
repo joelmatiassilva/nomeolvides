@@ -17,6 +17,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 public class Hecho : GLib.Object
 {
 	
@@ -30,8 +31,17 @@ public class Hecho : GLib.Object
 		this.descripcion = descripcion;
 	}
 
+	public Hecho.json (string json) {
+		if (json.contains ("{\"Hecho\":{")) {
+			this.nombre = this.sacarDatoJson (json, "nombre");
+			this.descripcion = this.sacarDatoJson (json, "descripcion");		
+		}
+		    
+
+	}
+
 	public string aJson () {
-		string retorno = "{\"Hecho\": {";
+		string retorno = "{\"Hecho\":{";
 
 		retorno += "\"nombre\":\"" + this.nombre + "\",";
 		retorno += "\"descripcion\":\"" + this.descripcion + "\"";
@@ -39,5 +49,12 @@ public class Hecho : GLib.Object
 		retorno +="}}";	
 
 		return retorno;
+	}
+
+	private string sacarDatoJson(string json, string campo) {
+		int inicio,fin;
+		inicio = json.index_of(":",json.index_of(campo)) + 2;
+		fin = json.index_of ("\"", inicio);
+		return json[inicio:fin];
 	}
 }

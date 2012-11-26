@@ -19,6 +19,8 @@ dnl Check for vala
 AM_PROG_VALAC([0.10.0])
 
 
+PKG_CHECK_MODULES(JSON_GLIB,json-glib-1.0)
+
 PKG_CHECK_MODULES(NOMEOLVIDES, [gtk+-3.0 ])
 
 

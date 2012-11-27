@@ -84,8 +84,8 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		string[] lineas;
 		Hecho nuevoHecho;
 		int i;
-
-		FileUtils.get_contents ("/home/berel/git/nomeolvides/src/hechos.json", out todo);
+		
+		FileUtils.get_contents ("src/hechos.json", out todo);
 		lineas = todo.split_set ("\n");
 		for (i=0; i < (lineas.length - 1); i++) {
         	nuevoHecho = new Hecho.json(lineas[i]);

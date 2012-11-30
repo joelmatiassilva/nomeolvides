@@ -21,13 +21,8 @@ using Gtk;
 using Nomeolvides;
 
 public static int main (string[] args)
-{
-	//Intl.bindtextdomain (Config.GETTEXT_PACKAGE,"ES_ar");
-	//Intl.bind_textdomain_codeset (Config.GETTEXT_PACKAGE,"UTF-8");
-	//Intl.textdomain (Config.GETTEXT_PACKAGE);
-	
+{	
 	Gtk.init(ref args);
-	//Notify.init (_("Nomeolvides")); 
 		
 	var app = new App();
 	app.run(args);

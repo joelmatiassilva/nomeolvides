@@ -19,8 +19,9 @@
 
 using GLib;
 using Gtk;
+using Nomeolvides;
 
-public class Nomeolvides.App : Gtk.Application 
+public class App : Gtk.Application 
 {
 
 	/* 
@@ -33,7 +34,7 @@ public class Nomeolvides.App : Gtk.Application
 	/* ANJUTA: Widgets declaration for nomeolvides.ui - DO NOT REMOVE */
 
 	public static App app;
-	public Nomeolvides.Window window;
+	public Window window;
 
 	private void create_window ()
 	{
@@ -41,7 +42,7 @@ public class Nomeolvides.App : Gtk.Application
 		action.activate.connect(() => { window.destroy(); });
 		this.add_action (action);
 
-		window = new Nomeolvides.Window(this);
+		window = new Window(this);
 
 		window.show_all();
 	}

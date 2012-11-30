@@ -18,7 +18,7 @@
  */
 
 
-public class Hecho : GLib.Object {
+public class Nomeolvides.Hecho : GLib.Object {
 	
 	public string nombre { get; private set; }
 	public string descripcion { get; private set; }

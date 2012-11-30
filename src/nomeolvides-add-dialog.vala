@@ -18,14 +18,13 @@
  */
 
 using Gtk;
+using Nomeolvides;
 
-
-
-public class Nomeolvides.Add_dialog : Dialog
+public class Add_dialog : Dialog
 {
 	private Entry nombre_entry;
 	private Entry descripcion_entry;
-	public Hecho respuesta { get; private set; }
+	public Nomeolvides.Hecho respuesta { get; private set; }
 	
 	public Add_dialog ()
 	{
@@ -74,7 +73,7 @@ public class Nomeolvides.Add_dialog : Dialog
 	{
 		if(this.nombre_entry.get_text_length() > 0)
 		{
-			this.respuesta  = new Hecho (this.nombre_entry.get_text(), 
+			this.respuesta  = new Nomeolvides.Hecho (this.nombre_entry.get_text(), 
 			            				 this.descripcion_entry.get_text());
 		}
 	}

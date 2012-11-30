@@ -20,7 +20,7 @@ AM_CFLAGS =\
 bin_PROGRAMS = nomeolvides
 
 nomeolvides_SOURCES = \
-	config.vapi hecho.vala main.vala nomeolvides-app.vala nomeolvides-window.vala panel.vala nomeolvides-add-dialog.vala nomeolvides-toolbar.vala nomeolvides-text-view-hecho.vala
+	config.vapi nomeolvides-app.vala nomeolvides-window.vala nomeolvides-add-dialog.vala nomeolvides-toolbar.vala nomeolvides-text-view-hecho.vala nomeolvides-hecho.vala nomeolvides-main.vala nomeolvides-panel.vala
 
 nomeolvides_VALAFLAGS =  \
 	--pkg gtk+-3.0

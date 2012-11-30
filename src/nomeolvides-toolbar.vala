@@ -18,8 +18,9 @@
  */
 
 using Gtk;
+using Nomeolvides;
 
-public class Nomeolvides.Main_toolbar : Toolbar
+public class Main_toolbar : Toolbar
 {
 	public Main_toolbar ()
 	{

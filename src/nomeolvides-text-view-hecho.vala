@@ -17,8 +17,9 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using Gtk;
+using Nomeolvides;
 
-public class Nomeolvides.TextViewHecho : TextView {
+public class TextViewHecho : TextView {
 
 	private Array<Hecho> hechos;
 	private int cantHechos;

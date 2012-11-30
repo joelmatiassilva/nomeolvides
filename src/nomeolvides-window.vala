@@ -18,8 +18,9 @@
  */
 
 using Gtk;
+using Nomeolvides;
 
-public class Nomeolvides.Window : Gtk.ApplicationWindow
+public class Window : Gtk.ApplicationWindow
 {
 	public Box box { get; private set; }
 	private Main_toolbar toolbar;
@@ -39,7 +40,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		box = new Box(Orientation.VERTICAL,0);
 		this.add(box);
 		
-		this.toolbar = new Nomeolvides.Main_toolbar();
+		this.toolbar = new Main_toolbar();
 		botones_toolbar();
 		this.hechos_text_view = new TextViewHecho();
 

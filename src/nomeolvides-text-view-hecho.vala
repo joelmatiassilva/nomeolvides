@@ -33,17 +33,14 @@ public class Nomeolvides.TextViewHecho : TextView {
 
 	public void mostrar ()
 	{
-		int i;
+		int i = this.cantHechos - 1;
 		string temp = "" ;
 		
-		for (i=0; i < this.hechos.length; i++) {
+		temp += (i+1).to_string() + ") " 
+			 +  this.hechos.index(i).nombre + ": "
+			 +  this.hechos.index(i).descripcion + "\n";
 
-			temp += (i+1).to_string() + ") " 
-				 + this.hechos.index(i).nombre + ": "
-				 + this.hechos.index(i).descripcion + "\n";
-
-		}
-		this.buffer.text = temp;
+		this.buffer.text += temp;
 	}
 
 	public void agregarHecho (Hecho nuevo)

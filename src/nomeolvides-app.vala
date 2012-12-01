@@ -21,7 +21,7 @@ using GLib;
 using Gtk;
 using Nomeolvides;
 
-public class App : Gtk.Application 
+public class Nomeolvides.App : Gtk.Application 
 {
 
 	/* 

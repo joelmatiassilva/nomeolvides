@@ -19,7 +19,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class TextViewHecho : TextView {
+public class Nomeolvides.TextViewHecho : TextView {
 
 	private Array<Hecho> hechos;
 	private int cantHechos;

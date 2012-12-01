@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Window : Gtk.ApplicationWindow
+public class Nomeolvides.Window : Gtk.ApplicationWindow
 {
 	public Box box { get; private set; }
 	private Main_toolbar toolbar;

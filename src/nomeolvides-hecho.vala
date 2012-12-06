@@ -56,4 +56,15 @@ public class Nomeolvides.Hecho : GLib.Object {
 		fin = json.index_of ("\"", inicio);
 		return json[inicio:fin];
 	}
+
+	public bool esIgual (Hecho otro) {
+		string esteSum = Checksum.compute_for_string(ChecksumType.SHA1, this.aJson());
+		string otroSum = Checksum.compute_for_string(ChecksumType.SHA1, otro.aJson());
+		if (esteSum == otroSum) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }

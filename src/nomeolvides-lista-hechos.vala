@@ -16,39 +16,57 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.TextViewHecho : TextView {
+public class Nomeolvides.ListaHechos : GLib.Object {
 
-	private ListaHechos hechos;
-
-
-	public TextViewHecho ()
-	{
-
-		this.hechos = new ListaHechos();
-		this.editable = false;
-		this.cursor_visible = false;
+	private Array<Hecho> hechos;
+	private int indice;
+	
+	public ListaHechos () {
+		this.hechos = new Array<Hecho>();
+		indice = 0;
 	}
 
-	private void mostrar ()
-	{
-		Hecho hecho = this.hechos.dameSiguiente();
-		string temp = "" ;
-		
-		temp += (this.hechos.dameIndice()).to_string() + ") " 
-			 +  hecho.nombre + ": "
-			 +  hecho.descripcion + "\n";
-
-		this.buffer.text += temp;
-	}
-
-	public void agregarHecho (Hecho nuevo)
-	{
-		if (this.hechos.agregar(nuevo)) {
-			this.mostrar();
+	public bool agregar (Hecho nuevo) {
+		bool retorno = false;
+		if (this.unico(nuevo)) {
+			this.hechos.append_val(nuevo);
+			retorno = true;
 		}
+		return retorno;
 	}
 
+	private bool unico (Hecho nuevo) {
+		int i;
+		bool retorno = true;
+
+		for (i=0; (i < (int) this.hechos.length) && (retorno != false); i++) {
+			if (this.hechos.index(i).esIgual(nuevo)) {
+				retorno = false;
+			}
+		}
+		return retorno;	
+	}
+
+	public int dameIndice() {
+		return this.indice;
+	}
+
+	public Hecho dameSiguiente() {
+		Hecho retorno;
+		
+		retorno = this.hechos.index(this.indice);
+		
+		if (this.indice < (int) this.hechos.length) {
+			this.indice++;
+		} else {
+			this.indice = 0;
+		}		
+		
+		return retorno;
+	}
 }
+

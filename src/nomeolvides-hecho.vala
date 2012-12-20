@@ -67,4 +67,14 @@ public class Nomeolvides.Hecho : GLib.Object {
 			return false;
 		}
 	}
+
+	public bool esIgualCache (string otroSum) {
+		string esteSum = Checksum.compute_for_string(ChecksumType.MD5, this.aJson());
+		if (esteSum == otroSum) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }

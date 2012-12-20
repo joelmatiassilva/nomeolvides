@@ -12,7 +12,7 @@
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
- * 
+ *   bullit - 39 escalones - silent love (japonesa) 
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,7 +24,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 {
 	public Box box { get; private set; }
 	private Main_toolbar toolbar;
-	private TextViewHecho hechos_text_view;
+	private ViewHechos hechos_text_view;
 	
 	public Window (Gtk.Application app)
 	{   
@@ -42,7 +42,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		
 		this.toolbar = new Main_toolbar();
 		botones_toolbar();
-		this.hechos_text_view = new TextViewHecho();
+		this.hechos_text_view = new ViewHechos();
 
 		var scroll = new ScrolledWindow (null, null);
         scroll.set_policy (PolicyType.AUTOMATIC, PolicyType.AUTOMATIC);
@@ -85,8 +85,12 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		string[] lineas;
 		Hecho nuevoHecho;
 		int i;
-		
-		FileUtils.get_contents ("src/hechos.json", out todo);
+
+		try {
+			FileUtils.get_contents ("src/hechos.json", out todo);
+		}  catch (Error e) {
+			error (e.message);
+		}
 		lineas = todo.split_set ("\n");
 		for (i=0; i < (lineas.length - 1); i++) {
         	nuevoHecho = new Hecho.json(lineas[i]);

@@ -22,34 +22,36 @@ using Nomeolvides;
 
 public class Nomeolvides.Window : Gtk.ApplicationWindow
 {
-	public Box box { get; private set; }
+	public Box main_box { get; private set; }
+	public Box list_view_box { get; private set; }
 	private Main_toolbar toolbar;
-	private ViewHechos hechos_text_view;
+	private ViewHechos hechos_view;
 	
 	public Window (Gtk.Application app)
 	{   
-
 		Object (application: app);
 		this.set_application (app);
 		this.set_title ("Nomeolvides - ");
 		this.set_position (WindowPosition.CENTER);
-		this.set_default_size (500,250);
-
+		this.set_default_size (800,500);
+		this.set_size_request (500,350);
 		this.hide_titlebar_when_maximized = true;
 
-		box = new Box(Orientation.VERTICAL,0);
-		this.add(box);
+		main_box = new Box (Orientation.VERTICAL,0);
+		list_view_box = new Box (Orientation.HORIZONTAL,0);
+		this.add (main_box);
 		
-		this.toolbar = new Main_toolbar();
-		botones_toolbar();
-		this.hechos_text_view = new ViewHechos();
+		this.toolbar = new Nomeolvides.Main_toolbar ();
+		this.botones_toolbar ();
 
-		var scroll = new ScrolledWindow (null, null);
-        scroll.set_policy (PolicyType.AUTOMATIC, PolicyType.AUTOMATIC);
-        scroll.add (this.hechos_text_view);
+		TreeViewSelector treeview_provisorio = new TreeViewSelector ();
+		this.hechos_view = new ViewHechos ();
 
-		this.box.pack_start(toolbar, false, true, 0);
-		this.box.pack_start(scroll, true, true, 0);
+		list_view_box.pack_start (treeview_provisorio, false, false, 0);
+		list_view_box.pack_start (this.hechos_view, true, true, 0);
+
+		this.main_box.pack_start (toolbar, false, true, 0);		
+		this.main_box.pack_start (list_view_box, true, true, 0);
 	}
 
 	private void botones_toolbar ()
@@ -74,7 +76,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 		if (add_dialog.run() == ResponseType.APPLY)
 		{
-			this.hechos_text_view.agregarHecho(add_dialog.respuesta);
+			this.hechos_view.agregarHecho(add_dialog.respuesta);
 			add_dialog.destroy();
 		}		
 	}
@@ -94,7 +96,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		lineas = todo.split_set ("\n");
 		for (i=0; i < (lineas.length - 1); i++) {
         	nuevoHecho = new Hecho.json(lineas[i]);
-			this.hechos_text_view.agregarHecho(nuevoHecho);
+			this.hechos_view.agregarHecho(nuevoHecho);
 		}
 	}
 }

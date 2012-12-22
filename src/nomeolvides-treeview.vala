@@ -27,8 +27,8 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 	public ViewHechos () {
 
 		this.hechos = new ListStoreHechos();
-		this.insert_column_with_attributes (-1, "Nombre", new CellRendererText(), "text", 0);
-		this.insert_column_with_attributes (-1, "Descripción", new CellRendererText(), "text", 0);
+		this.insert_column_with_attributes (0, "Nombre", new CellRendererText(), "text", 0);
+		this.insert_column_with_attributes (1, "Descripción", new CellRendererText(), "text", 1);
 		this.set_model(hechos);
 	}
 

@@ -44,7 +44,7 @@ public class Nomeolvides.ListaHechos : GLib.Object {
 		bool retorno = true;
 
 		for (i=0; (i < (int) this.hechos.length) && (retorno != false); i++) {
-			if (this.hechos.index(i).esIgual(nuevo)) {
+			if (this.hechos.index(i).esIgual(nuevo.hash)) {
 				retorno = false;
 			}
 		}

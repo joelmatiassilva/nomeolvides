@@ -35,7 +35,7 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 		if (this.unico(nuevo)) {
 			this.append(out iterador);
 			this.set(iterador, 0, nuevo.nombre, 1, nuevo.descripcion);
-			this.hechosCache += Checksum.compute_for_string(ChecksumType.MD5, nuevo.aJson());
+			this.hechosCache += nuevo.hash;
 			retorno = true;
 		}
 		return retorno;
@@ -47,7 +47,7 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 
 		if (this.hechosCache.length > 0) {
 			for (i=0; (i < this.hechosCache.length) && (retorno != false); i++) {
-				if (nuevo.esIgualCache(this.hechosCache[i])) {
+				if (nuevo.esIgual(this.hechosCache[i])) {
 				retorno = false;
 				}
 			}

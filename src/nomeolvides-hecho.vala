@@ -22,18 +22,21 @@ public class Nomeolvides.Hecho : GLib.Object {
 	
 	public string nombre { get; private set; }
 	public string descripcion { get; private set; }
+	public string hash { get; private set; }
 
 	// Constructor
 	public Hecho (string nombre, string descripcion)
 	{
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		hash = Checksum.compute_for_string(ChecksumType.MD5, this.nombre + this.descripcion);
 	}
 
 	public Hecho.json (string json) {
 		if (json.contains ("{\"Hecho\":{")) {
 			this.nombre = this.sacarDatoJson (json, "nombre");
-			this.descripcion = this.sacarDatoJson (json, "descripcion");		
+			this.descripcion = this.sacarDatoJson (json, "descripcion");
+			hash = Checksum.compute_for_string(ChecksumType.MD5, this.nombre + this.descripcion);
 		}
 		    
 
@@ -57,20 +60,9 @@ public class Nomeolvides.Hecho : GLib.Object {
 		return json[inicio:fin];
 	}
 
-	public bool esIgual (Hecho otro) {
-		string esteSum = Checksum.compute_for_string(ChecksumType.SHA1, this.aJson());
-		string otroSum = Checksum.compute_for_string(ChecksumType.SHA1, otro.aJson());
-		if (esteSum == otroSum) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public bool esIgualCache (string otroSum) {
-		string esteSum = Checksum.compute_for_string(ChecksumType.MD5, this.aJson());
-		if (esteSum == otroSum) {
+	public bool esIgual (string otroSum) {
+		
+		if (this.hash == otroSum) {
 			return true;
 		}
 		else {

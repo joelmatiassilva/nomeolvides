@@ -25,7 +25,7 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 	private TreeIter iterador;
 	
 	public ListStoreHechos () {
-		Type[] tipos= {typeof(string),typeof(string)};
+		Type[] tipos= { typeof (string), typeof (string), typeof (string) };
 		this.hechosCache = {};
 		this.set_column_types(tipos);
 	}
@@ -34,7 +34,7 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 		bool retorno = false;
 		if (this.unico(nuevo)) {
 			this.append(out iterador);
-			this.set(iterador, 0, nuevo.nombre, 1, nuevo.descripcion);
+			this.set(iterador, 0, nuevo.nombre, 1, nuevo.descripcion, 2, nuevo.fecha);
 			this.hechosCache += nuevo.hash;
 			retorno = true;
 		}

@@ -50,7 +50,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		Separator separador = new Separator(Orientation.VERTICAL);
 
 		list_view_box.pack_start (treeview_provisorio, false, false, 0);
-		list_view_box.pack_start (separador, false, false, 0);
+		list_view_box.pack_start (separador, false, false, 2);
 		list_view_box.pack_start (this.hechos_view, true, true, 0);
 
 		this.main_box.pack_start (toolbar, false, true, 0);		

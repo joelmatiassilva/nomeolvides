@@ -22,13 +22,15 @@ public class Nomeolvides.Hecho : GLib.Object {
 	
 	public string nombre { get; private set; }
 	public string descripcion { get; private set; }
+	public string fecha {get; private set; }
 	public string hash { get; private set; }
 
 	// Constructor
-	public Hecho (string nombre, string descripcion)
+	public Hecho (string nombre, string descripcion, string fecha)
 	{
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		this.fecha = fecha;
 		hash = Checksum.compute_for_string(ChecksumType.MD5, this.aJson ());
 	}
 
@@ -36,6 +38,7 @@ public class Nomeolvides.Hecho : GLib.Object {
 		if (json.contains ("{\"Hecho\":{")) {
 			this.nombre = this.sacarDatoJson (json, "nombre");
 			this.descripcion = this.sacarDatoJson (json, "descripcion");
+			this.fecha = this.sacarDatoJson (json, "fecha");
 			hash = Checksum.compute_for_string(ChecksumType.MD5, this.aJson ());
 		}
 	}
@@ -45,6 +48,7 @@ public class Nomeolvides.Hecho : GLib.Object {
 
 		retorno += "\"nombre\":\"" + this.nombre + "\",";
 		retorno += "\"descripcion\":\"" + this.descripcion + "\"";
+		retorno += "\"fecha\":\"" + this.fecha + "\"";
 
 		retorno +="}}";	
 

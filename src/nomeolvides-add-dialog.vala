@@ -24,6 +24,7 @@ public class Nomeolvides.Add_dialog : Dialog
 {
 	private Entry nombre_entry;
 	private Entry descripcion_entry;
+	private Entry fecha_entry;
 	public Hecho respuesta { get; private set; }
 	
 	public Add_dialog ()
@@ -32,19 +33,24 @@ public class Nomeolvides.Add_dialog : Dialog
 		this.resizable = false;
 		this.modal = true;		
 		
-		var nombre_label = new Label.with_mnemonic("Nombre: ");
-		var descripcion_label = new Label.with_mnemonic("Descripcion: ");
-		this.add_button(Stock.CANCEL , ResponseType.CLOSE);
-		this.add_button(Stock.ADD , ResponseType.APPLY);
+		var nombre_label = new Label.with_mnemonic ("Nombre: ");
+		var descripcion_label = new Label.with_mnemonic ("Descripcion: ");
+		var fecha_label = new Label.with_mnemonic ("Fecha: ");
+		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
+		this.add_button (Stock.ADD , ResponseType.APPLY);
+		var calendar_button = new ToolButton.from_stock(Stock.ADD);
 		
-		this.nombre_entry = new Entry();
-		this.descripcion_entry = new Entry();
+		this.nombre_entry = new Entry ();
+		this.descripcion_entry = new Entry ();
+		this.fecha_entry = new Entry ();
 
-		var grid = new Grid();
-		grid.attach(nombre_label, 0, 0, 1, 1);
-	    grid.attach(nombre_entry, 1, 0, 1, 1);
-		grid.attach(descripcion_label, 0, 1, 1, 1);
-		grid.attach(descripcion_entry, 1, 1, 1, 1);
+		var grid = new Grid ();
+		grid.attach (nombre_label, 0, 0, 1, 1);
+	    grid.attach (nombre_entry, 1, 0, 1, 1);
+		grid.attach (descripcion_label, 0, 1, 1, 1);
+		grid.attach (descripcion_entry, 1, 1, 1, 1);
+		grid.attach (fecha_label, 0, 2, 1, 1);
+		grid.attach (fecha_entry, 1 , 2 , 1 ,1);
 		
 		var contenido = this.get_content_area() as Box;
 		contenido.pack_start(grid, false, true, 0);
@@ -71,10 +77,11 @@ public class Nomeolvides.Add_dialog : Dialog
 
 	private void aplicar ()
 	{
-		if(this.nombre_entry.get_text_length() > 0)
+		if(this.nombre_entry.get_text_length () > 0)
 		{
-			this.respuesta  = new Hecho (this.nombre_entry.get_text(), 
-			            				 this.descripcion_entry.get_text());
+			this.respuesta  = new Hecho (this.nombre_entry.get_text (), 
+			            				 this.descripcion_entry.get_text (),
+			                             this.fecha_entry.get_text ());
 		}
 	}
 }

@@ -38,8 +38,6 @@ public class Nomeolvides.Hecho : GLib.Object {
 			this.descripcion = this.sacarDatoJson (json, "descripcion");
 			hash = Checksum.compute_for_string(ChecksumType.MD5, this.aJson ());
 		}
-		    
-
 	}
 
 	public string aJson () {

@@ -69,4 +69,3 @@ public class Nomeolvides.ListaHechos : GLib.Object {
 		return retorno;
 	}
 }
-

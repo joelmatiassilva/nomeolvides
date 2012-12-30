@@ -29,14 +29,14 @@ public class Nomeolvides.Hecho : GLib.Object {
 	{
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		hash = Checksum.compute_for_string(ChecksumType.MD5, this.nombre + this.descripcion);
+		hash = Checksum.compute_for_string(ChecksumType.MD5, this.aJson ());
 	}
 
 	public Hecho.json (string json) {
 		if (json.contains ("{\"Hecho\":{")) {
 			this.nombre = this.sacarDatoJson (json, "nombre");
 			this.descripcion = this.sacarDatoJson (json, "descripcion");
-			hash = Checksum.compute_for_string(ChecksumType.MD5, this.nombre + this.descripcion);
+			hash = Checksum.compute_for_string(ChecksumType.MD5, this.aJson ());
 		}
 		    
 

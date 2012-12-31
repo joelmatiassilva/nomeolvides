@@ -22,21 +22,25 @@ public class Nomeolvides.Hecho : GLib.Object {
 	
 	public string nombre { get; private set; }
 	public string descripcion { get; private set; }
+	public string fecha {get; private set; }
+	public string hash { get; private set; }
 
 	// Constructor
-	public Hecho (string nombre, string descripcion)
+	public Hecho (string nombre, string descripcion, string fecha)
 	{
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		this.fecha = fecha;
+		hash = Checksum.compute_for_string(ChecksumType.MD5, this.aJson ());
 	}
 
 	public Hecho.json (string json) {
 		if (json.contains ("{\"Hecho\":{")) {
 			this.nombre = this.sacarDatoJson (json, "nombre");
-			this.descripcion = this.sacarDatoJson (json, "descripcion");		
+			this.descripcion = this.sacarDatoJson (json, "descripcion");
+			this.fecha = this.sacarDatoJson (json, "fecha");
+			hash = Checksum.compute_for_string(ChecksumType.MD5, this.aJson ());
 		}
-		    
-
 	}
 
 	public string aJson () {
@@ -44,6 +48,7 @@ public class Nomeolvides.Hecho : GLib.Object {
 
 		retorno += "\"nombre\":\"" + this.nombre + "\",";
 		retorno += "\"descripcion\":\"" + this.descripcion + "\"";
+		retorno += "\"fecha\":\"" + this.fecha + "\"";
 
 		retorno +="}}";	
 
@@ -57,20 +62,9 @@ public class Nomeolvides.Hecho : GLib.Object {
 		return json[inicio:fin];
 	}
 
-	public bool esIgual (Hecho otro) {
-		string esteSum = Checksum.compute_for_string(ChecksumType.SHA1, this.aJson());
-		string otroSum = Checksum.compute_for_string(ChecksumType.SHA1, otro.aJson());
-		if (esteSum == otroSum) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public bool esIgualCache (string otroSum) {
-		string esteSum = Checksum.compute_for_string(ChecksumType.MD5, this.aJson());
-		if (esteSum == otroSum) {
+	public bool esIgual (string otroSum) {
+		
+		if (this.hash == otroSum) {
 			return true;
 		}
 		else {

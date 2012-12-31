@@ -35,8 +35,8 @@ public class Nomeolvides.TreeViewSelector : TreeView {
 		liststore.set(iter,0,"LA VIDA POR CRISTINA");
 		this.set_model (liststore);
 		var celda = new CellRendererText();
-		celda.set("background_set", true);
-		celda.background = "grey";
-		this.insert_column_with_attributes (-1,"TreeView Provisorio", celda, "text",0,"background",0);
+//		celda.set("background_set", true);
+//		celda.background = "grey";
+		this.insert_column_with_attributes (-1,"TreeView Provisorio", celda, "text",0);
 	}	
 }

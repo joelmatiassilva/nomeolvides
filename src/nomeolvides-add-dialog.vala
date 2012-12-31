@@ -56,6 +56,9 @@ public class Nomeolvides.Add_dialog : Dialog
 		contenido.pack_start(grid, false, true, 0);
 
 		this.response.connect(on_response);
+		this.nombre_entry.activate.connect(on_activate);
+		this.descripcion_entry.activate.connect(on_activate);
+		this.fecha_entry.activate.connect(on_activate);
 
 
 		this.show_all ();
@@ -75,6 +78,12 @@ public class Nomeolvides.Add_dialog : Dialog
         }
     }
 
+	private void on_activate () {
+		if (this.nombre_entry.text_length > 0 && this.descripcion_entry.text_length > 0 && this.fecha_entry.text_length > 0) {
+			this.response (ResponseType.APPLY);
+		}
+	}
+		
 	private void aplicar ()
 	{
 		if(this.nombre_entry.get_text_length () > 0)

@@ -34,7 +34,7 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 		bool retorno = false;
 		if (this.unico(nuevo)) {
 			this.append(out iterador);
-			this.set(iterador, 0, nuevo.nombre, 1, nuevo.descripcion, 2, nuevo.fecha);
+			this.set(iterador, 0, nuevo.nombre, 1, nuevo.descripcion, 2, nuevo.fecha_to_string());
 			this.hechosCache += nuevo.hash;
 			retorno = true;
 		}

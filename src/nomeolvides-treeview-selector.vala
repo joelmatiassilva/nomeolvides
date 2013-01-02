@@ -22,21 +22,21 @@ using Nomeolvides;
 
 public class Nomeolvides.TreeViewSelector : TreeView {
 
+	private ListStore lista;
+	private TreeIter iter;
+	
 	public TreeViewSelector () {
-		var liststore = new ListStore(1,typeof(string));
-		TreeIter iter;
-		liststore.append (out iter);
-		liststore.set(iter,0,"LA VIDA POR CRISTINA");
-		liststore.append (out iter);
-		liststore.set(iter,0,"LA VIDA POR CRISTINA");
-		liststore.append (out iter);
-		liststore.set(iter,0,"LA VIDA POR CRISTINA");
-		liststore.append (out iter);
-		liststore.set(iter,0,"LA VIDA POR CRISTINA");
-		this.set_model (liststore);
+		this.lista = new ListStore(1,typeof(string));
+		this.set_model (this.lista);
 		var celda = new CellRendererText();
 //		celda.set("background_set", true);
 //		celda.background = "grey";
-		this.insert_column_with_attributes (-1,"TreeView Provisorio", celda, "text",0);
-	}	
+		this.insert_column_with_attributes (-1,"Años", celda, "text",0);
+	}
+
+	public void agregar (string nuevo)
+	{
+		this.lista.append (out this.iter);
+		this.lista.set(this.iter,0,nuevo);
+	}
 }

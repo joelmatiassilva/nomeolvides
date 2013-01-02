@@ -22,18 +22,58 @@ using Nomeolvides;
 
 public class Nomeolvides.ViewHechos : Gtk.TreeView {
 
-	private ListStoreHechos hechos;
+	private ListStoreHechos[] hechos_anios;
+	private string[] cache_hechos_anios;
 
 	public ViewHechos () {
-
-		this.hechos = new ListStoreHechos();
+		this.cache_hechos_anios = {};
+		this.hechos_anios = {};
 		this.insert_column_with_attributes (-1, "Nombre", new CellRendererText (), "text", 0);
 		this.insert_column_with_attributes (-1, "Descripción", new CellRendererText (), "text", 1);
 		this.insert_column_with_attributes (-1, "Fecha", new CellRendererText (), "text", 2);
-		this.set_model(hechos);
 	}
 
-	public void agregarHecho(Hecho nuevo) {
-		this.hechos.agregar(nuevo);
+	public void agregarHecho (Hecho nuevo) {
+		if ( anio_en_cache ( nuevo.fecha.get_year().to_string() )) {
+			this.hechos_anios[en_liststore (nuevo.fecha.get_year().to_string())].agregar (nuevo);
+			
+		} else {
+			agregar_liststore ( nuevo.fecha.get_year().to_string() );
+			this.hechos_anios[en_liststore (nuevo.fecha.get_year().to_string())].agregar (nuevo);
+		}
+		this.mostrar_anio ("1828");
+	}
+
+	public void mostrar_anio ( string anio ) {
+		if ( anio_en_cache ( anio ) ){
+			this.set_model( this.hechos_anios[en_liststore (anio)] );
+		}
+	}
+
+	private bool anio_en_cache (string anio) {
+		int i;
+		
+		for (i=0; i < this.cache_hechos_anios.length; i++) {
+			if (this.cache_hechos_anios[i] == anio) {
+				return true;
+			}	
+		}	
+		return false;
+	}
+
+	private void agregar_liststore (string nuevo_anio) {
+		this.hechos_anios += new ListStoreHechos();
+		this.cache_hechos_anios += nuevo_anio;
+	}
+
+	private int en_liststore (string anio) {
+		int i;
+		
+		for (i=0; i < this.cache_hechos_anios.length; i++) {
+			if (this.cache_hechos_anios[i] == anio) {
+				return i;
+			}	
+		}
+		return 0;
 	}
 }

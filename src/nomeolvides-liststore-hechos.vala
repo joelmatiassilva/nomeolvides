@@ -26,6 +26,7 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 	
 	public ListStoreHechos () {
 		Type[] tipos= { typeof (string), typeof (string), typeof (string) };
+		print ("se creo un Nomeolvides.ListStoreHechos");
 		this.hechosCache = {};
 		this.set_column_types(tipos);
 	}

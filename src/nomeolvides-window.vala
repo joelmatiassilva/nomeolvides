@@ -24,6 +24,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 {
 	public Box main_box { get; private set; }
 	public Box list_view_box { get; private set; }
+	private TreeViewSelector treeview_provisorio;
 	private Main_toolbar toolbar;
 	private ViewHechos hechos_view;
 	
@@ -44,8 +45,9 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		this.toolbar = new Nomeolvides.Main_toolbar ();
 		this.botones_toolbar ();
 
-		TreeViewSelector treeview_provisorio = new TreeViewSelector ();
+		treeview_provisorio = new TreeViewSelector ();
 		this.hechos_view = new ViewHechos ();
+		this.treeview_provisorio.cursor_changed.connect(elegir_anio);
 
 		Separator separador = new Separator(Orientation.VERTICAL);
 
@@ -55,6 +57,10 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 		this.main_box.pack_start (toolbar, false, true, 0);		
 		this.main_box.pack_start (list_view_box, true, true, 0);
+	}
+
+	private void elegir_anio () {
+		this.hechos_view.mostrar_anio (this.treeview_provisorio.get_anio ());
 	}
 
 	private void botones_toolbar ()

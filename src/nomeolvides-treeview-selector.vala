@@ -29,14 +29,27 @@ public class Nomeolvides.TreeViewSelector : TreeView {
 		this.lista = new ListStore(1,typeof(string));
 		this.set_model (this.lista);
 		var celda = new CellRendererText();
-//		celda.set("background_set", true);
-//		celda.background = "grey";
 		this.insert_column_with_attributes (-1,"Años", celda, "text",0);
+		this.agregar ("1945");
+		this.agregar ("1828");
 	}
 
 	public void agregar (string nuevo)
 	{
 		this.lista.append (out this.iter);
 		this.lista.set(this.iter,0,nuevo);
+	}
+
+	public string get_anio () {
+		TreePath path;
+		TreeViewColumn columna;
+		TreeIter iterador;
+		Value valor;
+		
+		this.get_cursor(out path, out columna);
+		this.lista.get_iter(out iterador, path);
+		this.lista.get_value (iterador, 0, out valor);
+
+		return (string)valor;
 	}
 }

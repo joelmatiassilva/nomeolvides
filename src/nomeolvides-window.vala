@@ -80,7 +80,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 	public void add_hecho ()
 	{
-		var add_dialog = new Add_dialog();
+		var add_dialog = new AddDialog();
 		add_dialog.show();
 
 		if (add_dialog.run() == ResponseType.APPLY)

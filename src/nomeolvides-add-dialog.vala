@@ -20,60 +20,17 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.Add_dialog : Dialog
-{
-	private Entry nombre_entry;
-	private Entry descripcion_entry;
-	private Entry anio_entry;
-	private Entry mes_entry;
-	private Entry dia_entry;
-	public Hecho respuesta { get; private set; }
+public class Nomeolvides.AddDialog : Nomeolvides.DialogoHecho {
 	
-	public Add_dialog ()
-	{
-		this.set_title ("Añadir un Heho Histórico");
-		this.resizable = false;
-		this.modal = true;		
+	public AddDialog () {
+		this.set_title ("Añadir un Hecho Histórico");
 		
-		var nombre_label = new Label.with_mnemonic ("Nombre: ");
-		var descripcion_label = new Label.with_mnemonic ("Descripcion: ");
-		var anio_label = new Label.with_mnemonic ("Año: ");
-		var mes_label = new Label.with_mnemonic ("Mes: ");
-		var dia_label = new Label.with_mnemonic ("Día: ");
-		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
-		this.add_button (Stock.ADD , ResponseType.APPLY);
-		var calendar_button = new ToolButton.from_stock(Stock.ADD);
-		
-		this.nombre_entry = new Entry ();
-		this.descripcion_entry = new Entry ();
-		this.anio_entry = new Entry ();
-		this.mes_entry = new Entry ();
-		this.dia_entry = new Entry ();
-
-		var grid = new Grid ();
-		grid.attach (nombre_label, 0, 0, 1, 1);
-	    grid.attach (nombre_entry, 1, 0, 1, 1);
-		grid.attach (descripcion_label, 0, 1, 1, 1);
-		grid.attach (descripcion_entry, 1, 1, 1, 1);
-		grid.attach (anio_label, 0, 2, 1, 1);
-		grid.attach (anio_entry, 1 , 2 , 1 ,1);
-		grid.attach (mes_label, 0, 3, 1, 1);
-		grid.attach (mes_entry, 1 , 3 , 1 ,1);
-		grid.attach (dia_label, 0, 4, 1, 1);
-		grid.attach (dia_entry, 1 , 4 , 1 ,1);
-		
-		var contenido = this.get_content_area() as Box;
-		contenido.pack_start(grid, false, true, 0);
-
 		this.response.connect(on_response);
 		this.nombre_entry.activate.connect(on_activate);
 		this.descripcion_entry.activate.connect(on_activate);
 		this.anio_entry.activate.connect(on_activate);
 		this.mes_entry.activate.connect(on_activate);
 		this.dia_entry.activate.connect(on_activate);
-
-
-		this.show_all ();
 	}
 
 

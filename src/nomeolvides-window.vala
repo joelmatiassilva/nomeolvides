@@ -86,6 +86,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		if (add_dialog.run() == ResponseType.APPLY)
 		{
 			this.hechos_view.agregarHecho(add_dialog.respuesta);
+			this.treeview_provisorio.agregar_varios (this.hechos_view.lista_de_anios());
 			add_dialog.destroy();
 		}		
 	}
@@ -107,5 +108,6 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
         	nuevoHecho = new Hecho.json(lineas[i]);
 			this.hechos_view.agregarHecho(nuevoHecho);
 		}
+		this.treeview_provisorio.agregar_varios (this.hechos_view.lista_de_anios());
 	}
 }

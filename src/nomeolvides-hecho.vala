@@ -32,7 +32,6 @@ public class Nomeolvides.Hecho : GLib.Object {
 		this.descripcion = descripcion;
 		this.fecha = new DateTime.utc (anio, mes, dia, 0,0,0);
 		hash = Checksum.compute_for_string (ChecksumType.MD5, this.aJson ());
-		stdout.printf("%s\n",this.aJson ());
 	}
 
 	public Hecho.json (string json) {
@@ -72,8 +71,6 @@ public class Nomeolvides.Hecho : GLib.Object {
 		string texto;
 		texto = this.fecha.format("%e de %B de %Y");
 		return texto;
-		//stdout.printf("%s\n", );
-		//return "123";
 	}
 
 	public bool esIgual (string otroSum) {

@@ -41,7 +41,6 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 			agregar_liststore ( nuevo.fecha.get_year().to_string() );
 			this.hechos_anios[en_liststore (nuevo.fecha.get_year().to_string())].agregar (nuevo);
 		}
-		this.mostrar_anio ("1828");
 	}
 
 	public void mostrar_anio ( string anio ) {
@@ -75,5 +74,12 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 			}	
 		}
 		return 0;
+	}
+
+	public string[] lista_de_anios ()
+	{
+		string[] retorno = this.cache_hechos_anios;
+		
+		return retorno;
 	}
 }

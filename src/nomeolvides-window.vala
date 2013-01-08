@@ -23,10 +23,10 @@ using Nomeolvides;
 public class Nomeolvides.Window : Gtk.ApplicationWindow
 {
 	public Box main_box { get; private set; }
-	public Box list_view_box { get; private set; }
-	private TreeViewSelector treeview_provisorio;
+	public Box list_view_box { get; private set; }	
 	private mainToolbar toolbar;
 	private ViewHechos hechos_view;
+	private ViewAnios anios_view;
 	
 	public Window (Gtk.Application app)
 	{   
@@ -45,13 +45,13 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		this.toolbar = new mainToolbar ();
 		this.botones_toolbar ();
 
-		treeview_provisorio = new TreeViewSelector ();
+		this.anios_view = new ViewAnios ();
 		this.hechos_view = new ViewHechos ();
-		this.treeview_provisorio.cursor_changed.connect(elegir_anio);
+		this.anios_view.cursor_changed.connect(elegir_anio);
 
 		Separator separador = new Separator(Orientation.VERTICAL);
 
-		list_view_box.pack_start (treeview_provisorio, false, false, 0);
+		list_view_box.pack_start (anios_view, false, false, 0);
 		list_view_box.pack_start (separador, false, false, 2);
 		list_view_box.pack_start (this.hechos_view, true, true, 0);
 
@@ -60,7 +60,11 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	}
 
 	private void elegir_anio () {
-		this.hechos_view.mostrar_anio (this.treeview_provisorio.get_anio ());
+		string anio = this.anios_view.get_anio ();
+		
+		if ( anio != "0") { //acá uso el número mágico del año 0 que no existe para evitar pedir algo null
+			this.hechos_view.mostrar_anio (anio);
+		}
 	}
 
 	private void botones_toolbar ()
@@ -77,7 +81,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		if (add_dialog.run() == ResponseType.APPLY)
 		{
 			this.hechos_view.agregarHecho(add_dialog.respuesta);
-			this.treeview_provisorio.agregar_varios (this.hechos_view.lista_de_anios());
+			this.anios_view.agregar_varios (this.hechos_view.lista_de_anios());
 			add_dialog.destroy();
 		}		
 	}
@@ -99,6 +103,6 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
         	nuevoHecho = new Hecho.json(lineas[i]);
 			this.hechos_view.agregarHecho(nuevoHecho);
 		}
-		this.treeview_provisorio.agregar_varios (this.hechos_view.lista_de_anios());
+		this.anios_view.agregar_varios (this.hechos_view.lista_de_anios());
 	}
 }

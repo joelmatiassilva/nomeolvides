@@ -1,7 +1,7 @@
 /* -*- Mode: vala; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*-  */
 /* nomeolvides
  *
- * Copyright (C) 2012 Fernando Fernandez <fernando@softwareperonista.com.ar>
+ * Copyright (C) 2012 Lonko Soft <fernando@softwareperonista.com.ar>
  *
  * nomeolvides is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -20,12 +20,12 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.TreeViewSelector : TreeView {
+public class Nomeolvides.ViewAnios : TreeView {
 
 	private ListStore lista;
 	private TreeIter iter;
 	
-	public TreeViewSelector () {
+	public ViewAnios () {
 		this.lista = new ListStore(1,typeof(string));
 		this.set_model (this.lista);
 		var celda = new CellRendererText();
@@ -61,9 +61,12 @@ public class Nomeolvides.TreeViewSelector : TreeView {
 		Value valor;
 		
 		this.get_cursor(out path, out columna);
-		this.lista.get_iter(out iterador, path);
-		this.lista.get_value (iterador, 0, out valor);
-
-		return (string)valor;
+		if (path != null ) {
+			this.lista.get_iter(out iterador, path);
+			this.lista.get_value (iterador, 0, out valor);
+			return (string)valor;
+		} else { 
+			return "0"; //retorna el número mágico 0, que no existe, no hay año elegido.
+		}
 	}
 }

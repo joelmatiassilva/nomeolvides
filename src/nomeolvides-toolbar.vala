@@ -20,10 +20,22 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.Main_toolbar : Toolbar
+public class Nomeolvides.mainToolbar : Toolbar
 {
-	public Main_toolbar ()
+	public ToolButton add_button {get; private set;}
+	public ToolButton open_button {get; private set;}
+	
+	public mainToolbar ()
 	{
 		this.get_style_context().add_class(STYLE_CLASS_PRIMARY_TOOLBAR);
+
+		this.add_button = new ToolButton.from_stock(Stock.ADD);
+		this.open_button = new ToolButton.from_stock(Stock.OPEN);
+		
+		this.add_button.is_important = true;		
+		this.open_button.is_important = true;
+
+		this.add(add_button);
+		this.add(open_button);
 	}
 }

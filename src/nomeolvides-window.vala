@@ -25,7 +25,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	public Box main_box { get; private set; }
 	public Box list_view_box { get; private set; }
 	private TreeViewSelector treeview_provisorio;
-	private Main_toolbar toolbar;
+	private mainToolbar toolbar;
 	private ViewHechos hechos_view;
 	
 	public Window (Gtk.Application app)
@@ -42,7 +42,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		list_view_box = new Box (Orientation.HORIZONTAL,0);
 		this.add (main_box);
 		
-		this.toolbar = new Nomeolvides.Main_toolbar ();
+		this.toolbar = new mainToolbar ();
 		this.botones_toolbar ();
 
 		treeview_provisorio = new TreeViewSelector ();
@@ -65,17 +65,8 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 	private void botones_toolbar ()
 	{
-		var add_button = new ToolButton.from_stock(Stock.ADD);
-		add_button.is_important = true;
-		add_button.clicked.connect(this.add_hecho);
-
-		this.toolbar.add(add_button);
-
-		var open_button = new ToolButton.from_stock(Stock.OPEN);
-		open_button.is_important = true;
-		open_button.clicked.connect(this.open_file);
-
-		this.toolbar.add(open_button);
+		this.toolbar.add_button.clicked.connect(this.add_hecho);
+		this.toolbar.open_button.clicked.connect(this.open_file);
 	}
 
 	public void add_hecho ()

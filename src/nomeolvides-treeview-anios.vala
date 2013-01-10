@@ -1,7 +1,7 @@
 /* -*- Mode: vala; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*-  */
 /* nomeolvides
  *
- * Copyright (C) 2012 Lonko Soft <fernando@softwareperonista.com.ar>
+ * Copyright (C) 2012 Fernando <fernando@softwareperonista.com.ar>
  *
  * nomeolvides is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the

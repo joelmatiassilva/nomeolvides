@@ -1,7 +1,7 @@
 /* -*- Mode: vala; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*-  */
 /* nomeolvides
  *
- * Copyright (C) 2012 Fernando Fernandez <fernando@softwareperonista.com.ar>
+ * Copyright (C) 2012 Andres Fernandez <andres@softwareperonista.com.ar>
  *
  * nomeolvides is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -20,44 +20,35 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.AddDialog : Nomeolvides.DialogoHecho {
+public class Nomeolvides.EditDialog : Nomeolvides.DialogoHecho {
 	
-	public AddDialog () {
+	public EditDialog () {
 		this.set_title ("Añadir un Hecho Histórico");
 		
 		this.response.connect(on_response);
-		this.nombre_entry.activate.connect(on_activate);
-		this.descripcion_entry.activate.connect(on_activate);
-		this.anio_entry.activate.connect(on_activate);
-		this.mes_entry.activate.connect(on_activate);
-		this.dia_entry.activate.connect(on_activate);
 	}
 
-
+	public void set_datos ( Hecho hecho_a_editar ) {
+		this.nombre_entry.set_text(hecho_a_editar.nombre);
+		this.descripcion_entry.set_text(hecho_a_editar.descripcion);
+		this.anio_entry.set_text(hecho_a_editar.fecha.get_year().to_string ());
+		this.mes_entry.set_text(hecho_a_editar.fecha.get_month().to_string ());
+		this.dia_entry.set_text(hecho_a_editar.fecha.get_day_of_month().to_string ());
+	}	
 	private void on_response (Dialog source, int response_id)
 	{
         switch (response_id)
 		{
     		case ResponseType.APPLY:
-        		aplicar();
+        		modificar();
        			break;
     		case ResponseType.CLOSE:
         		destroy();
         		break;
         }
     }
-
-	private void on_activate () {
-		if (this.nombre_entry.text_length > 0 && 
-		    this.descripcion_entry.text_length > 0 && 
-		    this.anio_entry.text_length > 0 && 
-		    this.mes_entry.text_length > 0 && 
-		    this.dia_entry.text_length > 0) {
-			this.response (ResponseType.APPLY);
-		}
-	}
 		
-	private void aplicar ()
+	private void modificar ()
 	{
 		if(this.nombre_entry.get_text_length () > 0)
 		{

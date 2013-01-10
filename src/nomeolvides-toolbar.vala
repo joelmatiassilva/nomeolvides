@@ -1,7 +1,7 @@
 /* -*- Mode: vala; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*-  */
 /* nomeolvides
  *
- * Copyright (C) 2012 Fernando Fernandez <fernando@softwareperonista.com.ar>
+ * Copyright (C) 2012 Andres Fernandez <andres@softwareperonista.com.ar>
  *
  * nomeolvides is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -20,22 +20,33 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.mainToolbar : Toolbar
+public class Nomeolvides.MainToolbar : Toolbar
 {
-	public ToolButton add_button {get; private set;}
-	public ToolButton open_button {get; private set;}
+	public ToolButton add_button { get; private set; }
+	public ToolButton open_button { get; private set; }
+	public ToolButton edit_button { get; private set; }
 	
 	public mainToolbar ()
 	{
-		this.get_style_context().add_class(STYLE_CLASS_PRIMARY_TOOLBAR);
+		this.get_style_context().add_class (STYLE_CLASS_PRIMARY_TOOLBAR);
 
-		this.add_button = new ToolButton.from_stock(Stock.ADD);
-		this.open_button = new ToolButton.from_stock(Stock.OPEN);
+		this.add_button = new ToolButton.from_stock ( Stock.ADD );
+		this.open_button = new ToolButton.from_stock ( Stock.OPEN );
+		this.edit_button = new ToolButton.from_stock ( Stock.EDIT );
 		
 		this.add_button.is_important = true;		
 		this.open_button.is_important = true;
+		this.edit_button.is_important = true;
+		this.edit_button.set_visible_horizontal ( false );
 
-		this.add(add_button);
-		this.add(open_button);
+		this.add ( this.add_button );
+		this.add ( this.open_button );
+		this.add ( this.edit_button );
+	}
+
+	public void set_edit_button_visible (bool cambiar) {
+		if(this.edit_button.get_visible_horizontal() != cambiar) {
+			this.edit_button.set_visible_horizontal(cambiar);
+		}
 	}
 }

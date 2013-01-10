@@ -24,7 +24,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 {
 	public Box main_box { get; private set; }
 	public Box list_view_box { get; private set; }	
-	private mainToolbar toolbar;
+	private MainToolbar toolbar;
 	private ViewHechos hechos_view;
 	private ViewAnios anios_view;
 	
@@ -42,7 +42,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		list_view_box = new Box (Orientation.HORIZONTAL,0);
 		this.add (main_box);
 		
-		this.toolbar = new mainToolbar ();
+		this.toolbar = new MainToolbar ();
 		this.botones_toolbar ();
 
 		this.anios_view = new ViewAnios ();

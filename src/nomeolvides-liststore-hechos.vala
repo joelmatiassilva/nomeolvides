@@ -1,7 +1,7 @@
 /* -*- Mode: vala; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*-  */
 /* nomeolvides
  *
- * Copyright (C) 2012 Lonko Soft <fernando@softwareperonista.com.ar>
+ * Copyright (C) 2012 Andres Fernandez <andres@softwareperonista.com.ar>
  *
  * nomeolvides is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -25,7 +25,7 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 	private TreeIter iterador;
 	
 	public ListStoreHechos () {
-		Type[] tipos= { typeof (string), typeof (string), typeof (string) };
+		Type[] tipos= { typeof (string), typeof (string), typeof (string), typeof (Hecho) };
 		this.hechosCache = {};
 		this.set_column_types(tipos);
 	}
@@ -34,11 +34,26 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 		bool retorno = false;
 		if (this.unico(nuevo)) {
 			this.append(out iterador);
-			this.set(iterador, 0, nuevo.nombre, 1, nuevo.descripcion, 2, nuevo.fecha_to_string());
+			this.set(iterador, 0, nuevo.nombre, 1, nuevo.descripcion, 2, nuevo.fecha_to_string(), 3, nuevo);
 			this.hechosCache += nuevo.hash;
 			retorno = true;
 		}
 		return retorno;
+	}
+
+	public void modificar ( Hecho aModificar, TreeIter iter, string hash_hecho_anterior ) {
+		int i;
+		
+		this.set(iter, 0, aModificar.nombre,
+			           1, aModificar.descripcion, 
+		   		       2, aModificar.fecha_to_string(), 
+		       		   3, aModificar);
+		for(i=0;i < this.hechosCache.length; i++) {
+			if(this.hechosCache[i] == hash_hecho_anterior) {
+				this.hechosCache[i] = aModificar.hash;
+				break;
+			}			
+		}
 	}
 
 	private bool unico (Hecho nuevo) {

@@ -31,6 +31,7 @@ public class Nomeolvides.AddDialog : Nomeolvides.DialogoHecho {
 		this.anio_entry.activate.connect(on_activate);
 		this.mes_entry.activate.connect(on_activate);
 		this.dia_entry.activate.connect(on_activate);
+		this.add_button (Stock.ADD , ResponseType.APPLY);
 	}
 
 

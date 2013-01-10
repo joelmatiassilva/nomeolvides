@@ -40,7 +40,6 @@ public class Nomeolvides.DialogoHecho : Dialog
 		var mes_label = new Label.with_mnemonic ("Mes: ");
 		var dia_label = new Label.with_mnemonic ("Día: ");
 		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
-		this.add_button (Stock.ADD , ResponseType.APPLY);
 		
 		this.nombre_entry = new Entry ();
 		this.descripcion_entry = new Entry ();

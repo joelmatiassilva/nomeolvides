@@ -19,3 +19,7 @@ EXTRA_DIST = $(nomeolvidesdoc_DATA)
 # Remove doc directory on uninstall
 uninstall-local:
 	-rm -r $(nomeolvidesdocdir)
+
+
+AM_VALAFLAGS = --pkg \
+	gee-1.0 

@@ -26,7 +26,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 	public ToolButton open_button { get; private set; }
 	public ToolButton edit_button { get; private set; }
 	
-	public mainToolbar ()
+	public MainToolbar ()
 	{
 		this.get_style_context().add_class (STYLE_CLASS_PRIMARY_TOOLBAR);
 

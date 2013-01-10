@@ -47,7 +47,9 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 		this.anios_view = new ViewAnios ();
 		this.hechos_view = new ViewHechos ();
-		this.anios_view.cursor_changed.connect(elegir_anio);
+		
+		this.anios_view.cursor_changed.connect ( elegir_anio );
+		this.hechos_view.cursor_changed.connect ( elegir_hecho );
 
 		Separator separador = new Separator(Orientation.VERTICAL);
 
@@ -69,8 +71,9 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 	private void botones_toolbar ()
 	{
-		this.toolbar.add_button.clicked.connect(this.add_hecho);
-		this.toolbar.open_button.clicked.connect(this.open_file);
+		this.toolbar.add_button.clicked.connect( this.add_hecho );
+		this.toolbar.open_button.clicked.connect( this.open_file );
+		this.toolbar.edit_button.clicked.connect( this.edit_hecho );
 	}
 
 	public void add_hecho ()
@@ -80,10 +83,24 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 		if (add_dialog.run() == ResponseType.APPLY)
 		{
-			this.hechos_view.agregarHecho(add_dialog.respuesta);
+			this.hechos_view.agregar_hecho(add_dialog.respuesta);
 			this.anios_view.agregar_varios (this.hechos_view.lista_de_anios());
 			add_dialog.destroy();
 		}		
+	}
+
+	public void edit_hecho () {
+		Hecho hecho_anterior = this.hechos_view.get_hecho_cursor();
+		
+		EditDialog edit_dialog = new EditDialog();
+		edit_dialog.set_datos (hecho_anterior);
+		edit_dialog.show_all ();
+
+		if (edit_dialog.run() == ResponseType.APPLY)
+		{
+			this.hechos_view.modificar_hecho(edit_dialog.respuesta, hecho_anterior);
+			edit_dialog.destroy();
+		}
 	}
 
 	public void open_file ()
@@ -101,8 +118,16 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		lineas = todo.split_set ("\n");
 		for (i=0; i < (lineas.length - 1); i++) {
         	nuevoHecho = new Hecho.json(lineas[i]);
-			this.hechos_view.agregarHecho(nuevoHecho);
+			this.hechos_view.agregar_hecho(nuevoHecho);
 		}
 		this.anios_view.agregar_varios (this.hechos_view.lista_de_anios());
+	}
+
+	public void elegir_hecho () {
+		if(this.hechos_view.get_hecho_cursor () != null) {
+			this.toolbar.set_edit_button_visible( true );
+		} else {
+			this.toolbar.set_edit_button_visible ( false );
+		}
 	}
 }

@@ -23,6 +23,7 @@ using Nomeolvides;
 public class Nomeolvides.ViewHechos : Gtk.TreeView {
 
 	private ListStoreHechos[] hechos_anios;
+	private ListStoreHechos anio_mostrado_ahora; 
 	private string[] cache_hechos_anios;
 
 	public ViewHechos () {
@@ -32,7 +33,7 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 		this.insert_column_with_attributes (-1, "Fecha", new CellRendererText (), "text", 2);
 	}
 
-	public void agregarHecho (Hecho nuevo) {
+	public void agregar_hecho (Hecho nuevo) {
 		if ( anio_en_cache ( nuevo.fecha.get_year().to_string() )) {
 			this.hechos_anios[en_liststore (nuevo.fecha.get_year().to_string())].agregar (nuevo);
 			
@@ -40,12 +41,28 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 			agregar_liststore ( nuevo.fecha.get_year().to_string() );
 			this.hechos_anios[en_liststore (nuevo.fecha.get_year().to_string())].agregar (nuevo);
 		}
+
+		this.mostrar_anio ( nuevo.fecha.get_year().to_string() );
 	}
 
 	public void mostrar_anio ( string anio ) {
 		if ( anio_en_cache ( anio ) ){
-			this.set_model( this.hechos_anios[en_liststore (anio)] );
+			this.anio_mostrado_ahora = this.hechos_anios[en_liststore (anio)];
+			this.set_model( this.anio_mostrado_ahora );
 		}
+	}
+
+	public void modificar_hecho ( Hecho a_modificar, Hecho hecho_anterior ) {
+		TreePath path;
+		TreeViewColumn columna;
+		TreeIter iterador;
+
+		this.get_cursor(out path, out columna);
+		this.anio_mostrado_ahora.get_iter(out iterador, path);
+		this.hechos_anios[en_liststore (a_modificar.fecha.get_year().to_string())].modificar ( a_modificar,
+		                                                                                      iterador,
+		                                                                                      hecho_anterior );
+		this.mostrar_anio (a_modificar.fecha.get_year().to_string());
 	}
 
 	private bool anio_en_cache (string anio) {
@@ -73,6 +90,22 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 			}	
 		}
 		return 0;
+	}
+
+	public Hecho get_hecho_cursor () {
+		TreePath path;
+		TreeViewColumn columna;
+		TreeIter iterador;
+		Value hecho;
+		
+		this.get_cursor(out path, out columna);
+		if (path != null ) {
+			this.anio_mostrado_ahora.get_iter(out iterador, path);
+			this.anio_mostrado_ahora.get_value (iterador, 3, out hecho);
+			return (Hecho) hecho;
+		} else { 
+			return null;
+		}		
 	}
 
 	public string[] lista_de_anios ()

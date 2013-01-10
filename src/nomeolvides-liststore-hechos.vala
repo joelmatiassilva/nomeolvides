@@ -18,15 +18,16 @@
  */
 
 using Gtk;
+using Gee;
 using Nomeolvides;
 
 public class Nomeolvides.ListStoreHechos : ListStore {
-	private string[] hechosCache;
+	private ArrayList<string> hechos_cache;
 	private TreeIter iterador;
 	
 	public ListStoreHechos () {
 		Type[] tipos= { typeof (string), typeof (string), typeof (string), typeof (Hecho) };
-		this.hechosCache = {};
+		this.hechos_cache = new ArrayList<string> ();
 		this.set_column_types(tipos);
 	}
 
@@ -35,34 +36,35 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 		if (this.unico(nuevo)) {
 			this.append(out iterador);
 			this.set(iterador, 0, nuevo.nombre, 1, nuevo.descripcion, 2, nuevo.fecha_to_string(), 3, nuevo);
-			this.hechosCache += nuevo.hash;
+			this.hechos_cache.add(nuevo.hash);
 			retorno = true;
 		}
 		return retorno;
 	}
 
-	public void modificar ( Hecho aModificar, TreeIter iter, string hash_hecho_anterior ) {
+	public void modificar ( Hecho a_modificar, TreeIter iter, Hecho hecho_anterior ) {
 		int i;
 		
-		this.set(iter, 0, aModificar.nombre,
-			           1, aModificar.descripcion, 
-		   		       2, aModificar.fecha_to_string(), 
-		       		   3, aModificar);
-		for(i=0;i < this.hechosCache.length; i++) {
-			if(this.hechosCache[i] == hash_hecho_anterior) {
-				this.hechosCache[i] = aModificar.hash;
+	
+		this.set(iter, 0, a_modificar.nombre,
+			           1, a_modificar.descripcion, 
+				       2, a_modificar.fecha_to_string(), 
+		       		   3, a_modificar);
+		for(i=0;i < this.hechos_cache.size; i++) {
+			if(this.hechos_cache[i] == hecho_anterior.hash) {
+				this.hechos_cache[i] = a_modificar.hash;
 				break;
 			}			
-		}
+		}	
 	}
 
 	private bool unico (Hecho nuevo) {
 		int i;																									
 		bool retorno = true;
 
-		if (this.hechosCache.length > 0) {
-			for (i=0; (i < this.hechosCache.length) && (retorno != false); i++) {
-				if (nuevo.esIgual(this.hechosCache[i])) {
+		if (this.hechos_cache.size > 0) {
+			for (i=0; (i < this.hechos_cache.size) && (retorno != false); i++) {
+				if (nuevo.esIgual(this.hechos_cache[i])) {
 				retorno = false;
 				}
 			}

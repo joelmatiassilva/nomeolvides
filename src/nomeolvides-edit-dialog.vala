@@ -24,7 +24,8 @@ public class Nomeolvides.EditDialog : Nomeolvides.DialogoHecho {
 	
 	public EditDialog () {
 		this.set_title ("Añadir un Hecho Histórico");
-		
+
+		this.add_button (Stock.EDIT , ResponseType.APPLY);
 		this.response.connect(on_response);
 	}
 

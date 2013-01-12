@@ -38,9 +38,9 @@ public class Nomeolvides.Hecho : GLib.Object {
 		if (json.contains ("{\"Hecho\":{")) {
 			this.nombre = this.sacarDatoJson (json, "nombre");
 			this.descripcion = this.sacarDatoJson (json, "descripcion");
-			this.fecha = new DateTime.utc (this.sacarDatoJson(json, "anio").to_int (),
-			                               this.sacarDatoJson(json, "mes").to_int (),
-			                               this.sacarDatoJson(json, "dia").to_int (),
+			this.fecha = new DateTime.utc (int.parse (this.sacarDatoJson(json, "anio")),
+			                               int.parse (this.sacarDatoJson(json, "mes")),
+			                               int.parse (this.sacarDatoJson(json, "dia")),
 			                     		   0,0,0);
 			hash = Checksum.compute_for_string(ChecksumType.MD5, this.aJson ());
 		}

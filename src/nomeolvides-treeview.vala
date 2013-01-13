@@ -113,7 +113,6 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 
 		for (i=0; i < this.cache_hechos_anios.size; i++ ) {
 			retorno += this.cache_hechos_anios[i];
-			stdout.printf("%d) %s\n",i,retorno[i]);
 		}		
 		
 		return retorno;

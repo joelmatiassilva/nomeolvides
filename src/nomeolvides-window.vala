@@ -109,20 +109,28 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	{
 		string todo;
 		string[] lineas;
+		string archivo;
 		Hecho nuevoHecho;
 		int i;
+		OpenFileDialog abrir_archivo = new OpenFileDialog(GLib.Environment.get_current_dir ());
 
-		try {
-			FileUtils.get_contents ("src/hechos.json", out todo);
-		}  catch (Error e) {
-			error (e.message);
+		if (abrir_archivo.run () == ResponseType.ACCEPT) {
+            archivo = abrir_archivo.get_filename ();
+
+			try {
+				FileUtils.get_contents (archivo, out todo);
+			}  catch (Error e) {
+				error (e.message);
+			}
+			lineas = todo.split_set ("\n");
+			for (i=0; i < (lineas.length - 1); i++) {
+        		nuevoHecho = new Hecho.json(lineas[i]);
+				this.hechos_view.agregar_hecho(nuevoHecho);
+			}
+			this.anios_view.agregar_varios (this.hechos_view.lista_de_anios());
 		}
-		lineas = todo.split_set ("\n");
-		for (i=0; i < (lineas.length - 1); i++) {
-        	nuevoHecho = new Hecho.json(lineas[i]);
-			this.hechos_view.agregar_hecho(nuevoHecho);
-		}
-		this.anios_view.agregar_varios (this.hechos_view.lista_de_anios());
+
+		abrir_archivo.close ();
 	}
 
 	public void elegir_hecho () {

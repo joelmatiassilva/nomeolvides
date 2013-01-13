@@ -98,7 +98,9 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 		if (edit_dialog.run() == ResponseType.APPLY)
 		{
-			this.hechos_view.modificar_hecho(edit_dialog.respuesta, hecho_anterior);
+			this.hechos_view.eliminar_hecho( hecho_anterior);
+			this.hechos_view.agregar_hecho(edit_dialog.respuesta);			
+			this.anios_view.agregar_varios (this.hechos_view.lista_de_anios());
 			edit_dialog.destroy();
 		}
 	}

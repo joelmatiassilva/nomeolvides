@@ -17,24 +17,25 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using Gtk;
+using Gee;
 using Nomeolvides;
 
 
 public class Nomeolvides.ViewHechos : Gtk.TreeView {
 
-	private ListStoreHechos[] hechos_anios;
+	private ArrayList<ListStoreHechos> hechos_anios;
 	private ListStoreHechos anio_mostrado_ahora; 
-	private string[] cache_hechos_anios;
+	private ArrayList<string> cache_hechos_anios;
 
 	public ViewHechos () {
-		this.cache_hechos_anios = {};
-		this.hechos_anios = {};
+		this.cache_hechos_anios = new ArrayList<string> ();
+		this.hechos_anios = new ArrayList<ListStoreHechos> ();
 		this.insert_column_with_attributes (-1, "Nombre", new CellRendererText (), "text", 0);
 		this.insert_column_with_attributes (-1, "Fecha", new CellRendererText (), "text", 2);
 	}
 
 	public void agregar_hecho (Hecho nuevo) {
-		if ( anio_en_cache ( nuevo.fecha.get_year().to_string() )) {
+		if ( this.cache_hechos_anios.contains ( nuevo.fecha.get_year().to_string() )) {
 			this.hechos_anios[en_liststore (nuevo.fecha.get_year().to_string())].agregar (nuevo);
 			
 		} else {
@@ -46,50 +47,47 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 	}
 
 	public void mostrar_anio ( string anio ) {
-		if ( anio_en_cache ( anio ) ){
+		if ( this.cache_hechos_anios.contains ( anio ) ){
 			this.anio_mostrado_ahora = this.hechos_anios[en_liststore (anio)];
 			this.set_model( this.anio_mostrado_ahora );
 		}
 	}
 
-	public void modificar_hecho ( Hecho a_modificar, Hecho hecho_anterior ) {
+	public void eliminar_hecho ( Hecho a_eliminar ) {
 		TreePath path;
 		TreeViewColumn columna;
 		TreeIter iterador;
+		int anio = en_liststore (a_eliminar.fecha.get_year().to_string());
 
+		
 		this.get_cursor(out path, out columna);
 		this.anio_mostrado_ahora.get_iter(out iterador, path);
-		this.hechos_anios[en_liststore (a_modificar.fecha.get_year().to_string())].modificar ( a_modificar,
-		                                                                                      iterador,
-		                                                                                      hecho_anterior );
-		this.mostrar_anio (a_modificar.fecha.get_year().to_string());
-	}
+		this.hechos_anios[anio].eliminar ( iterador, a_eliminar );
 
-	private bool anio_en_cache (string anio) {
-		int i;
+		if (this.hechos_anios[anio].length () == 0) {
+			this.eliminar_liststore (anio);
+		}
 		
-		for (i=0; i < this.cache_hechos_anios.length; i++) {
-			if (this.cache_hechos_anios[i] == anio) {
-				return true;
-			}	
-		}	
-		return false;
+	}
+	
+	private void agregar_liststore (string nuevo_anio) {
+		this.hechos_anios.add ( new ListStoreHechos() );
+		this.cache_hechos_anios.add (nuevo_anio);
 	}
 
-	private void agregar_liststore (string nuevo_anio) {
-		this.hechos_anios += new ListStoreHechos();
-		this.cache_hechos_anios += nuevo_anio;
+	private void eliminar_liststore (int a_eliminar) {
+		
+		this.hechos_anios.remove (this.hechos_anios[a_eliminar]);
+		this.cache_hechos_anios.remove(this.cache_hechos_anios[a_eliminar]);
 	}
 
 	private int en_liststore (string anio) {
-		int i;
-		
-		for (i=0; i < this.cache_hechos_anios.length; i++) {
-			if (this.cache_hechos_anios[i] == anio) {
-				return i;
-			}	
-		}
-		return 0;
+
+		int retorno;
+
+		retorno = this.cache_hechos_anios.index_of( anio ); 
+
+		return retorno;
 	}
 
 	public Hecho get_hecho_cursor () {
@@ -110,7 +108,13 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 
 	public string[] lista_de_anios ()
 	{
-		string[] retorno = this.cache_hechos_anios;
+		string[] retorno = {};
+		int i;
+
+		for (i=0; i < this.cache_hechos_anios.size; i++ ) {
+			retorno += this.cache_hechos_anios[i];
+			stdout.printf("%d) %s\n",i,retorno[i]);
+		}		
 		
 		return retorno;
 	}

@@ -64,9 +64,9 @@ public class Nomeolvides.AddDialog : Nomeolvides.DialogoHecho {
 		{
 			this.respuesta  = new Hecho (this.nombre_entry.get_text (), 
 			            				 this.descripcion_entry.get_text (),
-			                             this.anio_entry.get_text().to_int (),
-			                             this.mes_entry.get_text().to_int (),
-			                             this.dia_entry.get_text().to_int ());
+			                             int.parse (this.anio_entry.get_text()),
+			                             int.parse (this.mes_entry.get_text()),
+			                             int.parse (this.dia_entry.get_text()));
 		}
 	}
 }

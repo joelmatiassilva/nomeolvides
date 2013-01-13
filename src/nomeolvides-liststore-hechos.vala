@@ -42,6 +42,11 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 		return retorno;
 	}
 
+	public void eliminar (TreeIter iter, Hecho a_eliminar ) {
+		this.hechos_cache.remove(a_eliminar.hash);
+		this.remove (iter);
+	}
+
 	public void modificar ( Hecho a_modificar, TreeIter iter, Hecho hecho_anterior ) {
 		int i;
 		
@@ -72,4 +77,9 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 		
 		return retorno;	
 	}
+
+	public int length () {
+		return this.hechos_cache.size;
+	}
+	
 }

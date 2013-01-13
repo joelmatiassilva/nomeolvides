@@ -36,9 +36,9 @@ public class Nomeolvides.DialogoHecho : Dialog
 		
 		var nombre_label = new Label.with_mnemonic ("Nombre: ");
 		var descripcion_label = new Label.with_mnemonic ("Descripcion: ");
-		var anio_label = new Label.with_mnemonic ("Año: ");
-		var mes_label = new Label.with_mnemonic ("Mes: ");
-		var dia_label = new Label.with_mnemonic ("Día: ");
+		var separador_fecha_label_1 = new Label.with_mnemonic (" de ");
+		var separador_fecha_label_2 = new Label.with_mnemonic (" de ");
+		var fecha_label = new Label.with_mnemonic ("Fecha: ");
 		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
 		
 		this.nombre_entry = new Entry ();
@@ -47,20 +47,31 @@ public class Nomeolvides.DialogoHecho : Dialog
 		this.mes_entry = new Entry ();
 		this.dia_entry = new Entry ();
 
+		var box = new Box(Orientation.HORIZONTAL,0);
+
+		dia_entry.set_max_length (2);
+		dia_entry.set_width_chars (2);
+		mes_entry.set_max_length (2);
+		mes_entry.set_width_chars (2);
+		anio_entry.set_max_length (4);
+		anio_entry.set_width_chars (4);
+
+		box.pack_start (this.dia_entry,false,false,1);
+		box.pack_start (separador_fecha_label_1,false,false,1);
+		box.pack_start (this.mes_entry,false,false,1);
+		box.pack_start (separador_fecha_label_2,false,false,1);
+		box.pack_start (this.anio_entry,false,false,1);
+
 		var grid = new Grid ();
 		grid.attach (nombre_label, 0, 0, 1, 1);
 	    grid.attach (nombre_entry, 1, 0, 1, 1);
 		grid.attach (descripcion_label, 0, 1, 1, 1);
 		grid.attach (descripcion_entry, 1, 1, 1, 1);
-		grid.attach (anio_label, 0, 2, 1, 1);
-		grid.attach (anio_entry, 1 , 2 , 1 ,1);
-		grid.attach (mes_label, 0, 3, 1, 1);
-		grid.attach (mes_entry, 1 , 3 , 1 ,1);
-		grid.attach (dia_label, 0, 4, 1, 1);
-		grid.attach (dia_entry, 1 , 4 , 1 ,1);
+		grid.attach (fecha_label, 0, 2, 1, 1);
+		grid.attach (box, 1 , 2 , 1 ,1);
 		
 		var contenido = this.get_content_area() as Box;
-		contenido.pack_start(grid, false, true, 0);
+		contenido.pack_start(grid, false, false, 0);
 		
 		this.show_all ();
 	}

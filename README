@@ -1,6 +1,6 @@
 ¿Qué es Nomeolvides?
 
-Una colección de backends de múltiples bases de datos de efemérides históricas. 
+Una colección de front-ends de múltiples bases de datos de efemérides históricas. 
 La idea es ofrecer la posibilidad de acceder desde múltiples dispositivos y 
 sistemas a los hechos históricos, por fecha, o por algún otro dato relevante. 
 Busca ser una herramienta que facilite el acceso a datos concretos para el 

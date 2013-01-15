@@ -47,22 +47,6 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 		this.remove (iter);
 	}
 
-	public void modificar ( Hecho a_modificar, TreeIter iter, Hecho hecho_anterior ) {
-		int i;
-		
-	
-		this.set(iter, 0, a_modificar.nombre,
-			           1, a_modificar.descripcion, 
-				       2, a_modificar.fecha_to_string(), 
-		       		   3, a_modificar);
-		for(i=0;i < this.hechos_cache.size; i++) {
-			if(this.hechos_cache[i] == hecho_anterior.hash) {
-				this.hechos_cache[i] = a_modificar.hash;
-				break;
-			}			
-		}	
-	}
-
 	private bool unico (Hecho nuevo) {
 		int i;																									
 		bool retorno = true;

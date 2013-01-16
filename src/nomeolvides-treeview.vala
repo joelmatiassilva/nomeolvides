@@ -50,6 +50,9 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 		if ( this.cache_hechos_anios.contains ( anio ) ){
 			this.anio_mostrado_ahora = this.hechos_anios[en_liststore (anio)];
 			this.set_model( this.anio_mostrado_ahora );
+			this.anio_mostrado_ahora.set_sort_column_id(3, SortType.ASCENDING);
+			this.anio_mostrado_ahora.set_sort_func(3, ordenar_hechos);
+
 		}
 	}
 
@@ -116,5 +119,48 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 		}		
 		
 		return retorno;
+	}
+
+	private int ordenar_hechos (Gtk.TreeModel model2, Gtk.TreeIter iter1, Gtk.TreeIter iter2) {
+		GLib.Value val1;
+		GLib.Value val2;
+
+		Hecho hecho1;
+		Hecho hecho2;
+
+		int mes1, dia1;
+		int mes2, dia2;
+
+		this.anio_mostrado_ahora.get_value(iter1, 3, out val1);
+        this.anio_mostrado_ahora.get_value(iter2, 3, out val2);
+
+		hecho1 = (Hecho) val1;
+		hecho2 = (Hecho) val2;
+		
+		mes1 = hecho1.fecha.get_month();
+		mes2 = hecho2.fecha.get_month();
+
+		dia1 = hecho1.fecha.get_day_of_month();
+		dia2 = hecho2.fecha.get_day_of_month();
+
+		stdout.printf("%d/%d  ---  %d/%d\n", dia1,mes1,dia2,mes2);
+
+		if (mes1 < mes2) {
+			return -1;
+		} else {
+			if (mes1 > mes2) {
+				return 1;
+			} else {
+				if (dia1 < dia2) {
+					return -1;
+				} else {
+					if (dia1 > dia2) {
+						return 1;
+					} else {
+						return 0;
+					}
+				}
+			}
+		}			
 	}
 }

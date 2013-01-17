@@ -143,8 +143,6 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 		dia1 = hecho1.fecha.get_day_of_month();
 		dia2 = hecho2.fecha.get_day_of_month();
 
-		stdout.printf("%d/%d  ---  %d/%d\n", dia1,mes1,dia2,mes2);
-
 		if (mes1 < mes2) {
 			return -1;
 		} else {

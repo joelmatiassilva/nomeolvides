@@ -18,6 +18,7 @@
  */
 
 using Gtk;
+using Gee;
 using Nomeolvides;
 
 public class Nomeolvides.Window : Gtk.ApplicationWindow
@@ -76,9 +77,10 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 	private void botones_toolbar ()
 	{
-		this.toolbar.add_button.clicked.connect( this.add_hecho );
 		this.toolbar.open_button.clicked.connect( this.open_file );
-		this.toolbar.edit_button.clicked.connect( this.edit_hecho );
+		this.toolbar.save_button.clicked.connect( this.save_file );
+		this.toolbar.add_button.clicked.connect( this.add_hecho );
+		this.toolbar.edit_button.clicked.connect( this.edit_hecho );		
 	}
 
 	public void add_hecho ()
@@ -136,6 +138,31 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		}
 
 		abrir_archivo.close ();
+	}
+
+	public void save_file () {
+
+		int i;
+		ArrayList<Hecho> lista;
+		string archivo, a_guardar = "";
+		
+		SaveFileDialog guardar_archivo = new SaveFileDialog(GLib.Environment.get_current_dir ());
+		if (guardar_archivo.run () == ResponseType.ACCEPT) {
+
+			lista = this.hechos_view.lista_de_hechos ();
+			for (i=0; i < lista.size; i++) {
+				a_guardar +=lista[i].aJson() + "\n"; 
+			}
+
+            archivo = guardar_archivo.get_filename ();
+
+			try {
+				FileUtils.set_contents (archivo, a_guardar);
+			}  catch (Error e) {
+				error (e.message);
+			}
+		}
+		guardar_archivo.close ();
 	}
 
 	public void elegir_hecho () {

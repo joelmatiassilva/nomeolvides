@@ -103,9 +103,28 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 			this.anio_mostrado_ahora.get_value (iterador, 3, out hecho);
 			return (Hecho) hecho;
 		} else { 
-			return null;
+			return (Hecho) null;
 		}		
 	}
+
+    public ArrayList<Hecho> lista_de_hechos () { 
+        ArrayList<Hecho> hechos = new ArrayList<Hecho>();
+		Value hecho;
+		TreeIter iter;
+		int i;
+
+
+		for (i=0; i < this.cache_hechos_anios.size; i++ ) {
+			this.hechos_anios[i].get_iter_first(out iter);
+			do {
+				this.hechos_anios[i].get_value(iter, 3, out hecho);
+				hechos.add ((Hecho) hecho);
+			}while (this.hechos_anios[i].iter_next(ref iter));
+		}
+		
+		return hechos;
+    }
+
 
 	public string[] lista_de_anios ()
 	{
@@ -119,21 +138,13 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 		return retorno;
 	}
 
-	private int ordenar_hechos (Gtk.TreeModel model2, Gtk.TreeIter iter1, Gtk.TreeIter iter2) {
-		GLib.Value val1;
-		GLib.Value val2;
+	private int comparar_hechos (Hecho hecho1, Hecho hecho2) {
 
-		Hecho hecho1;
-		Hecho hecho2;
-
-		int mes1, dia1;
-		int mes2, dia2;
-
-		this.anio_mostrado_ahora.get_value(iter1, 3, out val1);
-        this.anio_mostrado_ahora.get_value(iter2, 3, out val2);
-
-		hecho1 = (Hecho) val1;
-		hecho2 = (Hecho) val2;
+		int anio1, mes1, dia1;
+		int anio2, mes2, dia2;
+		
+		anio1 = hecho1.fecha.get_year();
+		anio2 = hecho2.fecha.get_year();
 		
 		mes1 = hecho1.fecha.get_month();
 		mes2 = hecho2.fecha.get_month();
@@ -141,22 +152,41 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 		dia1 = hecho1.fecha.get_day_of_month();
 		dia2 = hecho2.fecha.get_day_of_month();
 
-		if (mes1 < mes2) {
+		if (anio1 < anio2) {
 			return -1;
 		} else {
-			if (mes1 > mes2) {
+			if (anio1 > anio2) {
 				return 1;
 			} else {
-				if (dia1 < dia2) {
+				if (mes1 < mes2) {
 					return -1;
 				} else {
-					if (dia1 > dia2) {
+					if (mes1 > mes2) {
 						return 1;
 					} else {
-						return 0;
+						if (dia1 < dia2) {
+							return -1;
+						} else {
+							if (dia1 > dia2) {
+								return 1;
+							} else {
+								return 0;
+							}
+						}
 					}
-				}
+				}			
 			}
-		}			
+		}
+	}
+	
+	
+	private int ordenar_hechos (TreeModel model2, TreeIter iter1, TreeIter iter2) {
+		GLib.Value val1;
+		GLib.Value val2;
+
+		this.anio_mostrado_ahora.get_value(iter1, 3, out val1);
+        this.anio_mostrado_ahora.get_value(iter2, 3, out val2);
+
+		return this.comparar_hechos((Hecho) val1, (Hecho) val2);
 	}
 }

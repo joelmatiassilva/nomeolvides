@@ -20,10 +20,11 @@ AM_CFLAGS =\
 bin_PROGRAMS = nomeolvides
 
 nomeolvides_SOURCES = \
-	config.vapi nomeolvides-app.vala nomeolvides-window.vala nomeolvides-add-dialog.vala nomeolvides-toolbar.vala nomeolvides-text-view-hecho.vala nomeolvides-hecho.vala nomeolvides-main.vala nomeolvides-panel.vala nomeolvides-lista-hechos.vala nomeolvides-treeview.vala nomeolvides-liststore-hechos.vala nomeolvides-dialogo-hecho.vala nomeolvides-treeview-anios.vala nomeolvides-edit-dialog.vala nomeolvides-openfile-dialog.vala nomeolvides-vista-hecho.vala
+	config.vapi nomeolvides-app.vala nomeolvides-window.vala nomeolvides-add-dialog.vala nomeolvides-toolbar.vala nomeolvides-text-view-hecho.vala nomeolvides-hecho.vala nomeolvides-main.vala nomeolvides-panel.vala nomeolvides-lista-hechos.vala nomeolvides-view-hechos.vala nomeolvides-liststore-hechos.vala nomeolvides-dialogo-hecho.vala nomeolvides-view-anios.vala nomeolvides-edit-dialog.vala nomeolvides-openfile-dialog.vala nomeolvides-vista-hecho.vala
 
 nomeolvides_VALAFLAGS = \
-	--pkg gee-1.0 --pkg gtk+-3.0
+	--pkg gee-1.0 \
+	--pkg gtk+-3.0
 
 nomeolvides_LDFLAGS = \
 	-Wl,--export-dynamic

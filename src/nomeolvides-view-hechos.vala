@@ -37,13 +37,11 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 	public void agregar_hecho (Hecho nuevo) {
 		if ( this.cache_hechos_anios.contains ( nuevo.fecha.get_year().to_string() )) {
 			this.hechos_anios[en_liststore (nuevo.fecha.get_year().to_string())].agregar (nuevo);
-			
 		} else {
 			agregar_liststore ( nuevo.fecha.get_year().to_string() );
 			this.hechos_anios[en_liststore (nuevo.fecha.get_year().to_string())].agregar (nuevo);
 		}
-
-		this.mostrar_anio ( nuevo.fecha.get_year().to_string() );
+		this.mostrar_anio ( nuevo.fecha.get_year().to_string() );		
 	}
 
 	public void mostrar_anio ( string anio ) {

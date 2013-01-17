@@ -26,25 +26,33 @@ public class Nomeolvides.VistaHecho : Box {
 	private Label label_descripcion;
 	
 	public VistaHecho () {
-		this.set_orientation (Orientation.VERTICAL);
-		this.set_spacing (0);
+		this.set_orientation ( Orientation.VERTICAL );
+		this.set_spacing ( 10 );
 		this.set_homogeneous ( false );
 		
 		this.label_nombre = new Label.with_mnemonic ("");
 		this.label_fecha = new Label.with_mnemonic ("");
 		this.label_descripcion = new Label.with_mnemonic ("");
 
-		this.pack_start (this.label_nombre, false, false, 0);
-		this.pack_start (this.label_fecha, false, false, 0);
-		this.pack_start (this.label_descripcion, false, false, 0);
+		this.label_nombre.set_width_chars ( 50 );
+		this.label_descripcion.set_width_chars ( 50 );
+		this.label_fecha.set_width_chars ( 50 );
+		
+		this.label_fecha.set_alignment ( 0, 0 );
+		this.label_descripcion.set_alignment ( 0, 1 );
+		this.label_descripcion.set_line_wrap ( true );
+
+		this.pack_start ( this.label_nombre, false, false, 0 );
+		this.pack_start ( this.label_fecha, false, false, 0 );
+		this.pack_start ( this.label_descripcion, false, false, 0 );
 	}
 
 	public bool set_datos_hecho ( Hecho a_mostrar ) {
 		bool retorno = false;
 
 		if ( a_mostrar != null ) {
-			this.label_nombre.set_label ( a_mostrar.nombre );
-			this.label_fecha.set_label ( a_mostrar.fecha_to_string () );
+			this.label_nombre.set_markup ("<span font_size=\"x-large\" font_weight=\"heavy\">"+ a_mostrar.nombre +"</span>");
+			this.label_fecha.set_markup ("<span font_style=\"italic\">"+ a_mostrar.fecha_to_string () +"</span>");
 			this.label_descripcion.set_label ( a_mostrar.descripcion );
 
 			retorno = true;

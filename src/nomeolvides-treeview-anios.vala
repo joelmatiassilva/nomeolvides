@@ -32,6 +32,7 @@ public class Nomeolvides.ViewAnios : TreeView {
 		this.insert_column_with_attributes (-1,"Años", celda, "text",0);
 		this.lista.set_sort_column_id(0, SortType.ASCENDING);
 		this.lista.set_sort_func(2, ordenar_anios);
+		this.set_size_request (100, -1);
 
 	}
 

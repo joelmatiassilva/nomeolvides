@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*-  */
-/*
- * main.c
- * Copyright (C) 2012 Lonko Soft <lonko@softwareperonista.com.ar>
+/* Nomeolvides
+ * 
+ * Copyright (C) 2012 Andres Fernandez <andres@softwareperonista.com.ar>
  * 
  * nomeolvides is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -44,7 +44,7 @@ public class Nomeolvides.App : Gtk.Application
 
 		window = new Window(this);
 
-		window.show_all();
+		window.show_visible();
 	}
 
 	public override void activate ()

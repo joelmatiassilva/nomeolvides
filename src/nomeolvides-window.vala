@@ -77,10 +77,11 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 	private void botones_toolbar ()
 	{
-		this.toolbar.open_button.clicked.connect( this.open_file );
-		this.toolbar.save_button.clicked.connect( this.save_file );
-		this.toolbar.add_button.clicked.connect( this.add_hecho );
-		this.toolbar.edit_button.clicked.connect( this.edit_hecho );		
+		this.toolbar.open_button.clicked.connect ( this.open_file );
+		this.toolbar.save_button.clicked.connect ( this.save_file );
+		this.toolbar.add_button.clicked.connect ( this.add_hecho );
+		this.toolbar.edit_button.clicked.connect ( this.edit_hecho );
+		this.toolbar.delete_button.clicked.connect ( this.delete_hecho );
 	}
 
 	public void add_hecho ()
@@ -105,12 +106,27 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 		if (edit_dialog.run() == ResponseType.APPLY)
 		{
-			this.hechos_view.eliminar_hecho( hecho_anterior);
-			this.hechos_view.agregar_hecho(edit_dialog.respuesta);			
-			this.anios_view.agregar_varios (this.hechos_view.lista_de_anios());
+			this.hechos_view.eliminar_hecho ( hecho_anterior );
+			this.hechos_view.agregar_hecho ( edit_dialog.respuesta );			
+			this.anios_view.agregar_varios ( this.hechos_view.lista_de_anios() );
 			edit_dialog.destroy();
 		}
+
 	}
+
+	public void delete_hecho () {
+		Hecho hecho_a_borrar = this.hechos_view.get_hecho_cursor ();
+		
+		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( hecho_a_borrar );
+
+		if (delete_dialog.run() == ResponseType.APPLY)
+		{
+			this.hechos_view.eliminar_hecho ( hecho_a_borrar );
+			this.anios_view.agregar_varios ( this.hechos_view.lista_de_anios() );
+		}
+		
+		delete_dialog.destroy ();
+	}			
 
 	public void open_file ()
 	{
@@ -167,9 +183,9 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 	public void elegir_hecho () {
 		if(this.hechos_view.get_hecho_cursor () != null) {
-			this.toolbar.set_edit_button_visible( true );
+			this.toolbar.set_buttons_visible ( true );
 		} else {
-			this.toolbar.set_edit_button_visible ( false );		
+			this.toolbar.set_buttons_visible ( false );		
 		}
 
 		this.vista_hecho.set_visible ( false );

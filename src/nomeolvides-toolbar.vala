@@ -26,6 +26,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 	public ToolButton save_button { get; private set; }
 	public ToolButton add_button { get; private set; }
 	public ToolButton edit_button { get; private set; }
+	public ToolButton delete_button { get; private set; }
 	
 	public MainToolbar ()
 	{
@@ -35,22 +36,27 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.save_button = new ToolButton.from_stock ( Stock.SAVE );
 		this.add_button = new ToolButton.from_stock ( Stock.ADD );
 		this.edit_button = new ToolButton.from_stock ( Stock.EDIT );
+		this.delete_button = new ToolButton.from_stock ( Stock.DELETE );
 		
 		this.open_button.is_important = true;
 		this.save_button.is_important = true;		
 		this.add_button.is_important = true;		
 		this.edit_button.is_important = true;
 		this.edit_button.set_visible_horizontal ( false );
+		this.delete_button.is_important = true;
+		this.delete_button.set_visible_horizontal ( false );
 
 		this.add ( this.open_button );
 		this.add ( this.save_button );
 		this.add ( this.add_button );
 		this.add ( this.edit_button );
+		this.add ( this.delete_button );
 	}
 
-	public void set_edit_button_visible (bool cambiar) {
+	public void set_buttons_visible (bool cambiar) {
 		if(this.edit_button.get_visible_horizontal() != cambiar) {
-			this.edit_button.set_visible_horizontal(cambiar);
+			this.edit_button.set_visible_horizontal (cambiar);
+			this.delete_button.set_visible_horizontal (cambiar);
 		}
 	}
 }

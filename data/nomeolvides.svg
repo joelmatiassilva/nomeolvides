@@ -9,8 +9,8 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
+   width="571"
+   height="571"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
@@ -24,14 +24,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="-214.28571"
-     inkscape:cy="497.14286"
+     inkscape:zoom="1"
+     inkscape:cx="529.06309"
+     inkscape:cy="364.24183"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1025"
+     inkscape:window-width="1600"
+     inkscape:window-height="1141"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1" />
@@ -43,18 +43,19 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      inkscape:label="Capa 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(0,-481.36217)">
     <g
        id="g3035"
        style="fill:#007fff"
-       transform="matrix(0.92143298,0,0,0.88741605,6.2894494,79.96449)">
+       transform="matrix(0.92143298,0,0,0.88741605,-72.502449,335.53309)">
       <path
          transform="matrix(0.73267238,-0.6805815,0.6805815,0.73267238,-237.64633,204.63549)"
          d="m 400.00002,483.79074 c 0,108.87899 -54.36543,197.14285 -121.42858,197.14285 -67.06315,0 -121.42857,-88.26386 -121.42857,-197.14285 0,-108.87899 54.36542,-197.14285 121.42857,-197.14285 67.06315,0 121.42858,88.26386 121.42858,197.14285 z"
@@ -110,7 +111,8 @@
   <g
      inkscape:groupmode="layer"
      id="layer2"
-     inkscape:label="Capa">
+     inkscape:label="Capa"
+     transform="translate(0,-481.36217)">
     <path
        sodipodi:type="arc"
        style="fill:#ffcc00;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -120,6 +122,6 @@
        sodipodi:rx="102.85714"
        sodipodi:ry="108.57143"
        d="m 408.57143,420.93362 a 102.85714,108.57143 0 1 1 -205.71428,0 102.85714,108.57143 0 1 1 205.71428,0 z"
-       transform="matrix(0.65590533,0,0,0.65590533,153.28203,227.84519)" />
+       transform="matrix(0.65590533,0,0,0.65590533,75.500284,486.44425)" />
   </g>
 </svg>

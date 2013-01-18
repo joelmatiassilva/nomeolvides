@@ -2,8 +2,9 @@
 ## Created by Anjuta
 
 SUBDIRS = src 
+PREFIX=/usr
 
-nomeolvidesdocdir = ${prefix}/doc/nomeolvides
+nomeolvidesdocdir = ${PREFIX}/doc/nomeolvides
 nomeolvidesdoc_DATA = \
 	README\
 	COPYING\
@@ -24,8 +25,8 @@ uninstall-local:
 AM_VALAFLAGS = --pkg \
 	gee-1.0 
 
-nomeolvidesdesktofiledir = /usr/share/applications
+nomeolvidesdesktofiledir = ${PREFIX}/share/applications
 nomeolvidesdesktofile_DATA = data/nomeolvides.desktop
 
-nomeolvidesicondir = /usr/share/pixmaps/
+nomeolvidesicondir = ${PREFIX}/share/pixmaps/
 nomeolvidesicon_DATA = data/nomeolvides.svg

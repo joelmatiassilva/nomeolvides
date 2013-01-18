@@ -23,3 +23,9 @@ uninstall-local:
 
 AM_VALAFLAGS = --pkg \
 	gee-1.0 
+
+nomeolvidesdesktofiledir = /usr/share/applications
+nomeolvidesdesktofile_DATA = data/nomeolvides.desktop
+
+nomeolvidesicondir = /usr/share/pixmaps/
+nomeolvidesicon_DATA = data/nomeolvides.svg

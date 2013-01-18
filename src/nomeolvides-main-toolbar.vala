@@ -39,7 +39,8 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.delete_button = new ToolButton.from_stock ( Stock.DELETE );
 		
 		this.open_button.is_important = true;
-		this.save_button.is_important = true;		
+		this.save_button.is_important = true;
+		this.save_button.set_visible_horizontal ( false );
 		this.add_button.is_important = true;		
 		this.edit_button.is_important = true;
 		this.edit_button.set_visible_horizontal ( false );

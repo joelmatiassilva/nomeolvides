@@ -35,7 +35,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	{   
 		Object (application: app);
 		this.set_application (app);
-		this.set_title ("Nomeolvides - 0.1-80");
+		this.set_title ("Nomeolvides - 0.1-82");
 		this.set_position (WindowPosition.CENTER);
 		this.set_default_size (800,500);
 		this.set_size_request (500,350);
@@ -100,6 +100,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		{
 			this.hechos_view.agregar_hecho(add_dialog.respuesta);
 			this.anios_view.agregar_varios (this.hechos_view.lista_de_anios());
+			this.toolbar.save_button.set_visible_horizontal (true);
 			add_dialog.destroy();
 		}		
 	}

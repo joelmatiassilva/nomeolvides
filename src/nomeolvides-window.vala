@@ -29,12 +29,13 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	private ViewHechos hechos_view;
 	private ViewAnios anios_view;
 	private VistaHecho vista_hecho;
+	private ScrolledWindow scroll_vista_hecho;
 	
 	public Window (Gtk.Application app)
 	{   
 		Object (application: app);
 		this.set_application (app);
-		this.set_title ("Nomeolvides - 0.1-76");
+		this.set_title ("Nomeolvides - 0.1-80");
 		this.set_position (WindowPosition.CENTER);
 		this.set_default_size (800,500);
 		this.set_size_request (500,350);
@@ -42,6 +43,10 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 		main_box = new Box (Orientation.VERTICAL,0);
 		list_view_box = new Box (Orientation.HORIZONTAL,0);
+		this.scroll_vista_hecho = new ScrolledWindow (null,null);
+		this.scroll_vista_hecho.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
+		this.scroll_vista_hecho.set_size_request (300,-1);
+		
 		this.add (main_box);
 		
 		this.toolbar = new MainToolbar ();
@@ -57,11 +62,13 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 		Separator separador = new Separator(Orientation.VERTICAL);
 
+		this.scroll_vista_hecho.add_with_viewport (this.vista_hecho);
+		
 		list_view_box.pack_start (anios_view, false, false, 0);
 		list_view_box.pack_start (new Separator(Orientation.VERTICAL), false, false, 2);
 		list_view_box.pack_start (this.hechos_view, true, true, 0);
 		list_view_box.pack_start (separador, false, false, 2);
-		list_view_box.pack_start (this.vista_hecho, false, false, 0);
+		list_view_box.pack_start (scroll_vista_hecho, false, false, 0);
 
 		this.main_box.pack_start (toolbar, false, true, 0);		
 		this.main_box.pack_start (list_view_box, true, true, 0);
@@ -188,24 +195,24 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 			this.toolbar.set_buttons_visible ( false );		
 		}
 
-		this.vista_hecho.set_visible ( false );
+		this.scroll_vista_hecho.set_visible ( false );
 	}
 
 	public void mostrar_hecho () {
 		Hecho hecho_a_mostrar = this.hechos_view.get_hecho_cursor();
 
-		if (this.vista_hecho.visible == true ) {
-			this.vista_hecho.set_visible (false);
+		if (this.scroll_vista_hecho.visible == true ) {
+			this.scroll_vista_hecho.set_visible (false);
 		} else {
 			if ( hecho_a_mostrar != null ) {
 				this.vista_hecho.set_datos_hecho ( hecho_a_mostrar );
-				this.vista_hecho.set_visible ( true );
+				this.scroll_vista_hecho.set_visible ( true );
 			}
 		}
 	}
 
 	public void show_visible () {
 		this.show_all ();
-		this.vista_hecho.set_visible ( false );
+		this.scroll_vista_hecho.hide ();
 	}
 }

@@ -23,7 +23,7 @@ using Nomeolvides;
 public class Nomeolvides.VistaHecho : Box {
 	private Label label_nombre;
 	private Label label_fecha;
-	private Label label_descripcion;
+	private TextView text_descripcion;
 	
 	public VistaHecho () {
 		this.set_orientation ( Orientation.VERTICAL );
@@ -32,19 +32,17 @@ public class Nomeolvides.VistaHecho : Box {
 		
 		this.label_nombre = new Label.with_mnemonic ("");
 		this.label_fecha = new Label.with_mnemonic ("");
-		this.label_descripcion = new Label.with_mnemonic ("");
+		this.text_descripcion = new TextView ();
 
-		this.label_nombre.set_width_chars ( 50 );
-		this.label_descripcion.set_width_chars ( 50 );
-		this.label_fecha.set_width_chars ( 50 );
+		this.label_nombre.set_width_chars ( 30 );
+		this.text_descripcion.set_wrap_mode (WrapMode.WORD);
+		this.label_fecha.set_width_chars ( 30 );
 		
 		this.label_fecha.set_alignment ( 0, 0 );
-		this.label_descripcion.set_alignment ( 0, 1 );
-		this.label_descripcion.set_line_wrap ( true );
 
 		this.pack_start ( this.label_nombre, false, false, 0 );
 		this.pack_start ( this.label_fecha, false, false, 0 );
-		this.pack_start ( this.label_descripcion, false, false, 0 );
+		this.pack_start ( this.text_descripcion, false, false, 0 );
 	}
 
 	public bool set_datos_hecho ( Hecho a_mostrar ) {
@@ -53,7 +51,7 @@ public class Nomeolvides.VistaHecho : Box {
 		if ( a_mostrar != null ) {
 			this.label_nombre.set_markup ("<span font_size=\"x-large\" font_weight=\"heavy\">"+ a_mostrar.nombre +"</span>");
 			this.label_fecha.set_markup ("<span font_style=\"italic\">"+ a_mostrar.fecha_to_string () +"</span>");
-			this.label_descripcion.set_label ( a_mostrar.descripcion );
+			this.text_descripcion.buffer.text = a_mostrar.descripcion;
 
 			retorno = true;
 		}

@@ -35,7 +35,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	{   
 		Object (application: app);
 		this.set_application (app);
-		this.set_title ("Nomeolvides v0.1-86");
+		this.set_title ("Nomeolvides v0.2");
 		this.set_position (WindowPosition.CENTER);
 		this.set_default_size (800,500);
 		this.set_size_request (500,350);

@@ -1,0 +1,9 @@
+Versión 0.2
+
+Esta es la primer versión de prueba. Ya cuenta con las acciones básicas para usar la aplicación:
+
+* Agregar hechos históricos
+* Modificar hechos históricos
+* Eliminar hechos históricos
+* Guardar hechos históricos en un archivo
+* Cargar hecho históricos desde un archivo

@@ -1,0 +1,22 @@
+** Instrucciones para la Instalación de Nomeolvides **
+
+* Dependencias *
+
+Las dependencias de nomeolvides son:
+	De Compilación:
+		* vala >= 0.18
+		* autoconf
+		* libtool
+
+	De ejecución:
+		* Gee
+		* GTK 3
+		* GLib
+
+* Instanación *
+
+$ ./autogen.sh
+
+$ make
+
+# make install

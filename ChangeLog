@@ -1,55 +1,97 @@
 
-n.n.n / 2012-11-24 
+0.2 / 2013-01-19 
 ==================
 
+  * Se modificó el archivo INSTALL
+  * Se agrego las notas de la primer versión de prueba al archivo NEWS Se mejoró el ícono de la aplicación.
+  * Se "mejoró" el ícono
+  * Se arregló el ícono, ahora se ve mas grande
+  * Ahora el prefix por defeto para make es /usr Los directorios de instalacion del desktop y el icono son relativos a PREFIX
+  * Se modificó el título de la ventama para que sea menos confuso
+  * Se separó la lista de archivos fuente de src/Makefile.am en varias líneas para que sea menos confuso
+  * Merge branch 'master' of github.com:softwareperonista/nomeolvides
+  * Se agregó el archivo desktop Se agregó un ícono provisorio Se modificó el archivo Makefile.am para que instale el ícono y el desktop en el lugar correspondiente
+  * Ahora el botón "Guardar" se encuentra invisible, hasta que se agrega manualmente un hecho. NO está solucionado el issue #27, ya que si se borra el/los hecho/s agregado/s debería hacerse invisble otra vez el botón.
+  * Se renombró el archivo nomeolvides-toolbar.vala a nomeolvides-main-toolbar.vala. fixed #26
+  * Se mejoró sensiblemente la vista completa del hecho elegido. fixed #17 Ahora el widget que aparece y desaparece es un ScrolledWindow cuando Nomeolvide.Window.vista_hecho envía la señal row_activated. Ahora la parte de la descripción en Nomeolvides.VistaHecho es un TextView.
+  * Ahora al elegir un hecho aparece el botón en la toolbar para borrarlo, además de modificarlo. fixed #25
+  * Ahora se puede guardar los hechos. closes #15
+  * Se renombró el archivo src/nomeolvides-treeview-anios.vala a src/nomeolvides-view-anios.vala. rel #26 Se renombró el archivo src/nomeolvides-treeview.vala a src/nomeolvides-view-hechos.vala. rel #26
+  * Se mejoró sensiblemente la forma en que se muestran los datos del hecho en Nomeolvides.Window.vista_hecho.
+  * Se borró un stdout.printf que se había agregado a los fines de testeo y debug.
+  * Se creó la clase Nomeolvides.VistaHecho que hereda de Box y la cual va a mostrar en un espacio particuar todos los datos del Hecho elegido. Ahora cuando se emite la señal Nomeolvides.Window.anios_view.row_activated se muestran los datos del hecho elegido en un box vertical a la derecha de la app. Como base para cerrar el issue #17. Se creó la función Nomeolvides.Windows.show_visible para mostrar sólo aquellos widgets que queramos al inicio de la app. Ahora Nomeolvides.App.create_window utiliza la nueva función Nomeolvides.Window.show_visible en vez de show_all.
+  * Se seteo un ancho minimo para la lista de años, así queda más estético.
+  * Se agregó la funcionpara ordenar los hechos en Nomeolvides.ViewHechos por fecha. fixes #23
+  * Se ageró la función que ordena los años de Nomeolvides.ViewAnios. rel #23
+  * Agregado los datos de los desarrolladores
+  * Se actualizó README
+  * Se actualizó README.md
+  * Se actualizó README.md
+  * Se actualizó README.md
+  * En el commit anterior se omitió agregar el archivo src/Makefile.am.
+  * Se creo la clase Nomeolvides.OpenFileDialog Se modificó la función Nomeolvides.Window.open_file para que use Nomeolvide.OpenFileDialog para elegir el archivo con hechos que se quiere cargar. fixed #10 Se eliminó de la función Nomeolvide.ViewHechos.lista_de_anios un stdout.printf de testeo.
+  * Merge branch 'master' of github.com:softwareperonista/nomeolvides
+  * Se modificó la clase Nomeolvides.DialogoHecho para que se vea más amigable la parte de la fecha.
+  * Cambiado el tipo de Nomeolvides.ViewHechos.hecho_anios y Nomeolvides.ViewHechos.cache_hechos_anios a Gee.ArrayList cambiado el nombre de la funcion Nomeolvides.ViewHechos.modificar_echo a Nomeolvides.ViewHechos.eliminar_hecho Ahora al modificar un echo, se elimina el anterio y se agrega el nuevo. fixes #21
+  * Ahora se usa int.parse() para pasar de string a int
+  * Se agregó la variable privada Nomeolvides.ViewHechos.anio_mostrado_ahora del tipo ListStoreHechos. Se modificó la función Nomeolvides.ViewHechos.mostrar_anio para que haga uso de la nueva variable Nomeolvides.ViewHechos.anio_mostrado_ahora. Se cambió el nombre de la función Nomeolvides.ViewHechos.agregarHechos por Nomeolvides.ViewHechos.agregar_hecho. Se modificó la función Nomeolvides.ViewHechos.agregar_hecho para que se muestre en Nomeolvides.Windows.view_hechos los hechos del año del último hecho agregado. Ahora Nomeolvides.ListStoreHechos.hechosCache es del tipo Gee.ArrayList y se llama Nomeolvides.ListStoreHechos.hechos_cache. En la función Nomeolvides.ListStoreHechos.modificar ahora el tercer parámentro es del tipo Hecho y ya no string. Se agregó la función Nomeolvides.Window.elegir_hecho. Se agregó la función Nomeolvides.Window.edit_hecho. Se agregó la función Nomeolvides.ViewHechos.get_hecho_cursor. Se quitó el botón Agregar de la clase madre Nomeolvides.DialogoHecho, para que sea implementado en las clases hijas. fixed #20
+  * Se agregó la clase Nomeolvides.EditDialog que hereda de Nomeolvides.DialogoHecho. Se agregó un botón editar en la toolbar. Ahora Nomeolvides.ListStoreHechos guarda el objeto Hecho, no sólo los datos sus datos. Se agregó la función Nomeolvides.ListStoreHechos.modificar, la cual modifica al hecho huardado en la posición de iter. Se cambió el nombre de la clase Nomeolvides.mainToolbar por Nomeolvides.MainToolbar. Se agregó la función Nomeolvides.MainToolbar.set_edit_button_visible.
+  * Se cambió el nombre de la Clase Nomeolvides.TreeViewSelector a Nombeolvides.ViewAnios. Se modificó Nomeolvides.Windows.elegir_anio y Nomeolvides.ViewAnios.get_anios para que verifique si habia seleccionado un elemento del TreeView cuando se ejecuta la señal Gtk.TreeView.cursor_changed.
+  * Se cambió el nombre de la clase Nomeolvides.Main_toolbar a Nomeolvides.mainToolbar. Se movió la creación de los ToolButton al constructor de Nomeolvides.mainToolbar. Se modificó la función Nomeolvides.Window.botone_toolbar() para que ahora sólo conecte las señales a la funciones correspondientes, dejando el resto del trabajo que hacía para el constructor de Nomeolvides.mainToolbar.
+  * Se actualizó README con la descripción que hay en el wiki
+  * Se quito la columna Descripción del TreeView que muestra los hechos para una mejor experiencia de uso. Ahora la clase Nomeolvides.Add_dialog se llama Nomeolvides.AddDialog y hereda de una clase recién creada que se llama Nomeolvides.DialogoHecho. Es te cambio es para hacer más sencillo la resolución de #20
+  * Ahora se listan automaticamente en en el selector de años los años de los hechos agregados. closes #12
+  * Se agregó un hehco más a hechos.json para que se vea mejor lo que se implementó en el commit 3dbf554
+  * Ahora los hechos que se ingresan se agregan a una lista de acurdo al año. Y cuando se hace click en un año de Nomeolvides.TreeViewSelector en el TreeView de los hechos aparecen los hechos del año seleccionado. fixed #13
+  * Se agregó el método Nomeolvides.TreeViewSelector.agregar() que permite agregar elementos. paso previo para cerrar #12 Se moficicó la clase Nomeolvides.Hecho, ahora la fecha es del tipo DateTime. Se agregó el método Nomeolvides.Hecho.fecha_to_string() que devuelve el texto en un formato ameno. closes #19 Se agregaron los entry's y labels correspondientes al nuevo tipo de fecha de Nomeolvides.Hechos Se modificó el archivo hechos.json para adecuarlo al nuevo tipo de fecha de Nomeolvides.Hechos
+  * Ahora apretar enter en el cuadro de dialogo equivale a apretar el boton aceptar. closes #16
   * Merge branch 'master' of https://github.com/LonkoSoft/nomeolvides
-  *  * se cambió el nombre del archivo src/text-view-hecho.vala para estar acorde con el resto de los archivos  * se agregó la funcion Nomeolvides.Hecho.aJson () que traduce el objeto a un string en formato JSON
+  * Se agregó el dato fecha a los hechos y se modificaron todos los archivos necesarios para que se puedan cargar, guardar y mostrar con este nuevo campo. Aun falta que sea cómo agregarlos y que se vean lindos. Pero podemos decir que: fixed #8 Se agrego padding al separador en la ventana principal, para que se vea en adwaita. fixed #9
+  * Se agregó un Gtk.Seprator entre los dos TreeViews para que sea más visible la diferencia y se quitó el gris feo a las celdas del TreeViewSelector. fixed #9 Se solucionó el floodeo de la terminal con Gtk-Warning del color desconocido. fixed #11 Se hicieron arreglos menos en la escritura del resto de los archivos.
+  * Ahora los checksums de los hechos vuelven a crearse desde la función Hechos.aJson, en los constructores Hecho.Hecho y Hecho.json.
+  * Se cambio la funcion Hecho.esIgual, por Hecho.esIgualCache. Es decir que ahora Hecho.esIgual hace lo que antes hacia Hecho.esIgualCache y ninguna hace ya lo que hacia la original Hecho.esIgual. Se agrego la variable Hecho.hash que guarda el hash del checksum que ahora se hace en el constructor Hecho.Hecho y en el constructor Hecho.json. fixed #6
+  * Merge branch 'master' of https://github.com/LonkoSoft/nomeolvides
+  * Se mergeo el commit hecho desde el fork mío.
+  * Se creó la clase Nomeolvides.TreeViewSelector con una constructor provisorio hasta que se implementen las fechas en los hechos Se modificó el constructor de la clase Nomeolvides.window para que muestre el nuevo selector en la ventana principal.
+  * Merge branch 'master' of https://github.com/LonkoSoft/nomeolvides
+  * Ahora Nomeolvides.treeview muestra correctamente los datos del model. fixed #5 Se arrgló un pequeño error en los datos de prueba del archivo src/hechos.json
+  * Merge branch 'master' of https://github.com/LonkoSoft/nomeolvides
+  * Se agregaron las clase Nomeolvides.ListStoreHechos y Nomeolvides.treeview las cuales se usan ahora para mostrar los hechos en la ventana principal. Se modificó el esquema de comprovación de duplicados. Ahora cuando se agrega un hecho se guarda un chache de los hash de cada hecho en la clase Nomeolvides.ListStoreHechos. Se agregó la función EsIgualCache a la clase Nomeolvides.Hecho, para adecuarlo al nuevo esquema de comprobación de iguales por medio de chaché. Se agregó un try-catch a la apertura del archivo con los hechos de prueba en la función open_file ("y por qué en ingles?") de la clase Nomeolvides.Windows (ahh... por eso...) para hacerla más robusta.
+  * Se creó la clase Nomeolvides.ListaHechos que controla que los Hechos no se repitan dentro de la lista. fixed #4
+  * Se implementó la funcion Nomeolvides.Hecho.esIgual(), que comprueba la igualdad entre dos hechos
+  * Corregida la burrada del commit anterior
+  * Ahora la clase Hechos pertenece al namespace Nomeolvides Ahora se usa el namespace Nomeolvides en todos los archivos. fixed #2 Se nombraron todos los archivos utilizando el mismo criterio. fixed #3
+  * Se mejoró el algoritmo Nomeolvides.TextViewHecho.mostrar (), ahora es mucho mas rápido para procesar grandes cantidades de hechos.
+  * Ahora la ruta al archivo hechos.json es relativa
+  * Boceto de prueba de carga de Hechos en formato json desde un archivo
+  * Se agregó el contructor Nomeolvides.Hecho.json que permite crear el objeto desde un string JSON Se agrego la funcion privada Nomeolvides.Hecho.sacarDatoJson que permite al constructor json sacar el dato de un campo
+  * Solucionado el conflicto que falto solucionar en el commit anterior
+  * conflictos solucionados
+  * Merge branch 'master' of https://github.com/LonkoSoft/nomeolvides
+  * Se cambió el nombre del archivo src/text-view-hecho.vala para estar acorde con el resto de los archivos  * se agregó la funcion Nomeolvides.Hecho.aJson () que traduce el objeto a un string en formato JSON
   * LIMPIEZA DEL CÓDIGO II
+  * Se agrega un espacio para una lista en la ventana principal
   * LIMPIEZA DEL CÓDIGO
-  *  * se creo la clase Nomeolvides.TextViewHecho, para guardar y mostrar los hechos
-  *  * Ahora se agrega el hecho con el siguiente formato "NOMBRE: DESCRIPCION\n" al final del buffer de texto
+  * Se creo la clase Nomeolvides.TextViewHecho, para guardar y mostrar los hechos
+  * Ahora se agrega el hecho con el siguiente formato "NOMBRE: DESCRIPCION\n" al final del buffer de texto
   * La clase hecho ahora es Hecho para que sea coherente con el resto de las clases. La clase add dialog tiene una variable miembro pública de tipo Hecho llamada respuesta. La función aplicar de add_dialog ahora crea un objeto Hecho con los valores de los entry y lo guarda en la variable miembro respuesta. La función add_hecho de la clase App ahora toma el nombre del Hecho si se creé en el dialogo para agregar y lo copia en el buffer del text_view para que se muestre en pantalla.
-  *  * pruebas con el método Nomeolvides.Add_dialog.aplicar()
-  *  * los botones de Nomeolvides.Add_dialog ahora se crean uitilzando el método add_button()  * se agregó una función para procesar las respuestas, y ahora se puede cerrar el diálogo con el boton cancelar
+  * Pruebas con el método Nomeolvides.Add_dialog.aplicar()
+  * Los botones de Nomeolvides.Add_dialog ahora se crean uitilzando el método add_button()  * se agregó una función para procesar las respuestas, y ahora se puede cerrar el diálogo con el boton cancelar
   * Se agregó el boceto de dialogo para agregar hechos.
   * Se agrregó la variable grid a la interface publica de Nomeolvides.Panel. Además de inició la tentativa de gui en Nomeolvides.App. Además de removieron del repositorio los archivos de ocultos anjuta, agregados por error y se añadieron a la lista de ignorados por git.
   * Merge branch 'master' of https://github.com/LonkoSoft/nomeolvides
-  * agregado panel.vala
+  * Agregado panel.vala
   * Merge branch 'master' of https://github.com/LonkoSoft/nomeolvides
   * Se agregaron los archivos cultos .anjuta/* y anjuta_sym_db.db a .gitignore. Se siguen probando iu para la ventana principal de la app
-  * pruebas con gtk
+  * ruebas con gtk
   * Se cambió la estructura de la aplicación. Separando la funcion main de la misma y manejando el uso de la aplicación desde otro archivo
   * Se modificó la clase hecho, para que funciones correctamente
-  * prueba 1
-  * se agregaron archivos faltantes al repo
-  * creacion de UI básica para pruebas
-  * se añadio la clase hecho
-  * proyecto inicial de anjuta
+  * Prueba 1
+  * Se agregaron archivos faltantes al repo
+  * Creacion de UI básica para pruebas
+  * Se añadio la clase hecho
+  * Proyecto inicial de anjuta
   * Initial commit
 
-n.n.n / 2012-11-24 
-==================
-
-  * LIMPIEZA DEL CÓDIGO
-  *  * se creo la clase Nomeolvides.TextViewHecho, para guardar y mostrar los hechos
-  *  * Ahora se agrega el hecho con el siguiente formato "NOMBRE: DESCRIPCION\n" al final del buffer de texto
-  * La clase hecho ahora es Hecho para que sea coherente con el resto de las clases. La clase add dialog tiene una variable miembro pública de tipo Hecho llamada respuesta. La función aplicar de add_dialog ahora crea un objeto Hecho con los valores de los entry y lo guarda en la variable miembro respuesta. La función add_hecho de la clase App ahora toma el nombre del Hecho si se creé en el dialogo para agregar y lo copia en el buffer del text_view para que se muestre en pantalla.
-  *  * pruebas con el método Nomeolvides.Add_dialog.aplicar()
-  *  * los botones de Nomeolvides.Add_dialog ahora se crean uitilzando el método add_button()  * se agregó una función para procesar las respuestas, y ahora se puede cerrar el diálogo con el boton cancelar
-  * Se agregó el boceto de dialogo para agregar hechos.
-  * Se agrregó la variable grid a la interface publica de Nomeolvides.Panel. Además de inició la tentativa de gui en Nomeolvides.App. Además de removieron del repositorio los archivos de ocultos anjuta, agregados por error y se añadieron a la lista de ignorados por git.
-  * Merge branch 'master' of https://github.com/LonkoSoft/nomeolvides
-  * agregado panel.vala
-  * Merge branch 'master' of https://github.com/LonkoSoft/nomeolvides
-  * Se agregaron los archivos cultos .anjuta/* y anjuta_sym_db.db a .gitignore. Se siguen probando iu para la ventana principal de la app
-  * pruebas con gtk
-  * Se cambió la estructura de la aplicación. Separando la funcion main de la misma y manejando el uso de la aplicación desde otro archivo
-  * Se modificó la clase hecho, para que funciones correctamente
-  * prueba 1
-  * se agregaron archivos faltantes al repo
-  * creacion de UI básica para pruebas
-  * se añadio la clase hecho
-  * proyecto inicial de anjuta
-  * Initial commit
 
 

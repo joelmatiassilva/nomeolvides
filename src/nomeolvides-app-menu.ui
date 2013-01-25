@@ -1,0 +1,15 @@
+<interface>
+  <menu id="app-menu">
+    <section>
+	<item>
+	<attribute name="action">app.acerca_de</attribute>
+	<attribute name="label">Acerca de Nomeolvides</attribute>
+      </item>
+      <item>
+	<attribute name="action">app.salir</attribute>
+	<attribute name="label">Salir</attribute>
+	<attribute name="accel">&lt;Primary&gt;q</attribute>
+    </item>
+    </section>
+  </menu>
+</interface>

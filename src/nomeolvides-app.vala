@@ -23,26 +23,15 @@ using Nomeolvides;
 
 public class Nomeolvides.App : Gtk.Application 
 {
-
-	/* 
-	 * Uncomment this line when you are done testing and building a tarball
-	 * or installing
-	 */
-	//const string UI_FILE = Config.PACKAGE_DATA_DIR + "/" + "nomeolvides.ui";
-	const string UI_FILE = "src/nomeolvides.ui";
-
-	/* ANJUTA: Widgets declaration for nomeolvides.ui - DO NOT REMOVE */
-
 	public static App app;
-	public Window window;
+	public Nomeolvides.Window window;
+	public string version {get; private set;}
 
 	private void create_window ()
 	{
-		var action = new GLib.SimpleAction("quit",null);
-		action.activate.connect(() => { window.destroy(); });
-		this.add_action (action);
+		window = new Nomeolvides.Window(this, this.version);
 
-		window = new Window(this);
+		this.create_app_menu ();
 
 		window.show_visible();
 	}
@@ -54,9 +43,45 @@ public class Nomeolvides.App : Gtk.Application
 		app.window.show();
 	}
 
+	public void create_app_menu () {
+		var salir = new GLib.SimpleAction ("salir", null);
+		salir.activate.connect (() => { window.destroy (); });
+		this.add_action (salir);
+
+		var acerca_de = new GLib.SimpleAction ("acerca_de", null);
+		acerca_de.activate.connect (() => { create_about_dialog (); });
+		this.add_action (acerca_de);
+
+		var builder = new Builder ();
+		try {
+  			builder.add_from_file ("usr/nomeolvides-app-menu.ui");
+  			set_app_menu ((MenuModel)builder.get_object ("app-menu"));
+		} catch {
+  			warning ("Error al cargar el archivo del Aplication Menu");
+		}
+	}
+
+	public void create_about_dialog () {
+		string[] authors = {
+  			"Andres Fernandez <andres@softwareperonista.com.ar>",
+  			"Fernando Fernandez <fernando@softwareperonista.com.ar>"
+		};
+		Gtk.show_about_dialog (this.window,
+			   "authors", authors,
+			   "program-name", "Nomeolvides",
+			   "title", "Acerca de Nomeolvides",
+			   "comments", "Gestor de efemérides históricas",
+			   "copyright", "Copyright 2012 Fernando Fernandez",
+			   "license-type", Gtk.License.GPL_3_0,
+			   "logo-icon-name", "nomeolvides",
+			   "version", this.version,
+			   "website", "https://github.com/softwareperonista/nomeolvides",
+			   "wrap-license", true);	
+		}
 
 	public App ()
 	{
 		app = this;
+		this.version = "0.3-94";
 	}
 }

@@ -4,7 +4,6 @@
 
 
 uidir = $(pkgdatadir)/ui
-ui_DATA = nomeolvides.ui
 
 
 AM_CPPFLAGS = \
@@ -57,3 +56,5 @@ uninstall-local:
 	-rm -r $(uidir)
 	-rm -r $(pkgdatadir)
 
+
+data_DATA = nomeolvides-app-menu.ui

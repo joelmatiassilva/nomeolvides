@@ -54,7 +54,7 @@ public class Nomeolvides.App : Gtk.Application
 
 		var builder = new Builder ();
 		try {
-  			builder.add_from_file ("usr/nomeolvides-app-menu.ui");
+  			builder.add_from_file ("/usr/local/share/nomeolvides-app-menu.ui");
   			set_app_menu ((MenuModel)builder.get_object ("app-menu"));
 		} catch {
   			warning ("Error al cargar el archivo del Aplication Menu");
@@ -71,7 +71,7 @@ public class Nomeolvides.App : Gtk.Application
 			   "program-name", "Nomeolvides",
 			   "title", "Acerca de Nomeolvides",
 			   "comments", "Gestor de efemérides históricas",
-			   "copyright", "Copyright 2012 Fernando Fernandez",
+			   "copyright", "Copyright 2012 Fernando Fernandez y Andres Fernandez",
 			   "license-type", Gtk.License.GPL_3_0,
 			   "logo-icon-name", "nomeolvides",
 			   "version", this.version,
@@ -82,6 +82,6 @@ public class Nomeolvides.App : Gtk.Application
 	public App ()
 	{
 		app = this;
-		this.version = "0.3-94";
+		this.version = "0.2.1";
 	}
 }

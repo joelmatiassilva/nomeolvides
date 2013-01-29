@@ -84,8 +84,8 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 	private void botones_toolbar ()
 	{
-		this.toolbar.open_button.clicked.connect ( this.open_file );
-		this.toolbar.save_button.clicked.connect ( this.save_file );
+		this.toolbar.open_button.clicked.connect ( this.open_file_dialog );
+		this.toolbar.save_button.clicked.connect ( this.save_file_dialog);
 		this.toolbar.add_button.clicked.connect ( this.add_hecho );
 		this.toolbar.edit_button.clicked.connect ( this.edit_hecho );
 		this.toolbar.delete_button.clicked.connect ( this.delete_hecho );
@@ -134,58 +134,66 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		}
 		
 		delete_dialog.destroy ();
-	}			
+	}
 
-	public void open_file ()
-	{
+	public void open_file ( string archivo ) {
 		string todo;
 		string[] lineas;
-		string archivo;
 		Hecho nuevoHecho;
-		int i;
+		int i;	
+
+		try {
+			FileUtils.get_contents (archivo, out todo);
+		}  catch (Error e) {
+			error (e.message);
+		}
+		
+		lineas = todo.split_set ("\n");
+
+		for (i=0; i < (lineas.length - 1); i++) {
+        	nuevoHecho = new Hecho.json(lineas[i]);
+			this.hechos_view.agregar_hecho(nuevoHecho);
+		}
+		
+		this.anios_view.agregar_varios (this.hechos_view.lista_de_anios());
+	}
+
+	public void open_file_dialog ()
+	{
 		OpenFileDialog abrir_archivo = new OpenFileDialog(GLib.Environment.get_current_dir ());
 
 		if (abrir_archivo.run () == ResponseType.ACCEPT) {
-            archivo = abrir_archivo.get_filename ();
-
-			try {
-				FileUtils.get_contents (archivo, out todo);
-			}  catch (Error e) {
-				error (e.message);
-			}
-			lineas = todo.split_set ("\n");
-			for (i=0; i < (lineas.length - 1); i++) {
-        		nuevoHecho = new Hecho.json(lineas[i]);
-				this.hechos_view.agregar_hecho(nuevoHecho);
-			}
-			this.anios_view.agregar_varios (this.hechos_view.lista_de_anios());
+            this.open_file ( abrir_archivo.get_filename () );
 		}
 
 		abrir_archivo.close ();
 	}
 
-	public void save_file () {
-
+	public void save_file ( string archivo ) {
 		int i;
 		ArrayList<Hecho> lista;
-		string archivo, a_guardar = "";
-		
-		SaveFileDialog guardar_archivo = new SaveFileDialog(GLib.Environment.get_current_dir ());
-		if (guardar_archivo.run () == ResponseType.ACCEPT) {
+		string a_guardar = "";
 
-			lista = this.hechos_view.lista_de_hechos ();
-			for (i=0; i < lista.size; i++) {
-				a_guardar +=lista[i].aJson() + "\n"; 
-			}
-
-            archivo = guardar_archivo.get_filename ();
-
-			try {
-				FileUtils.set_contents (archivo, a_guardar);
-			}  catch (Error e) {
-				error (e.message);
-			}
+		lista = this.hechos_view.lista_de_hechos ();
+		for (i=0; i < lista.size; i++) {
+			a_guardar +=lista[i].aJson() + "\n"; 
 		}
+
+		try {
+			FileUtils.set_contents (archivo, a_guardar);
+		}  catch (Error e) {
+			error (e.message);
+		}
+	}
+
+	public void save_file_dialog () {
+		SaveFileDialog guardar_archivo = new SaveFileDialog(GLib.Environment.get_current_dir ());
+
+		if (guardar_archivo.run () == ResponseType.ACCEPT) {
+			
+            this.save_file ( guardar_archivo.get_filename () );
+		}
+		
 		guardar_archivo.close ();
 	}
 

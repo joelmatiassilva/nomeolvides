@@ -25,11 +25,10 @@ public class Nomeolvides.App : Gtk.Application
 {
 	public static App app;
 	public Nomeolvides.Window window;
-	public string version {get; private set;}
 
 	private void create_window ()
 	{
-		window = new Nomeolvides.Window(this, this.version);
+		window = new Nomeolvides.Window(this);
 
 		this.create_app_menu ();
 
@@ -74,7 +73,7 @@ public class Nomeolvides.App : Gtk.Application
 			   "copyright", "Copyright 2012 Fernando Fernandez y Andres Fernandez",
 			   "license-type", Gtk.License.GPL_3_0,
 			   "logo-icon-name", "nomeolvides",
-			   "version", this.version,
+			   "version", Config.VERSION,
 			   "website", "https://github.com/softwareperonista/nomeolvides",
 			   "wrap-license", true);	
 		}
@@ -82,6 +81,5 @@ public class Nomeolvides.App : Gtk.Application
 	public App ()
 	{
 		app = this;
-		this.version = "0.2.1";
 	}
 }

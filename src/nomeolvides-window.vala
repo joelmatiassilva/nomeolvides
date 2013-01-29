@@ -31,11 +31,11 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	private VistaHecho vista_hecho;
 	private ScrolledWindow scroll_vista_hecho;
 	
-	public Window (Gtk.Application app, string version)
+	public Window ( Gtk.Application app )
 	{   
 		Object (application: app);
 		this.set_application (app);
-		this.set_title ("Nomeolvides v" + version);
+		this.set_title ("Nomeolvides v" + Config.VERSION );
 		this.set_position (WindowPosition.CENTER);
 		this.set_default_size (800,500);
 		this.set_size_request (500,350);

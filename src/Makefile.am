@@ -37,7 +37,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-openfile-dialog.vala \
 	nomeolvides-vista-hecho.vala \
 	nomeolvides-savefile-dialog.vala \
-	nomeolvides-borrar-hecho-dialogo.vala
+	nomeolvides-borrar-hecho-dialogo.vala \
+	nomeolvides-hechos-fuentes.vala
 
 nomeolvides_VALAFLAGS = \
 	--pkg gee-1.0 \

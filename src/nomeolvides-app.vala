@@ -25,12 +25,15 @@ public class Nomeolvides.App : Gtk.Application
 {
 	public static App app;
 	public Nomeolvides.Window window;
+	public HechosFuentes fuentes;
 
 	private void create_window ()
 	{
 		window = new Nomeolvides.Window(this);
 
 		this.create_app_menu ();
+
+		this.window.cargar_fuentes_predefinidas ( this.fuentes );
 
 		window.show_visible();
 	}
@@ -50,6 +53,10 @@ public class Nomeolvides.App : Gtk.Application
 		var acerca_de = new GLib.SimpleAction ("acerca_de", null);
 		acerca_de.activate.connect (() => { create_about_dialog (); });
 		this.add_action (acerca_de);
+
+		var config_fuentes = new GLib.SimpleAction ("config_fuentes_hechos", null);
+		config_fuentes.activate.connect (() => { config_fuentes_hechos (); });
+		this.add_action (config_fuentes);
 
 		var builder = new Builder ();
 		try {
@@ -78,8 +85,13 @@ public class Nomeolvides.App : Gtk.Application
 			   "wrap-license", true);	
 		}
 
+	private void config_fuentes_hechos () {
+		this.fuentes.show_all ();		
+	}
+
 	public App ()
 	{
 		app = this;
+		this.fuentes = new HechosFuentes ();
 	}
 }

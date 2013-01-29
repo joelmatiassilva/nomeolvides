@@ -220,6 +220,14 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		}
 	}
 
+	public void cargar_fuentes_predefinidas ( HechosFuentes fuentes ) {		
+		int indice;
+		
+		for (indice = 0; indice < fuentes.archivos.size; indice++ ) {
+			this.open_file ( fuentes.archivos[indice] );
+		}
+	}
+
 	public void show_visible () {
 		this.show_all ();
 		this.scroll_vista_hecho.hide ();

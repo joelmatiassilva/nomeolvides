@@ -51,7 +51,7 @@ public class Nomeolvides.HechosFuentes : Gtk.Dialog {
 
 	private void on_response (Dialog source, int response_id)
 	{
-		destroy();
+		this.hide ();
     }
 
 	public void agregar_fuente ( string nombre, string archivo, string path ) {

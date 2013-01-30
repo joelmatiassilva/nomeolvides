@@ -40,7 +40,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-borrar-hecho-dialogo.vala \
 	nomeolvides-hechos-fuentes.vala \
 	nomeolvides-fuente.vala \
-	nomeolvides-liststore-fuentes.vala
+	nomeolvides-liststore-fuentes.vala \
+	nomeolvides-treeview-fuentes.vala
 
 nomeolvides_VALAFLAGS = \
 	--pkg gee-1.0 \

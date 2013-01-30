@@ -20,23 +20,21 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.HechosFuentes : Gtk.Dialog {
-	public TreeViewFuentes fuentes_view { get; private set; }
-		
-	public HechosFuentes () {
-		this.set_title ("Fuentes predeterminadas de hechos históricos");
+public class Nomeolvides.TreeViewFuentes : TreeView {
+	public ListStoreFuentes fuentes_store { get; private set; }
 
-		this.add_button (Stock.CLOSE , ResponseType.CLOSE);
-		this.response.connect(on_response);
-		
-		this.fuentes_view = new TreeViewFuentes ();		
+	public TreeViewFuentes () {
 
-		Gtk.Container contenido =  this.get_content_area () as Box;
-		contenido.add ( this.fuentes_view );
+		this.fuentes_store = new ListStoreFuentes ();
+		Fuente inicial = new Fuente ( "Inicial","hechos.json","src/","local" ); 
+		
+		this.fuentes_store.agregar_fuente ( inicial );
+		
+		this.insert_column_with_attributes ( -1, "Nombre", new CellRendererText(), "text", 0 );
+		this.insert_column_with_attributes ( -1, "Nombre de Archivo", new CellRendererText(), "text", 1 );
+		this.insert_column_with_attributes ( -1, "Dirección", new CellRendererText(), "text", 2 );
+		this.insert_column_with_attributes ( -1, "Tipo de Fuente", new CellRendererText(), "text", 3 );
+
+		this.set_model ( fuentes_store );
 	}
-
-	private void on_response (Dialog source, int response_id)
-	{
-		this.hide ();
-    }
 }

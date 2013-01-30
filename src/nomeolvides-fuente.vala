@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.Fuente {
+public class Nomeolvides.Fuente : GLib.Object{
 	public string nombre_fuente { get; private set; }
 	public string nombre_archivo { get; private set; }
 	public string direccion_fuente { get; private set; }

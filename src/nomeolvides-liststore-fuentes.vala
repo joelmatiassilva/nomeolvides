@@ -26,7 +26,7 @@ public class Nomeolvides.ListStoreFuentes : ListStore {
 	private TreeIter iterador;
 	
 	public ListStoreFuentes () {
-		Type[] tipos= { typeof (string), typeof (string), typeof (string), typeof (string)/*, typeof (Fuente) */};
+		Type[] tipos= { typeof(string), typeof(string), typeof(string), typeof(string), typeof(Fuente) };
 		this.archivos = new ArrayList<string> ();
 		this.set_column_types(tipos);
 	}
@@ -38,8 +38,8 @@ public class Nomeolvides.ListStoreFuentes : ListStore {
 		                         0,fuente.nombre_fuente,
 		                         1,fuente.nombre_archivo,
 		                         2,fuente.direccion_fuente,
-		                         3,fuente.tipo_fuente/*,
-		                         4,fuente*/ );
+		                         3,fuente.tipo_fuente,
+		                         4,fuente );
 			this.archivos.add (fuente.direccion_fuente + fuente.nombre_archivo );
 		}	
 	}

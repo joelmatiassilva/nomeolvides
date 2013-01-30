@@ -60,7 +60,7 @@ public class Nomeolvides.App : Gtk.Application
 
 		var builder = new Builder ();
 		try {
-  			builder.add_from_file ("/usr/local/share/nomeolvides-app-menu.ui");
+  			builder.add_from_file ("src/nomeolvides-app-menu.ui");
   			set_app_menu ((MenuModel)builder.get_object ("app-menu"));
 		} catch {
   			warning ("Error al cargar el archivo del Aplication Menu");

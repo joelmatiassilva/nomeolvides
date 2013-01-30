@@ -18,34 +18,32 @@
  */
 
 using Gtk;
-using Gee;
 using Nomeolvides;
 
 public class Nomeolvides.HechosFuentes : Gtk.Dialog {
-	private ListStore fuentes_store;
+	public ListStoreFuentes fuentes_store { get; private set; }
 	private TreeView fuentes_view;
-	private TreeIter fuentes_iter;
-	public ArrayList<string> archivos { get; private set; }
 		
 	public HechosFuentes () {
 		this.set_title ("Fuentes predeterminadas de hechos históricos");
 
 		this.add_button (Stock.CLOSE , ResponseType.CLOSE);
 		this.response.connect(on_response);
-		this.archivos = new ArrayList<string> ();
 		
 		this.fuentes_view = new TreeView ();
-		this.fuentes_store = new ListStore ( 3, typeof(string), typeof(string), typeof(string) );
-
-		this.agregar_fuente ("Inicial","hechos.json","src/");
+		this.fuentes_store = new ListStoreFuentes ();
+		Fuente inicial = new Fuente ( "Inicial","hechos.json","src/","local" ); 
+		
+		this.fuentes_store.agregar_fuente ( inicial );
 		
 		this.fuentes_view.insert_column_with_attributes ( -1, "Nombre", new CellRendererText(), "text", 0 );
 		this.fuentes_view.insert_column_with_attributes ( -1, "Nombre de Archivo", new CellRendererText(), "text", 1 );
 		this.fuentes_view.insert_column_with_attributes ( -1, "Dirección", new CellRendererText(), "text", 2 );
+		this.fuentes_view.insert_column_with_attributes ( -1, "Tipo de Fuente", new CellRendererText(), "text", 3 );
 
 		this.fuentes_view.set_model ( fuentes_store );
 
-		Gtk.Container contenido =  this.get_content_area ();
+		Gtk.Container contenido =  this.get_content_area () as Box;
 		contenido.add ( this.fuentes_view );
 	}
 
@@ -53,10 +51,4 @@ public class Nomeolvides.HechosFuentes : Gtk.Dialog {
 	{
 		this.hide ();
     }
-
-	public void agregar_fuente ( string nombre, string archivo, string path ) {
-		this.fuentes_store.append ( out this.fuentes_iter );
-		this.fuentes_store.set ( this.fuentes_iter, 0,nombre, 1,archivo, 2,path );
-		this.archivos.add ((string) path + (string) archivo);
-	}
 }

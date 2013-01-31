@@ -20,23 +20,28 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.HechosFuentes : Gtk.Dialog {
-	public TreeViewFuentes fuentes_view { get; private set; }
-		
-	public HechosFuentes () {
-		this.set_title ("Fuentes predeterminadas de hechos históricos");
+public class Nomeolvides.Fuente : GLib.Object{
+	public string nombre_fuente { get; private set; }
+	public string nombre_archivo { get; private set; }
+	public string direccion_fuente { get; private set; }
+	public string tipo_fuente { get; private set; }
 
-		this.add_button (Stock.CLOSE , ResponseType.CLOSE);
-		this.response.connect(on_response);
-		
-		this.fuentes_view = new TreeViewFuentes ();		
-
-		Gtk.Container contenido =  this.get_content_area () as Box;
-		contenido.add ( this.fuentes_view );
+	public Fuente ( string nombre_fuente, string nombre_archivo, string direccion_fuente, string tipo_fuente ) {
+		this.nombre_fuente = nombre_fuente;
+		this.nombre_archivo = nombre_archivo;
+		this.direccion_fuente = direccion_fuente;
+		this.tipo_fuente = tipo_fuente;
 	}
 
-	private void on_response (Dialog source, int response_id)
-	{
-		this.hide ();
-    }
+	public bool verificar_fuente () {
+		bool retorno = true;
+		if ( this.tipo_fuente == "local" ) {
+			if( !(FileUtils.test (this.direccion_fuente + this.nombre_archivo, FileTest.EXISTS))) {
+				retorno = false;
+				print ("No existe el archivo " + this.direccion_fuente + this.nombre_archivo);
+			}
+		}
+
+		return retorno;
+	}
 }

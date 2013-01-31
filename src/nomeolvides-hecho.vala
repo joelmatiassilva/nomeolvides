@@ -24,17 +24,19 @@ public class Nomeolvides.Hecho : GLib.Object {
 	public string descripcion { get; private set; }
 	public DateTime fecha {get; private set; }
 	public string hash { get; private set; }
+	public string archivo_fuente { get; private set;}
 
 	// Constructor
-	public Hecho (string nombre, string descripcion, int anio, int mes, int dia)
+	public Hecho ( string nombre, string descripcion, int anio, int mes, int dia, string archivo_fuente )
 	{
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.fecha = new DateTime.utc (anio, mes, dia, 0,0,0);
 		hash = Checksum.compute_for_string (ChecksumType.MD5, this.aJson ());
+		this.archivo_fuente = archivo_fuente;
 	}
 
-	public Hecho.json (string json) {
+	public Hecho.json (string json, string archivo_fuente ) {
 		if (json.contains ("{\"Hecho\":{")) {
 			this.nombre = this.sacarDatoJson (json, "nombre");
 			this.descripcion = this.sacarDatoJson (json, "descripcion");
@@ -43,7 +45,9 @@ public class Nomeolvides.Hecho : GLib.Object {
 			                               int.parse (this.sacarDatoJson(json, "dia")),
 			                     		   0,0,0);
 			hash = Checksum.compute_for_string(ChecksumType.MD5, this.aJson ());
-		}
+
+			this.archivo_fuente = archivo_fuente;
+		}		
 	}
 
 	public string aJson () {

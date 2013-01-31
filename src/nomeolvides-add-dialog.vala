@@ -18,11 +18,12 @@
  */
 
 using Gtk;
+using Gee;
 using Nomeolvides;
 
 public class Nomeolvides.AddDialog : Nomeolvides.DialogoHecho {
 	
-	public AddDialog () {
+	public AddDialog ( ArrayList<string> archivos_fuentes ) {
 		this.set_title ("Añadir un Hecho Histórico");
 		
 		this.response.connect(on_response);
@@ -31,6 +32,7 @@ public class Nomeolvides.AddDialog : Nomeolvides.DialogoHecho {
 		this.mes_entry.activate.connect(on_activate);
 		this.dia_entry.activate.connect(on_activate);
 		this.add_button (Stock.ADD , ResponseType.APPLY);
+		this.add_fuentes_predeterminadas ( archivos_fuentes );
 	}
 
 
@@ -60,5 +62,15 @@ public class Nomeolvides.AddDialog : Nomeolvides.DialogoHecho {
 	private void aplicar ()
 	{
 		this.crear_respuesta ();
+	}
+
+	protected void add_fuentes_predeterminadas ( ArrayList<string> archivos ) {
+		int indice;
+		TreeIter iter;
+		
+		for (indice = 0; indice < archivos.size; indice++ ) {
+			this.lista_fuentes.append ( out iter );
+			this.lista_fuentes.set ( iter, 0, archivos[indice] );
+		}
 	}
 }

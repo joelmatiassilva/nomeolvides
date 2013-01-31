@@ -30,6 +30,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	private ViewAnios anios_view;
 	private VistaHecho vista_hecho;
 	private ScrolledWindow scroll_vista_hecho;
+	private ArrayList<string> fuentes;
 	
 	public Window ( Gtk.Application app )
 	{   
@@ -94,7 +95,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 	public void add_hecho ()
 	{
-		var add_dialog = new AddDialog();
+		var add_dialog = new AddDialog( this.fuentes );
 		add_dialog.show();
 
 		if (add_dialog.run() == ResponseType.APPLY)
@@ -109,7 +110,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	public void edit_hecho () {
 		Hecho hecho_anterior = this.hechos_view.get_hecho_cursor();
 		
-		EditDialog edit_dialog = new EditDialog();
+		EditDialog edit_dialog = new EditDialog( this.fuentes );
 		edit_dialog.set_datos (hecho_anterior);
 		edit_dialog.show_all ();
 
@@ -253,6 +254,8 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 	public void cargar_fuentes_predefinidas ( HechosFuentes fuentes ) {		
 		int indice;
+
+		this.fuentes = fuentes.fuentes_view.fuentes_store.archivos;
 		
 		for (indice = 0; indice < fuentes.fuentes_view.fuentes_store.archivos.size; indice++ ) {
 			this.open_file ( fuentes.fuentes_view.fuentes_store.archivos[indice] );

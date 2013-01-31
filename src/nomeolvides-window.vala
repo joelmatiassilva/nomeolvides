@@ -85,7 +85,8 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	private void botones_toolbar ()
 	{
 		this.toolbar.open_button.clicked.connect ( this.open_file_dialog );
-		this.toolbar.save_button.clicked.connect ( this.save_file_dialog);
+		this.toolbar.save_as_button.clicked.connect ( this.save_as_file_dialog);
+		this.toolbar.save_button.clicked.connect ( this.save_file);
 		this.toolbar.add_button.clicked.connect ( this.add_hecho );
 		this.toolbar.edit_button.clicked.connect ( this.edit_hecho );
 		this.toolbar.delete_button.clicked.connect ( this.delete_hecho );
@@ -117,6 +118,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 			this.hechos_view.eliminar_hecho ( hecho_anterior );
 			this.hechos_view.agregar_hecho ( edit_dialog.respuesta );			
 			this.anios_view.agregar_varios ( this.hechos_view.lista_de_anios() );
+			this.toolbar.save_button.set_visible_horizontal (true);
 			edit_dialog.destroy();
 		}
 
@@ -131,6 +133,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		{
 			this.hechos_view.eliminar_hecho ( hecho_a_borrar );
 			this.anios_view.agregar_varios ( this.hechos_view.lista_de_anios() );
+			this.toolbar.save_button.set_visible_horizontal (true);
 		}
 		
 		delete_dialog.destroy ();
@@ -151,7 +154,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		lineas = todo.split_set ("\n");
 
 		for (i=0; i < (lineas.length - 1); i++) {
-        	nuevoHecho = new Hecho.json(lineas[i]);
+        	nuevoHecho = new Hecho.json(lineas[i], archivo);
 			this.hechos_view.agregar_hecho(nuevoHecho);
 		}
 		
@@ -169,7 +172,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		abrir_archivo.close ();
 	}
 
-	public void save_file ( string archivo ) {
+	public void save_as_file ( string archivo ) {
 		int i;
 		ArrayList<Hecho> lista;
 		string a_guardar = "";
@@ -186,12 +189,40 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		}
 	}
 
-	public void save_file_dialog () {
+	public void save_file () {
+		int i,y;
+		ArrayList<Hecho> lista;
+		string archivo;
+		string a_guardar = "";
+
+		lista = this.hechos_view.lista_de_hechos ();
+	
+		for (i=0; i < lista.size; i++) {
+			archivo = lista[i].archivo_fuente;
+			for (y=0; y < lista.size; y++) {
+				if (lista[y].archivo_fuente == archivo) {
+					a_guardar +=lista[y].aJson() + "\n";
+					lista.remove_at(y);
+					y--;
+				}
+			}
+			
+			try {
+				FileUtils.set_contents (archivo, a_guardar);
+			} catch (Error e) {
+				error (e.message);
+			}
+
+			a_guardar = "";
+		}	
+	}
+
+	public void save_as_file_dialog () {
 		SaveFileDialog guardar_archivo = new SaveFileDialog(GLib.Environment.get_current_dir ());
 
 		if (guardar_archivo.run () == ResponseType.ACCEPT) {
 			
-            this.save_file ( guardar_archivo.get_filename () );
+            this.save_as_file ( guardar_archivo.get_filename () );
 		}
 		
 		guardar_archivo.close ();

@@ -57,7 +57,8 @@ public class Nomeolvides.EditDialog : Nomeolvides.DialogoHecho {
 			            				 this.descripcion_entry.get_text (),
 			                             int.parse (this.anio_entry.get_text()),
 			                             int.parse (this.mes_entry.get_text()),
-			                             int.parse (this.dia_entry.get_text()));
+			                             int.parse (this.dia_entry.get_text()),
+			                             "src/hechos.json");
 		}
 	}
 }

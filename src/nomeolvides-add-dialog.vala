@@ -27,7 +27,6 @@ public class Nomeolvides.AddDialog : Nomeolvides.DialogoHecho {
 		
 		this.response.connect(on_response);
 		this.nombre_entry.activate.connect(on_activate);
-		this.descripcion_entry.activate.connect(on_activate);
 		this.anio_entry.activate.connect(on_activate);
 		this.mes_entry.activate.connect(on_activate);
 		this.dia_entry.activate.connect(on_activate);
@@ -50,7 +49,7 @@ public class Nomeolvides.AddDialog : Nomeolvides.DialogoHecho {
 
 	private void on_activate () {
 		if (this.nombre_entry.text_length > 0 && 
-		    this.descripcion_entry.text_length > 0 && 
+		    this.descripcion_textview.buffer.text.length > 0 && 
 		    this.anio_entry.text_length > 0 && 
 		    this.mes_entry.text_length > 0 && 
 		    this.dia_entry.text_length > 0) {
@@ -60,13 +59,6 @@ public class Nomeolvides.AddDialog : Nomeolvides.DialogoHecho {
 		
 	private void aplicar ()
 	{
-		if(this.nombre_entry.get_text_length () > 0)
-		{
-			this.respuesta  = new Hecho (this.nombre_entry.get_text (), 
-			            				 this.descripcion_entry.get_text (),
-			                             int.parse (this.anio_entry.get_text()),
-			                             int.parse (this.mes_entry.get_text()),
-			                             int.parse (this.dia_entry.get_text()));
-		}
+		this.crear_respuesta ();
 	}
 }

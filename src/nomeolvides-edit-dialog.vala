@@ -31,7 +31,7 @@ public class Nomeolvides.EditDialog : Nomeolvides.DialogoHecho {
 
 	public void set_datos ( Hecho hecho_a_editar ) {
 		this.nombre_entry.set_text(hecho_a_editar.nombre);
-		this.descripcion_entry.set_text(hecho_a_editar.descripcion);
+		this.descripcion_textview.buffer.text= hecho_a_editar.descripcion;
 		this.anio_entry.set_text(hecho_a_editar.fecha.get_year().to_string ());
 		this.mes_entry.set_text(hecho_a_editar.fecha.get_month().to_string ());
 		this.dia_entry.set_text(hecho_a_editar.fecha.get_day_of_month().to_string ());
@@ -51,13 +51,6 @@ public class Nomeolvides.EditDialog : Nomeolvides.DialogoHecho {
 		
 	private void modificar ()
 	{
-		if(this.nombre_entry.get_text_length () > 0)
-		{
-			this.respuesta  = new Hecho (this.nombre_entry.get_text (), 
-			            				 this.descripcion_entry.get_text (),
-			                             int.parse (this.anio_entry.get_text()),
-			                             int.parse (this.mes_entry.get_text()),
-			                             int.parse (this.dia_entry.get_text()));
-		}
+		this.crear_respuesta ();
 	}
 }

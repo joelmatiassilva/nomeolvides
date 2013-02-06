@@ -26,8 +26,8 @@ public class Nomeolvides.TreeViewFuentes : TreeView {
 	public TreeViewFuentes () {
 
 		this.fuentes_store = new ListStoreFuentes ();
-		Fuente inicial = new Fuente ( "Inicial","hechos.json","src/","local" );
-		Fuente siguiente = new Fuente ( "Siguiente","hechos2.json","src/","local" );
+		Fuente inicial = new Fuente ( "Inicial","hechos.json","src/", FuentesTipo.LOCAL );
+		Fuente siguiente = new Fuente ( "Siguiente","hechos2.json","src/", FuentesTipo.LOCAL );
 		
 		this.fuentes_store.agregar_fuente ( inicial );
 		this.fuentes_store.agregar_fuente ( siguiente );

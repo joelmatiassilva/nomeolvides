@@ -24,9 +24,9 @@ public class Nomeolvides.Fuente : GLib.Object{
 	public string nombre_fuente { get; private set; }
 	public string nombre_archivo { get; private set; }
 	public string direccion_fuente { get; private set; }
-	public string tipo_fuente { get; private set; }
+	public FuentesTipo tipo_fuente { get; private set; }
 
-	public Fuente ( string nombre_fuente, string nombre_archivo, string direccion_fuente, string tipo_fuente ) {
+	public Fuente ( string nombre_fuente, string nombre_archivo, string direccion_fuente, FuentesTipo tipo_fuente ) {
 		this.nombre_fuente = nombre_fuente;
 		this.nombre_archivo = nombre_archivo;
 		this.direccion_fuente = direccion_fuente;
@@ -35,7 +35,7 @@ public class Nomeolvides.Fuente : GLib.Object{
 
 	public bool verificar_fuente () {
 		bool retorno = true;
-		if ( this.tipo_fuente == "local" ) {
+		if ( this.tipo_fuente == FuentesTipo.LOCAL ) {
 			if( !(FileUtils.test (this.direccion_fuente + this.nombre_archivo, FileTest.EXISTS))) {
 				retorno = false;
 				print ("No existe el archivo " + this.direccion_fuente + this.nombre_archivo);
@@ -44,4 +44,9 @@ public class Nomeolvides.Fuente : GLib.Object{
 
 		return retorno;
 	}
+}
+
+
+public enum FuentesTipo {
+	LOCAL
 }

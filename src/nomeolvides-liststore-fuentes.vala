@@ -31,16 +31,28 @@ public class Nomeolvides.ListStoreFuentes : ListStore {
 		this.set_column_types(tipos);
 	}
 
-	public void agregar_fuente ( Fuente fuente ) {
-		if (fuente.verificar_fuente () ) {
+	public void agregar_fuente ( Fuente fuente ) {		
+		if (fuente.verificar_fuente () ) {		
 			this.append ( out this.iterador );
 			this.set ( this.iterador,
 		                         0,fuente.nombre_fuente,
 		                         1,fuente.nombre_archivo,
 		                         2,fuente.direccion_fuente,
-		                         3,fuente.tipo_fuente,
+		                         3,traducir_tipo_fuente ( fuente.tipo_fuente ),
 		                         4,fuente );
-			this.archivos.add (fuente.direccion_fuente + fuente.nombre_archivo );
+			this.archivos.add ( fuente.direccion_fuente + fuente.nombre_archivo );
 		}	
+	}
+
+	private string traducir_tipo_fuente ( FuentesTipo tipo_fuente) {
+		string tipo_traducido = "";
+		
+		switch ( tipo_fuente ){
+			case FuentesTipo.LOCAL:
+				tipo_traducido = "Local";
+					break;							
+		}
+	
+		return tipo_traducido;
 	}
 }

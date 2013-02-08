@@ -95,7 +95,8 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 	public void add_hecho ()
 	{
-		var add_dialog = new AddDialog( this.fuentes );
+		var add_dialog = new AddDialog( this.fuentes, this );
+		
 		add_dialog.show();
 
 		if (add_dialog.run() == ResponseType.APPLY)
@@ -110,7 +111,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	public void edit_hecho () {
 		Hecho hecho_anterior = this.hechos_view.get_hecho_cursor();
 		
-		EditDialog edit_dialog = new EditDialog( this.fuentes );
+		EditDialog edit_dialog = new EditDialog( this.fuentes, this );
 		edit_dialog.set_datos (hecho_anterior);
 		edit_dialog.show_all ();
 
@@ -128,7 +129,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	public void delete_hecho () {
 		Hecho hecho_a_borrar = this.hechos_view.get_hecho_cursor ();
 		
-		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( hecho_a_borrar );
+		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( hecho_a_borrar, this );
 
 		if (delete_dialog.run() == ResponseType.APPLY)
 		{
@@ -165,6 +166,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	public void open_file_dialog ()
 	{
 		OpenFileDialog abrir_archivo = new OpenFileDialog(GLib.Environment.get_current_dir ());
+		abrir_archivo.set_transient_for ( this as Window );
 
 		if (abrir_archivo.run () == ResponseType.ACCEPT) {
             this.open_file ( abrir_archivo.get_filename () );
@@ -221,6 +223,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 	public void save_as_file_dialog () {
 		SaveFileDialog guardar_archivo = new SaveFileDialog(GLib.Environment.get_current_dir ());
+		guardar_archivo.set_transient_for ( this as Window );
 
 		if (guardar_archivo.run () == ResponseType.ACCEPT) {
 			

@@ -23,8 +23,9 @@ using Nomeolvides;
 
 public class Nomeolvides.AddDialog : Nomeolvides.DialogoHecho {
 	
-	public AddDialog ( ArrayList<string> archivos_fuentes ) {
+	public AddDialog ( ArrayList<string> archivos_fuentes, Nomeolvides.Window ventana ) {
 		this.set_title ("Añadir un Hecho Histórico");
+		this.set_transient_for ( ventana as Window );
 		
 		this.response.connect(on_response);
 		this.nombre_entry.activate.connect(on_activate);
@@ -32,7 +33,7 @@ public class Nomeolvides.AddDialog : Nomeolvides.DialogoHecho {
 		this.mes_entry.activate.connect(on_activate);
 		this.dia_entry.activate.connect(on_activate);
 		this.add_button (Stock.ADD , ResponseType.APPLY);
-		this.add_fuentes_predeterminadas ( archivos_fuentes );
+		this.add_fuentes_predeterminadas ( archivos_fuentes );		
 	}
 
 

@@ -29,11 +29,9 @@ public class Nomeolvides.App : Gtk.Application
 
 	private void create_window ()
 	{
-		window = new Nomeolvides.Window(this);
+		this.window = new Nomeolvides.Window(this);
 
-		this.create_app_menu ();
-
-		this.window.cargar_fuentes_predefinidas ( this.fuentes );
+		this.create_app_menu ( );
 
 		window.show_visible();
 	}
@@ -41,7 +39,8 @@ public class Nomeolvides.App : Gtk.Application
 	public override void activate ()
 	{
 		create_window();
-
+		this.fuentes = new HechosFuentes ( this.window );
+		this.window.cargar_fuentes_predefinidas ( this.fuentes );
 		app.window.show();
 	}
 
@@ -91,7 +90,6 @@ public class Nomeolvides.App : Gtk.Application
 
 	public App ()
 	{
-		app = this;
-		this.fuentes = new HechosFuentes ();
+		app = this;		
 	}
 }

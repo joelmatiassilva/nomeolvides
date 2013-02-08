@@ -21,7 +21,9 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.BorrarHechoDialogo : Dialog {
-	public BorrarHechoDialogo ( Hecho hecho_a_borrar ) {
+	public BorrarHechoDialogo ( Hecho hecho_a_borrar, Nomeolvides.Window ventana ) {
+		this.set_modal ( true );
+		this.set_transient_for ( ventana as Gtk.Window );
 		Label pregunta = new Label.with_mnemonic ( "" );
 		Label hecho_nombre = new Label.with_mnemonic ( "" );
 		Label hecho_fecha = new Label.with_mnemonic ( "" );

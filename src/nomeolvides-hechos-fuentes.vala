@@ -23,9 +23,11 @@ using Nomeolvides;
 public class Nomeolvides.HechosFuentes : Gtk.Dialog {
 	public TreeViewFuentes fuentes_view { get; private set; }
 		
-	public HechosFuentes () {
+	public HechosFuentes (Nomeolvides.Window ventana) {
 		this.set_title ("Fuentes predeterminadas de hechos históricos");
-
+		this.set_modal ( true );
+		this.set_transient_for ( ventana as Gtk.Window );
+		
 		this.add_button (Stock.CLOSE , ResponseType.CLOSE);
 		this.response.connect(on_response);
 		

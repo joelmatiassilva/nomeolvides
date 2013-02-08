@@ -210,6 +210,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 			
 			try {
 				FileUtils.set_contents (archivo, a_guardar);
+				i--;
 			} catch (Error e) {
 				error (e.message);
 			}

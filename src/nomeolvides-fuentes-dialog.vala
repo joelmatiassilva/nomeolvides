@@ -20,15 +20,26 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.HechosFuentes : GLib.Object{
-	public ListStoreFuentes fuentes_liststore { get; private set; }
+public class Nomeolvides.FuentesDialog : Gtk.Dialog {
+	public TreeViewFuentes fuentes_view { get; private set; }
 		
-	public HechosFuentes () {
-		this.fuentes_liststore = new ListStoreFuentes ();
-		Fuente inicial = new Fuente ( "Inicial","hechos.json","src/", FuentesTipo.LOCAL );
-		Fuente siguiente = new Fuente ( "Siguiente","hechos2.json","src/", FuentesTipo.LOCAL );
+	public FuentesDialog (Nomeolvides.Window ventana, ListStoreFuentes liststore_fuente) {
+		this.set_title ("Fuentes predeterminadas de hechos históricos");
+		this.set_modal ( true );
+		this.set_transient_for ( ventana as Gtk.Window );
 		
-		this.fuentes_liststore.agregar_fuente ( inicial );
-		this.fuentes_liststore.agregar_fuente ( siguiente );
+		this.add_button ( Stock.CLOSE , ResponseType.CLOSE );
+		this.response.connect(on_response);
+		
+		this.fuentes_view = new TreeViewFuentes ();
+		this.fuentes_view.set_model ( liststore_fuente );
+
+		Gtk.Container contenido =  this.get_content_area () as Box;
+		contenido.add ( this.fuentes_view );
 	}
+
+	private void on_response (Dialog source, int response_id)
+	{
+		this.destroy ();
+    }
 }

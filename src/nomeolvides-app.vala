@@ -39,7 +39,7 @@ public class Nomeolvides.App : Gtk.Application
 	public override void activate ()
 	{
 		create_window();
-		this.fuentes = new HechosFuentes ( this.window );
+		this.fuentes = new HechosFuentes ( );
 		this.window.cargar_fuentes_predefinidas ( this.fuentes );
 		app.window.show();
 	}
@@ -85,7 +85,8 @@ public class Nomeolvides.App : Gtk.Application
 		}
 
 	private void config_fuentes_hechos () {
-		this.fuentes.show_all ();		
+		var fuente_dialogo = new FuentesDialog ( this.window, this.fuentes.fuentes_liststore );
+		fuente_dialogo.show_all ();
 	}
 
 	public App ()

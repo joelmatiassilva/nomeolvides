@@ -21,22 +21,11 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.TreeViewFuentes : TreeView {
-	public ListStoreFuentes fuentes_store { get; private set; }
-
 	public TreeViewFuentes () {
-
-		this.fuentes_store = new ListStoreFuentes ();
-		Fuente inicial = new Fuente ( "Inicial","hechos.json","src/", FuentesTipo.LOCAL );
-		Fuente siguiente = new Fuente ( "Siguiente","hechos2.json","src/", FuentesTipo.LOCAL );
-		
-		this.fuentes_store.agregar_fuente ( inicial );
-		this.fuentes_store.agregar_fuente ( siguiente );
-		
 		this.insert_column_with_attributes ( -1, "Nombre", new CellRendererText(), "text", 0 );
 		this.insert_column_with_attributes ( -1, "Nombre de Archivo", new CellRendererText(), "text", 1 );
 		this.insert_column_with_attributes ( -1, "Dirección", new CellRendererText(), "text", 2 );
 		this.insert_column_with_attributes ( -1, "Tipo de Fuente", new CellRendererText(), "text", 3 );
 
-		this.set_model ( fuentes_store );
 	}
 }

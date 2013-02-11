@@ -95,7 +95,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 	public void add_hecho ()
 	{
-		var add_dialog = new AddDialog( this.fuentes, this );
+		var add_dialog = new AddHechoDialog( this.fuentes, this );
 		
 		add_dialog.show();
 
@@ -111,7 +111,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	public void edit_hecho () {
 		Hecho hecho_anterior = this.hechos_view.get_hecho_cursor();
 		
-		EditDialog edit_dialog = new EditDialog( this.fuentes, this );
+		var edit_dialog = new EditHechoDialog( this.fuentes, this );
 		edit_dialog.set_datos (hecho_anterior);
 		edit_dialog.show_all ();
 

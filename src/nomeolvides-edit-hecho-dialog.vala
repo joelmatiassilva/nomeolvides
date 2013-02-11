@@ -21,9 +21,10 @@ using Gtk;
 using Gee;
 using Nomeolvides;
 
-public class Nomeolvides.EditDialog : Nomeolvides.DialogoHecho {
+public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 	private ArrayList<string> archivos_fuente;
-	public EditDialog ( ArrayList<string> archivos_fuentes, Nomeolvides.Window ventana ) {
+	
+	public EditHechoDialog ( ArrayList<string> archivos_fuentes, Nomeolvides.Window ventana ) {
 		base (archivos_fuentes, ventana);
 		this.set_title ("Añadir un Hecho Histórico");				
 

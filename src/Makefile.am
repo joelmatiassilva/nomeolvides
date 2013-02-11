@@ -20,9 +20,7 @@ bin_PROGRAMS = nomeolvides
 
 nomeolvides_SOURCES = \
 	config.vapi \
-	nomeolvides-app.vala \
 	nomeolvides-window.vala \
-	nomeolvides-add-dialog.vala \
 	nomeolvides-main-toolbar.vala \
 	nomeolvides-text-view-hecho.vala \
 	nomeolvides-hecho.vala \
@@ -33,7 +31,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-liststore-hechos.vala \
 	nomeolvides-dialogo-hecho.vala \
 	nomeolvides-view-anios.vala \
-	nomeolvides-edit-dialog.vala \
 	nomeolvides-openfile-dialog.vala \
 	nomeolvides-vista-hecho.vala \
 	nomeolvides-savefile-dialog.vala \
@@ -42,7 +39,10 @@ nomeolvides_SOURCES = \
 	nomeolvides-fuente.vala \
 	nomeolvides-liststore-fuentes.vala \
 	nomeolvides-treeview-fuentes.vala \
-	nomeolvides-fuentes-dialog.vala
+	nomeolvides-fuentes-dialog.vala \
+	nomeolvides-add-hecho-dialog.vala \
+	nomeolvides-app.vala \
+	nomeolvides-edit-hecho-dialog.vala
 
 nomeolvides_VALAFLAGS = \
 	--pkg gee-1.0 \

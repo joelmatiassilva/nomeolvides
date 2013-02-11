@@ -36,22 +36,24 @@ public class Nomeolvides.AddFuenteDialog : Dialog
 		modal = true;
 		this.set_transient_for ( ventana as Window );
 		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
+		this.add_button (Stock.FILE, ResponseType.ACCEPT);
 		this.add_button (Stock.ADD , ResponseType.APPLY);
 		this.response.connect(on_response);
 		
 		var nombre_fuente_label = new Label.with_mnemonic ("Nombre de la Fuente: ");
 		var nombre_archivo_label = new Label.with_mnemonic ("Nombre del Archivo: ");
 		var direccion_label = new Label.with_mnemonic ("Dirección del Archivo: ");
-		var tipo_fuente_label = new Label.with_mnemonic ("Tipo de Fuente: ");
+	//	var tipo_fuente_label = new Label.with_mnemonic ("Tipo de Fuente: ");
 		
 		this.nombre_fuente_entry = new Entry ();
 		this.nombre_archivo_entry = new Entry ();
 		this.direccion_entry = new Entry ();
-		this.lista_tipos_fuentes = new ListStore (2,typeof(string),typeof(FuentesTipo));		
-		this.combo_tipos_fuentes = new ComboBox ();
+//		this.lista_tipos_fuentes = new ListStore (2,typeof(string),typeof(FuentesTipo));		
+//		this.combo_tipos_fuentes = new ComboBox ();
 
-		this.set_liststore_tipos_fuente ();
-		this.set_combo_box ();
+//		this.set_liststore_tipos_fuente ();
+//		this.set_combo_box ();
+
 
 		var grid = new Grid ();
 		
@@ -61,8 +63,8 @@ public class Nomeolvides.AddFuenteDialog : Dialog
 		grid.attach (this.nombre_archivo_entry, 1, 1, 1, 1);
 		grid.attach (direccion_label, 0 , 2 , 1 ,1);
 		grid.attach (this.direccion_entry, 1 , 2 , 1 ,1);
-		grid.attach (tipo_fuente_label, 0, 3, 1, 1);
-		grid.attach (this.combo_tipos_fuentes, 1 , 3 , 1 ,1);
+/*		grid.attach (tipo_fuente_label, 0, 3, 1, 1);
+		grid.attach (this.combo_tipos_fuentes, 1 , 3 , 1 ,1);*/
 		
 		
 		var contenido = this.get_content_area() as Box;
@@ -76,9 +78,12 @@ public class Nomeolvides.AddFuenteDialog : Dialog
 	{
         switch (response_id)
 		{
+			case ResponseType.ACCEPT:
+        		this.elegir_fuente ();
+        		break;
     		case ResponseType.APPLY:
-        		crear_respuesta ();
-       			break;
+        		this.crear_respuesta ();
+				break;
     		case ResponseType.CLOSE:
         		this.destroy();
         		break;
@@ -91,19 +96,19 @@ public class Nomeolvides.AddFuenteDialog : Dialog
 			this.respuesta  = new Fuente (this.nombre_fuente_entry.get_text (), 
 			            				  this.nombre_archivo_entry.get_text(),
 										  this.direccion_entry.get_text (),
-			                              this.get_tipo_elegido());
+			                              FuentesTipo.LOCAL);
 		}
 	}
 
-	private void set_combo_box () {
+	/*private void set_combo_box () {
 		CellRendererText renderer = new CellRendererText ();
 		this.combo_tipos_fuentes.pack_start (renderer, true);
 		this.combo_tipos_fuentes.add_attribute (renderer, "text", 0);
 		this.combo_tipos_fuentes.active = 0;
 		this.combo_tipos_fuentes.set_model ( this.lista_tipos_fuentes );
-	}
+	}*/
 
-	protected FuentesTipo get_tipo_elegido () {		
+	/*private FuentesTipo get_tipo_elegido () {		
 		TreeIter iter;
 		Value tipo_fuente;
 		
@@ -111,13 +116,28 @@ public class Nomeolvides.AddFuenteDialog : Dialog
 		this.lista_tipos_fuentes.get_value (iter, 1, out tipo_fuente);
 
 		return (FuentesTipo) tipo_fuente;
-	}
+	}*/
 
-	private void set_liststore_tipos_fuente () {
+/*	private void set_liststore_tipos_fuente () {
 		TreeIter iter;		
 
 		this.lista_tipos_fuentes.append ( out iter );
 		this.lista_tipos_fuentes.set ( iter, 0, "Archivo Local" );
 		this.lista_tipos_fuentes.set ( iter, 1, FuentesTipo.LOCAL );
+	}*/
+
+	private void elegir_fuente () {
+		OpenFileDialog elegir_archivo = new OpenFileDialog(GLib.Environment.get_current_dir ());
+		elegir_archivo.set_transient_for ( this as Window );
+
+		string path_provisorio;
+
+		if (elegir_archivo.run () == ResponseType.ACCEPT) {
+    		path_provisorio = elegir_archivo.get_filename ();
+			this.direccion_entry.set_text (path_provisorio.slice(0,path_provisorio.last_index_of_char ('/') +1));
+			this.nombre_archivo_entry.set_text (path_provisorio.slice(path_provisorio.last_index_of_char ('/') +1, path_provisorio.char_count ()));
+		}
+
+		elegir_archivo.destroy ();
 	}
 }

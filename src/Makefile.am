@@ -62,4 +62,4 @@ uninstall-local:
 	-rm -r $(pkgdatadir)
 
 
-data_DATA = nomeolvides-app-menu.ui
+data_DATA =

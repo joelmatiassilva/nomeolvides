@@ -26,6 +26,13 @@ public class Nomeolvides.App : Gtk.Application
 	public static App app;
 	public Nomeolvides.Window window;
 	public HechosFuentes fuentes;
+	public GLib.Menu application_menu;
+
+	private const GLib.ActionEntry[] actions_app_menu = {
+		{ "create-about-dialog", create_about_dialog },
+		{ "window-destroy", salir_app },
+		{ "config-fuentes-dialog", config_fuentes_dialog }
+	};
 
 	private void create_window ()
 	{
@@ -45,28 +52,17 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void create_app_menu () {
-		var salir = new GLib.SimpleAction ("salir", null);
-		salir.activate.connect (() => { window.destroy (); });
-		this.add_action (salir);
-
-		var acerca_de = new GLib.SimpleAction ("acerca_de", null);
-		acerca_de.activate.connect (() => { create_about_dialog (); });
-		this.add_action (acerca_de);
-
-		var config_fuentes = new GLib.SimpleAction ("config_fuentes_hechos", null);
-		config_fuentes.activate.connect (() => { config_fuentes_hechos (); });
-		this.add_action (config_fuentes);
-
-		var builder = new Builder ();
-		try {
-  			builder.add_from_file ("src/nomeolvides-app-menu.ui");
-  			set_app_menu ((MenuModel)builder.get_object ("app-menu"));
-		} catch {
-  			warning ("Error al cargar el archivo del Aplication Menu");
-		}
+		this.application_menu = new GLib.Menu ();
+		
+		this.application_menu.append ( "Configurar Fuentes", "app.config-fuentes-dialog" );
+		this.application_menu.append ( "Acerca de Nomeolvides", "app.create-about-dialog" );
+		this.application_menu.append ( "Salir", "app.window-destroy" );
+		
+		this.set_app_menu ( application_menu );		
+		this.add_action_entries (actions_app_menu, this);
 	}
 
-	public void create_about_dialog () {
+	private void create_about_dialog () {
 		string[] authors = {
   			"Andres Fernandez <andres@softwareperonista.com.ar>",
   			"Fernando Fernandez <fernando@softwareperonista.com.ar>"
@@ -82,15 +78,20 @@ public class Nomeolvides.App : Gtk.Application
 			   "version", Config.VERSION,
 			   "website", "https://github.com/softwareperonista/nomeolvides",
 			   "wrap-license", true);	
-		}
+	}
 
-	private void config_fuentes_hechos () {
+	private void salir_app () {
+		this.window.destroy ();
+	}
+
+	private void config_fuentes_dialog () {
 		var fuente_dialogo = new FuentesDialog ( this.window, this.fuentes.fuentes_liststore );
 		fuente_dialogo.show_all ();
 	}
 
 	public App ()
 	{
-		app = this;		
+		app = this;
+		
 	}
 }

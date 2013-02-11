@@ -26,9 +26,11 @@ public class Nomeolvides.HechosFuentes : GLib.Object{
 	public HechosFuentes () {
 		this.fuentes_liststore = new ListStoreFuentes ();
 		Fuente inicial = new Fuente ( "Inicial","hechos.json","src/", FuentesTipo.LOCAL );
-		Fuente siguiente = new Fuente ( "Siguiente","hechos2.json","src/", FuentesTipo.LOCAL );
 		
 		this.fuentes_liststore.agregar_fuente ( inicial );
-		this.fuentes_liststore.agregar_fuente ( siguiente );
 	}
+
+	public void actualizar_fuentes_liststore ( ListStoreFuentes nueva_fuente_liststore) {
+		this.fuentes_liststore = nueva_fuente_liststore;
+	} 
 }

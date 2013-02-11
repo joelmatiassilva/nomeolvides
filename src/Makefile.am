@@ -42,7 +42,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-fuentes-dialog.vala \
 	nomeolvides-add-hecho-dialog.vala \
 	nomeolvides-app.vala \
-	nomeolvides-edit-hecho-dialog.vala
+	nomeolvides-edit-hecho-dialog.vala \
+	nomeolvides-add-fuente-dialog.vala
 
 nomeolvides_VALAFLAGS = \
 	--pkg gee-1.0 \

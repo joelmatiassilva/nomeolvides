@@ -24,14 +24,14 @@ using Nomeolvides;
 public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 	private ArrayList<string> archivos_fuente;
 	
-	public EditHechoDialog ( ArrayList<string> archivos_fuentes, Nomeolvides.Window ventana ) {
-		base (archivos_fuentes, ventana);
+	public EditHechoDialog ( Nomeolvides.Window ventana, HechosFuentes fuentes ) {
+		base (ventana, fuentes);
 		this.set_title ("Añadir un Hecho Histórico");				
 
 		this.add_button (Stock.EDIT , ResponseType.APPLY);
 		this.response.connect(on_response);
 
-		this.archivos_fuente = archivos_fuentes;		
+		this.archivos_fuente = fuentes.fuentes_liststore.archivos;		
 	}
 
 	public void set_datos ( Hecho hecho_a_editar ) {

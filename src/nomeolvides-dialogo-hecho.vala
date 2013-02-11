@@ -28,11 +28,11 @@ public class Nomeolvides.DialogoHecho : Dialog
 	protected Entry anio_entry;
 	protected Entry mes_entry;
 	protected Entry dia_entry;
-	protected ListStore lista_fuentes;
+	protected ListStoreFuentes lista_fuentes;
 	protected ComboBox combo_fuentes;
 	public Hecho respuesta { get; protected set; }
 	
-	public DialogoHecho ( ArrayList<string> archivos_fuentes, Nomeolvides.Window ventana )
+	public DialogoHecho (Nomeolvides.Window ventana, HechosFuentes fuentes )
 	{
 		resizable = false;
 		modal = true;
@@ -52,10 +52,9 @@ public class Nomeolvides.DialogoHecho : Dialog
 		this.anio_entry = new Entry ();
 		this.mes_entry = new Entry ();
 		this.dia_entry = new Entry ();
-		this.lista_fuentes = new ListStore (1,typeof(string));
 		this.combo_fuentes = new ComboBox ();
 
-		this.add_fuentes_predeterminadas ( archivos_fuentes );
+		this.lista_fuentes = fuentes.fuentes_liststore;
 
 		this.dia_entry.set_max_length (2);
 		this.dia_entry.set_width_chars (2);
@@ -128,20 +127,13 @@ public class Nomeolvides.DialogoHecho : Dialog
 	protected string get_archivo_elegido () {		
 		TreeIter iter;
 		Value archivo;
+		Value direccion;
 		
 		this.combo_fuentes.get_active_iter( out iter );
-		this.lista_fuentes.get_value (iter, 0, out archivo);
+		this.lista_fuentes.get_value (iter, 1, out archivo);
+		this.lista_fuentes.get_value (iter, 2, out direccion);
 
-		return (string) archivo;
+		return (string) direccion + (string) archivo ;
 	}
 
-	private void add_fuentes_predeterminadas ( ArrayList<string> archivos ) {
-		int indice;
-		TreeIter iter;
-		
-		for (indice = 0; indice < archivos.size; indice++ ) {
-			this.lista_fuentes.append ( out iter );
-			this.lista_fuentes.set ( iter, 0, archivos[indice] );
-		}
-	}
 }

@@ -23,8 +23,8 @@ using Nomeolvides;
 
 public class Nomeolvides.AddHechoDialog : Nomeolvides.DialogoHecho {
 	
-	public AddHechoDialog ( ArrayList<string> archivos_fuentes, Nomeolvides.Window ventana ) {
-		base (archivos_fuentes, ventana);
+	public AddHechoDialog ( Nomeolvides.Window ventana, HechosFuentes fuentes ) {
+		base (ventana, fuentes);
 
 		this.set_title ("Añadir un Hecho Histórico");
 		

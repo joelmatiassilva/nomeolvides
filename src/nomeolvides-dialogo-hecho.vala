@@ -32,10 +32,11 @@ public class Nomeolvides.DialogoHecho : Dialog
 	protected ComboBox combo_fuentes;
 	public Hecho respuesta { get; protected set; }
 	
-	public DialogoHecho ()
+	public DialogoHecho ( ArrayList<string> archivos_fuentes, Nomeolvides.Window ventana )
 	{
 		resizable = false;
-		modal = true;		
+		modal = true;
+		this.set_transient_for ( ventana as Window );
 		
 		var nombre_label = new Label.with_mnemonic ("Nombre: ");
 		var descripcion_label = new Label.with_mnemonic ("Descripcion: ");
@@ -53,6 +54,8 @@ public class Nomeolvides.DialogoHecho : Dialog
 		this.dia_entry = new Entry ();
 		this.lista_fuentes = new ListStore (1,typeof(string));
 		this.combo_fuentes = new ComboBox ();
+
+		this.add_fuentes_predeterminadas ( archivos_fuentes );
 
 		this.dia_entry.set_max_length (2);
 		this.dia_entry.set_width_chars (2);
@@ -130,5 +133,15 @@ public class Nomeolvides.DialogoHecho : Dialog
 		this.lista_fuentes.get_value (iter, 0, out archivo);
 
 		return (string) archivo;
+	}
+
+	private void add_fuentes_predeterminadas ( ArrayList<string> archivos ) {
+		int indice;
+		TreeIter iter;
+		
+		for (indice = 0; indice < archivos.size; indice++ ) {
+			this.lista_fuentes.append ( out iter );
+			this.lista_fuentes.set ( iter, 0, archivos[indice] );
+		}
 	}
 }

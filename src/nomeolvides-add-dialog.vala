@@ -24,16 +24,16 @@ using Nomeolvides;
 public class Nomeolvides.AddDialog : Nomeolvides.DialogoHecho {
 	
 	public AddDialog ( ArrayList<string> archivos_fuentes, Nomeolvides.Window ventana ) {
+		base (archivos_fuentes, ventana);
+
 		this.set_title ("Añadir un Hecho Histórico");
-		this.set_transient_for ( ventana as Window );
 		
 		this.response.connect(on_response);
 		this.nombre_entry.activate.connect(on_activate);
 		this.anio_entry.activate.connect(on_activate);
 		this.mes_entry.activate.connect(on_activate);
 		this.dia_entry.activate.connect(on_activate);
-		this.add_button (Stock.ADD , ResponseType.APPLY);
-		this.add_fuentes_predeterminadas ( archivos_fuentes );		
+		this.add_button (Stock.ADD , ResponseType.APPLY);		
 	}
 
 
@@ -63,15 +63,5 @@ public class Nomeolvides.AddDialog : Nomeolvides.DialogoHecho {
 	private void aplicar ()
 	{
 		this.crear_respuesta ();
-	}
-
-	protected void add_fuentes_predeterminadas ( ArrayList<string> archivos ) {
-		int indice;
-		TreeIter iter;
-		
-		for (indice = 0; indice < archivos.size; indice++ ) {
-			this.lista_fuentes.append ( out iter );
-			this.lista_fuentes.set ( iter, 0, archivos[indice] );
-		}
 	}
 }

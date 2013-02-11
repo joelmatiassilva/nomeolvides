@@ -22,10 +22,10 @@ using Gee;
 using Nomeolvides;
 
 public class Nomeolvides.EditDialog : Nomeolvides.DialogoHecho {
-	private ArrayList archivos_fuente;
+	private ArrayList<string> archivos_fuente;
 	public EditDialog ( ArrayList<string> archivos_fuentes, Nomeolvides.Window ventana ) {
-		this.set_title ("Añadir un Hecho Histórico");
-		this.set_transient_for ( ventana as Window );
+		base (archivos_fuentes, ventana);
+		this.set_title ("Añadir un Hecho Histórico");				
 
 		this.add_button (Stock.EDIT , ResponseType.APPLY);
 		this.response.connect(on_response);
@@ -39,7 +39,7 @@ public class Nomeolvides.EditDialog : Nomeolvides.DialogoHecho {
 		this.anio_entry.set_text(hecho_a_editar.fecha.get_year().to_string ());
 		this.mes_entry.set_text(hecho_a_editar.fecha.get_month().to_string ());
 		this.dia_entry.set_text(hecho_a_editar.fecha.get_day_of_month().to_string ());
-		this.add_fuentes_predeterminadas (archivos_fuente, hecho_a_editar.archivo_fuente);		
+		set_fuente_de_hecho ( hecho_a_editar.archivo_fuente );
 	}
 	
 	private void on_response (Dialog source, int response_id)
@@ -60,14 +60,11 @@ public class Nomeolvides.EditDialog : Nomeolvides.DialogoHecho {
 		this.crear_respuesta ();
 	}
 
-	protected void add_fuentes_predeterminadas ( ArrayList<string> archivos, string archivo_fuente ) {
+	protected void set_fuente_de_hecho (string archivo_fuente ) {
 		int indice;
-		TreeIter iter;
 		
-		for (indice = 0; indice < archivos.size; indice++ ) {
-			this.lista_fuentes.append ( out iter );
-			this.lista_fuentes.set ( iter, 0, archivos[indice] );
-			if ( archivos[indice] == archivo_fuente ) {
+		for (indice = 0; indice < this.archivos_fuente.size; indice++ ) {
+			if ( this.archivos_fuente[indice] == archivo_fuente ) {
 				this.combo_fuentes.set_active (indice);
 			} 
 		}

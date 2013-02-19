@@ -57,19 +57,15 @@ public class Nomeolvides.FuentesDialog : Gtk.Dialog {
 	private void add_fuente_dialog() {
 		ListStoreFuentes liststore;
 		
-		var add_dialog = new AddFuenteDialog (this);
+		var add_dialog = new AddFuenteDialog ( );
 		add_dialog.show_all ();
 
 		if (add_dialog.run() == ResponseType.APPLY) {
 			liststore = this.fuentes_view.get_model () as ListStoreFuentes;
 			liststore.agregar_fuente (add_dialog.respuesta);
 			this.nuevas_fuentes = true;
-			add_dialog.destroy ();
-		} else if (add_dialog.run() == ResponseType.APPLY) { 
-			liststore = this.fuentes_view.get_model () as ListStoreFuentes;
-			liststore.agregar_fuente (add_dialog.respuesta);
-			this.nuevas_fuentes = true;
-			add_dialog.destroy ();
 		}
+		
+		add_dialog.destroy ();
 	}
 }

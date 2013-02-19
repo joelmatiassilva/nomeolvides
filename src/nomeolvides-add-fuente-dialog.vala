@@ -25,18 +25,17 @@ public class Nomeolvides.AddFuenteDialog : Dialog
 {
 	private Entry nombre_fuente_entry;
 	private Entry nombre_archivo_entry;
-	protected Entry direccion_entry;
-	protected ListStore lista_tipos_fuentes;
-	protected ComboBox combo_tipos_fuentes;
+	private Entry direccion_entry;
+//	private ListStore lista_tipos_fuentes;
+//	private ComboBox combo_tipos_fuentes;
+	private Button elegir_archivo;
 	public Fuente respuesta { get; protected set; }
 	
-	public AddFuenteDialog (FuentesDialog ventana )
+	public AddFuenteDialog ( )
 	{
-		resizable = false;
-		modal = true;
-		this.set_transient_for ( ventana as Window );
+		this.resizable = false;
+		this.modal = true;
 		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
-		this.add_button (Stock.FILE, ResponseType.ACCEPT);
 		this.add_button (Stock.ADD , ResponseType.APPLY);
 		this.response.connect(on_response);
 		
@@ -50,6 +49,8 @@ public class Nomeolvides.AddFuenteDialog : Dialog
 		this.direccion_entry = new Entry ();
 //		this.lista_tipos_fuentes = new ListStore (2,typeof(string),typeof(FuentesTipo));		
 //		this.combo_tipos_fuentes = new ComboBox ();
+		this.elegir_archivo = new Button.from_stock (Stock.FILE);
+		this.elegir_archivo.clicked.connect ( elegir_fuente );
 
 //		this.set_liststore_tipos_fuente ();
 //		this.set_combo_box ();
@@ -63,6 +64,7 @@ public class Nomeolvides.AddFuenteDialog : Dialog
 		grid.attach (this.nombre_archivo_entry, 1, 1, 1, 1);
 		grid.attach (direccion_label, 0 , 2 , 1 ,1);
 		grid.attach (this.direccion_entry, 1 , 2 , 1 ,1);
+		grid.attach (this.elegir_archivo, 2, 2, 1, 1);
 /*		grid.attach (tipo_fuente_label, 0, 3, 1, 1);
 		grid.attach (this.combo_tipos_fuentes, 1 , 3 , 1 ,1);*/
 		
@@ -78,9 +80,6 @@ public class Nomeolvides.AddFuenteDialog : Dialog
 	{
         switch (response_id)
 		{
-			case ResponseType.ACCEPT:
-        		this.elegir_fuente ();
-        		break;
     		case ResponseType.APPLY:
         		this.crear_respuesta ();
 				break;

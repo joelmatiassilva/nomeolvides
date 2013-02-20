@@ -32,14 +32,15 @@ public class Nomeolvides.DialogoHecho : Dialog
 	
 	public DialogoHecho (Nomeolvides.Window ventana, HechosFuentes fuentes )
 	{
-		resizable = false;
-		modal = true;
+		this.resizable = true;
+		this.modal = true;
+		this.set_default_size (600,400);
+		this.set_size_request (400,250);
 		this.set_transient_for ( ventana as Window );
 		
 		var nombre_label = new Label.with_mnemonic ("Nombre: ");
-		var descripcion_label = new Label.with_mnemonic ("Descripcion: ");
 		var fecha_label = new Label.with_mnemonic ("Fecha: ");
-		var archivo_label = new Label.with_mnemonic ("Guardar en: ");
+		var fuente_label = new Label.with_mnemonic ("Guardar en: ");
 		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
 		
 		this.nombre_entry = new Entry ();
@@ -49,31 +50,35 @@ public class Nomeolvides.DialogoHecho : Dialog
 
 		this.lista_fuentes = fuentes.fuentes_liststore;
 
-		var descripcion_frame = new Frame(null);
+		var descripcion_frame = new Frame( "Descripcion" );
 		descripcion_frame.set_shadow_type(ShadowType.ETCHED_IN);
 	
 		this.descripcion_textview = new TextView ();
 		this.descripcion_textview.set_wrap_mode (WrapMode.WORD);
 
-		descripcion_frame.add(this.descripcion_textview);
+		descripcion_frame.add (this.descripcion_textview);
 
 		this.set_combo_box ();
+		
+		Box box_hecho = new Box (Orientation.HORIZONTAL, 0);
+		Box box_labels = new Box (Orientation.VERTICAL, 0);
+		Box box_widgets = new Box (Orientation.VERTICAL, 0);
 
-		var grid = new Grid ();
+		box_labels.pack_start (nombre_label, false, false, 5);		
+		box_labels.pack_start (fecha_label, false, false, 5);
+		box_labels.pack_start (fuente_label, false, false, 5);
+		box_widgets.pack_start (nombre_entry, false, false, 0);
+		box_widgets.pack_start (fecha, false, false, 0);
+		box_widgets.pack_start (combo_fuentes, false, false, 0);
 		
-		grid.attach (nombre_label, 0, 0, 1, 1);
-	    grid.attach (nombre_entry, 1, 0, 1, 1);
-		grid.attach (fecha_label, 0, 1, 1, 1);
-		grid.attach (fecha, 1, 1, 1, 1);
-		grid.attach (archivo_label, 0 , 2 , 1 ,1);
-		grid.attach (combo_fuentes, 1 , 2 , 1 ,1);
-		grid.attach (descripcion_label, 0, 3, 1, 1);
-		grid.attach (descripcion_frame, 1 , 3 , 1 ,1);
-		
+		box_hecho.pack_start (box_labels, true, false, 0);
+		box_hecho.pack_start (box_widgets, true, true, 0);
+	
 		
 		var contenido = this.get_content_area() as Box;
 
-		contenido.pack_start(grid, false, false, 0);
+		contenido.pack_start(box_hecho, false, false, 0);
+		contenido.pack_start(descripcion_frame, true, true, 0);
 		
 		this.show_all ();
 	}

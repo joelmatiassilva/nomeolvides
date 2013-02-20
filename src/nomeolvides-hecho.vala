@@ -24,22 +24,24 @@ public class Nomeolvides.Hecho : GLib.Object {
 	public string descripcion { get; private set; }
 	public DateTime fecha {get; private set; }
 	public string hash { get; private set; }
-	public string archivo_fuente { get; private set;}
+	public string archivo_fuente { get; private set; }
+	private string reemplazoSaltoDeLinea { get; private set; } 
 
 	// Constructor
 	public Hecho ( string nombre, string descripcion, int anio, int mes, int dia, string archivo_fuente )
 	{
 		this.nombre = nombre;
-		this.descripcion = descripcion;
+		this.descripcion = this.ponerSaltoDeLinea ( descripcion );
 		this.fecha = new DateTime.utc (anio, mes, dia, 0,0,0);
 		hash = Checksum.compute_for_string (ChecksumType.MD5, this.a_json ());
 		this.archivo_fuente = archivo_fuente;
 	}
 
 	public Hecho.json (string json, string archivo_fuente ) {
+		
 		if (json.contains ("{\"Hecho\":{")) {
 			this.nombre = this.sacarDatoJson (json, "nombre");
-			this.descripcion = this.sacarDatoJson (json, "descripcion");
+			this.descripcion = this.ponerSaltoDeLinea ( this.sacarDatoJson ( json, "descripcion" ) );
 			this.fecha = new DateTime.utc (int.parse (this.sacarDatoJson(json, "anio")),
 			                               int.parse (this.sacarDatoJson(json, "mes")),
 			                               int.parse (this.sacarDatoJson(json, "dia")),
@@ -56,11 +58,14 @@ public class Nomeolvides.Hecho : GLib.Object {
 		this.archivo_fuente = archivo_fuente;
 	}
 
+	private void saltoDeLinea () {
+		this.reemplazoSaltoDeLinea = "|";
+	}
 	public string a_json () {
 		string retorno = "{\"Hecho\":{";
 
 		retorno += "\"nombre\":\"" + this.nombre + "\",";
-		retorno += "\"descripcion\":\"" + this.descripcion + "\",";
+		retorno += "\"descripcion\":\"" + this.sacarSaltoDeLinea(this.descripcion) + "\",";
 		retorno += "\"anio\":\"" + this.fecha.get_year().to_string () + "\",";
 		retorno += "\"mes\":\"" + this.fecha.get_month().to_string () + "\",";
 		retorno += "\"dia\":\"" + this.fecha.get_day_of_month().to_string () + "\"";
@@ -92,4 +97,23 @@ public class Nomeolvides.Hecho : GLib.Object {
 			return false;
 		}
 	}
+
+	private string ponerSaltoDeLinea ( string inicial ) {
+
+		string saltoDeLinea = "\n";
+		this.saltoDeLinea ();
+		string retorno = inicial.replace ( this.reemplazoSaltoDeLinea, saltoDeLinea );
+		
+		return retorno;
+	}
+
+	private string sacarSaltoDeLinea ( string inicial ) {
+
+		string saltoDeLinea = "\n";
+		string retorno = inicial.replace ( saltoDeLinea, this.reemplazoSaltoDeLinea );
+		
+		return retorno;
+	}
+
+	
 }

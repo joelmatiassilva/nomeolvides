@@ -28,6 +28,9 @@ public class Nomeolvides.MainToolbar : Toolbar
 	public ToolButton add_button { get; private set; }
 	public ToolButton edit_button { get; private set; }
 	public ToolButton delete_button { get; private set; }
+	public SeparatorToolItem separador { get; private set; }
+	public ToolItem anio_item { get; private set; }
+	public Label anio_label { get; private set; }
 	
 	public MainToolbar ()
 	{
@@ -39,6 +42,10 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.add_button = new ToolButton.from_stock ( Stock.ADD );
 		this.edit_button = new ToolButton.from_stock ( Stock.EDIT );
 		this.delete_button = new ToolButton.from_stock ( Stock.DELETE );
+		this.separador = new SeparatorToolItem ();
+		this.anio_item = new ToolItem ();
+
+		this.anio_label = new Label ("");
 		
 		this.open_button.is_important = true;
 		this.save_as_button.is_important = true;
@@ -50,12 +57,21 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.delete_button.is_important = true;
 		this.delete_button.set_visible_horizontal ( false );
 
+		this.separador.set_expand ( true );
+		this.separador.draw = false;
+		
+		this.anio_item.add ( this.anio_label );
+
 		this.add ( this.open_button );
 		this.add ( this.save_as_button );
 		this.add ( this.save_button );
 		this.add ( this.add_button );
 		this.add ( this.edit_button );
 		this.add ( this.delete_button );
+		this.add ( this.separador );
+		this.add ( this.anio_item );
+		
+
 	}
 
 	public void set_buttons_visible (bool cambiar) {
@@ -63,5 +79,10 @@ public class Nomeolvides.MainToolbar : Toolbar
 			this.edit_button.set_visible_horizontal (cambiar);
 			this.delete_button.set_visible_horizontal (cambiar);
 		}
+	}
+
+	public void set_anio (string anio)
+	{
+		this.anio_label.set_markup ( "<span font_size=\"x-large\" font_weight=\"heavy\">" + anio + "</span>" );
 	}
 }

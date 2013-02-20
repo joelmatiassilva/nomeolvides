@@ -37,9 +37,9 @@ public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 	public void set_datos ( Hecho hecho_a_editar ) {
 		this.nombre_entry.set_text(hecho_a_editar.nombre);
 		this.descripcion_textview.buffer.text= hecho_a_editar.descripcion;
-		this.anio_entry.set_text(hecho_a_editar.fecha.get_year().to_string ());
-		this.mes_entry.set_text(hecho_a_editar.fecha.get_month().to_string ());
-		this.dia_entry.set_text(hecho_a_editar.fecha.get_day_of_month().to_string ());
+		this.fecha.set_anio(hecho_a_editar.fecha.get_year());
+		this.fecha.set_mes(hecho_a_editar.fecha.get_month());
+		this.fecha.set_dia(hecho_a_editar.fecha.get_day_of_month());
 		set_fuente_de_hecho ( hecho_a_editar.archivo_fuente );
 	}
 	

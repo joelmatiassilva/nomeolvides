@@ -30,9 +30,6 @@ public class Nomeolvides.AddHechoDialog : Nomeolvides.DialogoHecho {
 		
 		this.response.connect(on_response);
 		this.nombre_entry.activate.connect(on_activate);
-		this.anio_entry.activate.connect(on_activate);
-		this.mes_entry.activate.connect(on_activate);
-		this.dia_entry.activate.connect(on_activate);
 		this.add_button (Stock.ADD , ResponseType.APPLY);		
 	}
 
@@ -51,11 +48,7 @@ public class Nomeolvides.AddHechoDialog : Nomeolvides.DialogoHecho {
     }
 
 	private void on_activate () {
-		if (this.nombre_entry.text_length > 0 && 
-		    this.descripcion_textview.buffer.text.length > 0 && 
-		    this.anio_entry.text_length > 0 && 
-		    this.mes_entry.text_length > 0 && 
-		    this.dia_entry.text_length > 0) {
+		if (this.nombre_entry.text_length > 0 && this.descripcion_textview.buffer.text.length > 0){
 			this.response (ResponseType.APPLY);
 		}
 	}

@@ -186,7 +186,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 		lista = this.hechos_view.lista_de_hechos ();
 		for (i=0; i < lista.size; i++) {
-			a_guardar +=lista[i].aJson() + "\n"; 
+			a_guardar +=lista[i].a_json() + "\n"; 
 		}
 
 		try {
@@ -208,7 +208,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 			archivo = lista[i].archivo_fuente;
 			for (y=0; y < lista.size; y++) {
 				if (lista[y].archivo_fuente == archivo) {
-					a_guardar +=lista[y].aJson() + "\n";
+					a_guardar +=lista[y].a_json() + "\n";
 					lista.remove_at(y);
 					y--;
 				}

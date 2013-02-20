@@ -32,7 +32,7 @@ public class Nomeolvides.Hecho : GLib.Object {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.fecha = new DateTime.utc (anio, mes, dia, 0,0,0);
-		hash = Checksum.compute_for_string (ChecksumType.MD5, this.aJson ());
+		hash = Checksum.compute_for_string (ChecksumType.MD5, this.a_json ());
 		this.archivo_fuente = archivo_fuente;
 	}
 
@@ -51,12 +51,12 @@ public class Nomeolvides.Hecho : GLib.Object {
 			this.archivo_fuente = archivo_fuente;
 		}
 		
-		hash = Checksum.compute_for_string(ChecksumType.MD5, this.aJson ());
+		hash = Checksum.compute_for_string(ChecksumType.MD5, this.a_json ());
 
 		this.archivo_fuente = archivo_fuente;
 	}
 
-	public string aJson () {
+	public string a_json () {
 		string retorno = "{\"Hecho\":{";
 
 		retorno += "\"nombre\":\"" + this.nombre + "\",";

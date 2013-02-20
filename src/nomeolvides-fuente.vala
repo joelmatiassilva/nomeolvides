@@ -33,6 +33,20 @@ public class Nomeolvides.Fuente : GLib.Object{
 		this.tipo_fuente = tipo_fuente;
 	}
 
+	public Fuente.json ( string json ) {
+		if (json.contains ("{\"Fuente\":{")) {
+			this.nombre_fuente = this.sacarDatoJson (json, "nombre");
+			this.nombre_archivo = this.sacarDatoJson (json, "archivo");
+			this.direccion_fuente = this.sacarDatoJson (json, "path");
+			this.tipo_fuente = FuentesTipo.LOCAL;
+		} else {
+			this.nombre_fuente = "null";
+			this.nombre_archivo = "null";
+			this.direccion_fuente = "null";
+			this.tipo_fuente = FuentesTipo.LOCAL;
+		}
+	}
+
 	public bool verificar_fuente () {
 		bool retorno = true;
 		if ( this.tipo_fuente == FuentesTipo.LOCAL ) {
@@ -43,6 +57,26 @@ public class Nomeolvides.Fuente : GLib.Object{
 		}
 
 		return retorno;
+	}
+
+	public string a_json () {
+		string retorno = "{\"Fuente\":{";
+
+		retorno += "\"nombre\":\"" + this.nombre_fuente + "\",";
+		retorno += "\"archivo\":\"" + this.nombre_archivo + "\",";
+		retorno += "\"path\":\"" + this.direccion_fuente + "\",";
+		retorno += "\"tipo\":\"" + "local" + "\"";
+
+		retorno +="}}";	
+		
+		return retorno;
+	}
+
+	private string sacarDatoJson(string json, string campo) {
+		int inicio,fin;
+		inicio = json.index_of(":",json.index_of(campo)) + 2;
+		fin = json.index_of ("\"", inicio);
+		return json[inicio:fin];
 	}
 }
 

@@ -43,11 +43,17 @@ public class Nomeolvides.Hecho : GLib.Object {
 			this.fecha = new DateTime.utc (int.parse (this.sacarDatoJson(json, "anio")),
 			                               int.parse (this.sacarDatoJson(json, "mes")),
 			                               int.parse (this.sacarDatoJson(json, "dia")),
-			                     		   0,0,0);
-			hash = Checksum.compute_for_string(ChecksumType.MD5, this.aJson ());
-
+			                     		   0,0,0);			
+		} else {
+			this.nombre = "null";
+			this.descripcion = "null";
+			this.fecha = new DateTime.utc (2013,2,20,0,0,0);
 			this.archivo_fuente = archivo_fuente;
-		}		
+		}
+		
+		hash = Checksum.compute_for_string(ChecksumType.MD5, this.aJson ());
+
+		this.archivo_fuente = archivo_fuente;
 	}
 
 	public string aJson () {

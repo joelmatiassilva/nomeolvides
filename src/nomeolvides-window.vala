@@ -159,7 +159,9 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 		for (i=0; i < (lineas.length - 1); i++) {
         	nuevoHecho = new Hecho.json(lineas[i], archivo);
-			this.hechos_view.agregar_hecho(nuevoHecho);
+			if ( nuevoHecho.nombre != "null" ) {
+				this.hechos_view.agregar_hecho(nuevoHecho);
+			}
 		}
 		
 		this.anios_view.agregar_varios (this.hechos_view.lista_de_anios());

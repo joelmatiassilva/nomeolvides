@@ -87,7 +87,6 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	private void botones_toolbar ()
 	{
 		this.toolbar.open_button.clicked.connect ( this.open_file_dialog );
-		this.toolbar.save_as_button.clicked.connect ( this.save_as_file_dialog);
 		this.toolbar.save_button.clicked.connect ( this.save_file);
 		this.toolbar.add_button.clicked.connect ( this.add_hecho );
 		this.toolbar.edit_button.clicked.connect ( this.edit_hecho );

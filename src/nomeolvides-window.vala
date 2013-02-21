@@ -64,8 +64,6 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 		Separator separador = new Separator(Orientation.VERTICAL);
 
-		this.toolbar.set_anio( this.anios_view.get_anio () );
-
 		this.scroll_vista_hecho.add_with_viewport (this.vista_hecho);
 		
 		list_view_box.pack_start (anios_view, false, false, 0);
@@ -74,8 +72,8 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		list_view_box.pack_start (separador, false, false, 2);
 		list_view_box.pack_start (scroll_vista_hecho, false, false, 0);
 
-		this.main_box.pack_start (toolbar, false, false, 0);		
-		this.main_box.pack_start (list_view_box, true, true, 0);		
+		this.main_box.pack_start (toolbar, false, false, 0);
+		this.main_box.pack_start (list_view_box, true, true, 0);
 	}
 
 	private void elegir_anio () {

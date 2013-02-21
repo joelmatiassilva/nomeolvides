@@ -23,33 +23,43 @@ using Nomeolvides;
 public class Nomeolvides.FuentesDialog : Gtk.Dialog {
 	public TreeViewFuentes fuentes_view { get; private set; }
 	public bool nuevas_fuentes { get; private set; }
+	public Button boton_aniadir;
 		
 	public FuentesDialog (Nomeolvides.Window ventana, ListStoreFuentes liststore_fuente) {
 		this.set_title ("Fuentes predeterminadas de hechos históricos");
 		this.set_modal ( true );
 		this.set_transient_for ( ventana as Gtk.Window );
 		
-		this.add_button ( Stock.CLOSE , ResponseType.CLOSE );
-		this.add_button ( Stock.ADD , ResponseType.APPLY );
+		this.add_button ( Stock.CANCEL , ResponseType.CANCEL );
+		this.add_button ( Stock.OK , ResponseType.OK );
 		this.response.connect(on_response);
+
+		this.boton_aniadir = new Button.with_label ( "Añadir" );
+
+		this.boton_aniadir.clicked.connect ( add_fuente_dialog );
 
 		this.nuevas_fuentes = false;
 		this.fuentes_view = new TreeViewFuentes ();
 		this.fuentes_view.set_model ( liststore_fuente );
 
+		Box box_fuentes = new Box (Orientation.HORIZONTAL, 0);
+
+		box_fuentes.pack_start ( this.fuentes_view, false, false, 0 );
+		box_fuentes.pack_end ( this.boton_aniadir, false, false, 0 );
+ 
 		Gtk.Container contenido =  this.get_content_area () as Box;
-		contenido.add ( this.fuentes_view );
+		contenido.add ( box_fuentes );
 	}
 
 	private void on_response (Dialog source, int response_id)
 	{
 		 switch (response_id)
 		{
-    		case ResponseType.APPLY:
-        		add_fuente_dialog();
-       			break;
-    		case ResponseType.CLOSE:
+    		case ResponseType.OK:
         		this.hide ();
+       			break;
+    		case ResponseType.CANCEL:
+        		this.destroy ();
         		break; 
         }
     }

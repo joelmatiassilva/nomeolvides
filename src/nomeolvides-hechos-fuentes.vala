@@ -82,4 +82,24 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 			}
 		}	
 	}
+
+	public ListStoreFuentes temp () {
+
+		GLib.Value fuente_value;
+		Fuente fuente;
+		ListStoreFuentes temp = new ListStoreFuentes ();
+		TreeIter iterador;
+		
+		this.fuentes_liststore.get_iter_first ( out iterador );
+		
+		do {
+			this.fuentes_liststore.get_value (iterador, 4, out fuente_value);
+			fuente = fuente_value as Fuente;
+			stdout.printf("agregar '%s'\n",fuente.nombre_fuente);
+			temp.agregar_fuente( fuente );
+			
+		}while ( this.fuentes_liststore.iter_next ( ref iterador) );
+		        
+		return temp;
+	}
 }

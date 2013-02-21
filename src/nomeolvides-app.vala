@@ -88,7 +88,7 @@ public class Nomeolvides.App : Gtk.Application
 
 	private void config_fuentes_dialog () {
 		
-		var fuente_dialogo = new FuentesDialog ( this.window, this.fuentes.fuentes_liststore );
+		var fuente_dialogo = new FuentesDialog ( this.window, this.fuentes.temp() );
 		fuente_dialogo.show_all ();
 
 		if ( fuente_dialogo.run () == ResponseType.OK ) {

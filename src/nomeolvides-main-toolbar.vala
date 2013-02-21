@@ -83,6 +83,10 @@ public class Nomeolvides.MainToolbar : Toolbar
 
 	public void set_anio (string anio)
 	{
-		this.anio_label.set_markup ( "<span font_size=\"x-large\" font_weight=\"heavy\"> Año: " + anio + "</span>" );
+		if ( anio != "0") {
+			this.anio_label.set_markup ( "<span font_size=\"x-large\" font_weight=\"heavy\"> Año: " + anio + "</span>" );
+		} else {
+			this.anio_label.set_text ( "" );
+		}
 	}
 }

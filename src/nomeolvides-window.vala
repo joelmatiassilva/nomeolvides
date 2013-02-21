@@ -31,7 +31,6 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	private VistaHecho vista_hecho;
 	private ScrolledWindow scroll_vista_hecho;
 	private HechosFuentes fuentes;
-	private Label anios_label;
 	
 	public Window ( Gtk.Application app )
 	{   
@@ -61,8 +60,11 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		this.anios_view.cursor_changed.connect ( elegir_anio );
 		this.hechos_view.cursor_changed.connect ( elegir_hecho );
 		this.hechos_view.row_activated.connect ( mostrar_hecho );
+		this.hechos_view.cambia_anio_signal.connect ( label_anio );
 
 		Separator separador = new Separator(Orientation.VERTICAL);
+
+		this.toolbar.set_anio( this.anios_view.get_anio () );
 
 		this.scroll_vista_hecho.add_with_viewport (this.vista_hecho);
 		
@@ -73,7 +75,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		list_view_box.pack_start (scroll_vista_hecho, false, false, 0);
 
 		this.main_box.pack_start (toolbar, false, false, 0);		
-		this.main_box.pack_start (list_view_box, true, true, 0);
+		this.main_box.pack_start (list_view_box, true, true, 0);		
 	}
 
 	private void elegir_anio () {
@@ -81,7 +83,6 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		
 		if ( anio != "0") { //acá uso el número mágico del año 0 que no existe para evitar pedir algo null
 			this.hechos_view.mostrar_anio ( anio );
-			this.toolbar.set_anio( anio );
 		}
 	}
 
@@ -273,5 +274,9 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	public void show_visible () {
 		this.show_all ();
 		this.scroll_vista_hecho.hide ();
+	}
+
+	public void label_anio () {
+		this.toolbar.set_anio( this.hechos_view.anio_actual );
 	}
 }

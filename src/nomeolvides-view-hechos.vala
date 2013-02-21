@@ -23,6 +23,7 @@ using Nomeolvides;
 
 public class Nomeolvides.ViewHechos : Gtk.TreeView {
 
+	public string anio_actual { get; private set; }
 	private ArrayList<ListStoreHechos> hechos_anios;
 	private ListStoreHechos anio_mostrado_ahora; 
 	private ArrayList<string> cache_hechos_anios;
@@ -50,7 +51,8 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 			this.set_model( this.anio_mostrado_ahora );
 			this.anio_mostrado_ahora.set_sort_column_id(3, SortType.ASCENDING);
 			this.anio_mostrado_ahora.set_sort_func(3, ordenar_hechos);
-
+			this.anio_actual = anio;
+			cambia_anio_signal ();
 		}
 	}
 
@@ -189,4 +191,6 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 
 		return this.comparar_hechos((Hecho) val1, (Hecho) val2);
 	}
+
+	public signal void cambia_anio_signal ();
 }

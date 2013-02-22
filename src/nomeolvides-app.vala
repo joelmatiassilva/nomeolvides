@@ -111,7 +111,13 @@ public class Nomeolvides.App : Gtk.Application
 		var directorio_configuracion = File.new_for_path(GLib.Environment.get_user_config_dir () + "/nomeolvides/");
 
 		if (!directorio_configuracion.query_exists ()) {
-			directorio_configuracion.make_directory ();
+
+			try {
+				directorio_configuracion.make_directory ();
+			}  catch (Error e) {
+				error (e.message);
+			}
+			
 		}
 		
 	}

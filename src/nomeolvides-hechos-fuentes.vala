@@ -95,9 +95,7 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 		do {
 			this.fuentes_liststore.get_value (iterador, 4, out fuente_value);
 			fuente = fuente_value as Fuente;
-			stdout.printf("agregar '%s'\n",fuente.nombre_fuente);
 			temp.agregar_fuente( fuente );
-			
 		}while ( this.fuentes_liststore.iter_next ( ref iterador) );
 		        
 		return temp;

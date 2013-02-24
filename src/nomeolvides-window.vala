@@ -87,7 +87,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	private void botones_toolbar ()
 	{
 		this.toolbar.open_button.clicked.connect ( this.open_file_dialog );
-		this.toolbar.save_button.clicked.connect ( this.save_file);
+		this.toolbar.save_button.clicked.connect ( this.save_file );
 		this.toolbar.add_button.clicked.connect ( this.add_hecho );
 		this.toolbar.edit_button.clicked.connect ( this.edit_hecho );
 		this.toolbar.delete_button.clicked.connect ( this.delete_hecho );
@@ -199,11 +199,11 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		ArrayList<Hecho> lista;
 		string archivo;
 		string a_guardar = "";
-
+		ArrayList<string> lista_archivos = this.fuentes.lista_de_archivos ();
 		lista = this.hechos_view.lista_de_hechos ();
 	
-		for (i=0; i < lista.size; i++) {
-			archivo = lista[i].archivo_fuente;
+		for (i=0; i < lista_archivos.size; i++) {
+			archivo = lista_archivos[i];
 			for (y=0; y < lista.size; y++) {
 				if (lista[y].archivo_fuente == archivo) {
 					a_guardar +=lista[y].a_json() + "\n";
@@ -211,10 +211,8 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 					y--;
 				}
 			}
-			
 			try {
 				FileUtils.set_contents (archivo, a_guardar);
-				i--;
 			} catch (Error e) {
 				error (e.message);
 			}

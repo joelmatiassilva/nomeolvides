@@ -20,23 +20,25 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.BorrarHechoDialogo : Dialog {
-	public BorrarHechoDialogo ( Hecho hecho_a_borrar, Nomeolvides.Window ventana ) {
+public class Nomeolvides.BorrarFuenteDialogo : Dialog {
+	public BorrarFuenteDialogo ( Fuente fuente_a_borrar ) {
 		this.set_modal ( true );
-		this.set_transient_for ( ventana as Gtk.Window );
 		Label pregunta = new Label.with_mnemonic ( "" );
-		Label hecho_nombre = new Label.with_mnemonic ( "" );
-		Label hecho_fecha = new Label.with_mnemonic ( "" );
+		Label fuente_nombre = new Label.with_mnemonic ( "" );
+		Label fuente_archivo = new Label.with_mnemonic ( "" );
+		Label fuente_direccion = new Label.with_mnemonic ( "" );
 
-		pregunta.set_markup ( "<big>¿Está seguro que desea borrar el siguiente hecho histórico?</big>" );
-		hecho_nombre.set_markup ( "<span font_weight=\"heavy\">"+ hecho_a_borrar.nombre +"</span>");
-		hecho_fecha.set_markup ( "de <span font_style=\"italic\">"+ hecho_a_borrar.fecha_to_string() +"</span>");
+		pregunta.set_markup ( "<big>¿Está seguro que desea borrar la siguiente Fuente local?</big>" );
+		fuente_nombre.set_markup ( "<span font_weight=\"heavy\">"+ fuente_a_borrar.nombre_fuente +"</span>");
+		fuente_archivo.set_markup ( "del archivo <span font_style=\"italic\">"+ fuente_a_borrar.nombre_archivo +"</span>");
+		fuente_direccion.set_markup ( "en <span font_style=\"italic\">"+ fuente_a_borrar.direccion_fuente +"</span>");
 
 		Box box = new Box ( Orientation.VERTICAL, 0 );
 
 		box.pack_start ( pregunta, true, true, 15 );
-		box.pack_start ( hecho_nombre, true, true, 0 );
-		box.pack_start ( hecho_fecha, true, true, 0 );
+		box.pack_start ( fuente_nombre, true, true, 0 );
+		box.pack_start ( fuente_archivo, true, true, 0 );
+		box.pack_start ( fuente_direccion, true, true, 0 );
 		
 		var contenido = this.get_content_area() as Box;
 		contenido.pack_start(box, false, false, 0);

@@ -124,7 +124,6 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 			this.toolbar.save_button.set_visible_horizontal (true);
 			edit_dialog.destroy();
 		}
-
 	}
 
 	public void delete_hecho () {

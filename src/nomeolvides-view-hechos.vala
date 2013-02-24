@@ -69,8 +69,7 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 
 		if (this.hechos_anios[anio].length () == 0) {
 			this.eliminar_liststore (anio);
-		}
-		
+		}		
 	}
 	
 	private void agregar_liststore (string nuevo_anio) {

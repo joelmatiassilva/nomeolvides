@@ -30,6 +30,7 @@ public class Nomeolvides.App : Gtk.Application
 
 	private const GLib.ActionEntry[] actions_app_menu = {
 		{ "create-about-dialog", create_about_dialog },
+		{ "exportar", exportar },
 		{ "window-destroy", salir_app },
 		{ "config-fuentes-dialog", config_fuentes_dialog }
 	};
@@ -55,6 +56,7 @@ public class Nomeolvides.App : Gtk.Application
 		this.application_menu = new GLib.Menu ();
 		
 		this.application_menu.append ( "Configurar Fuentes", "app.config-fuentes-dialog" );
+		this.application_menu.append ( "Exportar", "app.exportar" );
 		this.application_menu.append ( "Acerca de Nomeolvides", "app.create-about-dialog" );
 		this.application_menu.append ( "Salir", "app.window-destroy" );
 		
@@ -85,15 +87,21 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	private void config_fuentes_dialog () {
-		var fuente_dialogo = new FuentesDialog ( this.window, this.fuentes.fuentes_liststore );
+		
+		var fuente_dialogo = new FuentesDialog ( this.window, this.fuentes.temp() );
 		fuente_dialogo.show_all ();
 
-		if ( fuente_dialogo.run () == ResponseType.APPLY ) {
+		if ( fuente_dialogo.run () == ResponseType.OK ) {
 			if (fuente_dialogo.nuevas_fuentes == true) {
 				this.fuentes.actualizar_fuentes_liststore ( fuente_dialogo.fuentes_view.get_model () as ListStoreFuentes);
 				this.window.cargar_fuentes_predefinidas ( this.fuentes );
 			}
-		}		
+		}
+		fuente_dialogo.destroy ();
+	}
+
+	private void exportar () {
+		this.window.save_as_file_dialog ();
 	}
 
 	public App ()
@@ -103,7 +111,13 @@ public class Nomeolvides.App : Gtk.Application
 		var directorio_configuracion = File.new_for_path(GLib.Environment.get_user_config_dir () + "/nomeolvides/");
 
 		if (!directorio_configuracion.query_exists ()) {
-			directorio_configuracion.make_directory ();
+
+			try {
+				directorio_configuracion.make_directory ();
+			}  catch (Error e) {
+				error (e.message);
+			}
+			
 		}
 		
 	}

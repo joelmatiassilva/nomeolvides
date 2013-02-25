@@ -26,6 +26,7 @@ public class Nomeolvides.FuentesDialog : Gtk.Dialog {
 	private ToolButton editar_fuente_button;
 	private ToolButton borrar_fuente_button;
 	public bool nuevas_fuentes { get; private set; }
+	public Button boton_aniadir;
 		
 	public FuentesDialog (Nomeolvides.Window ventana, ListStoreFuentes liststore_fuente) {
 		this.set_title ("Fuentes predeterminadas de hechos históricos");
@@ -46,21 +47,24 @@ public class Nomeolvides.FuentesDialog : Gtk.Dialog {
 		separador.draw = false;
 
 		borrar_fuente_button.clicked.connect ( borrar_fuente_dialog );
+		aniadir_fuente_button.clicked.connect ( add_fuente_dialog );
 
 		toolbar.add ( aniadir_fuente_button );
 		toolbar.add ( separador );
 		toolbar.add ( editar_fuente_button );
 		toolbar.add ( borrar_fuente_button );
 		
-		this.add_button ( Stock.CLOSE , ResponseType.CLOSE );
-		this.add_button ( Stock.ADD , ResponseType.APPLY );
+		this.add_button ( Stock.CANCEL , ResponseType.CANCEL );
+		this.add_button ( Stock.OK , ResponseType.OK );
 		this.response.connect(on_response);
+
+		this.boton_aniadir = new Button.with_label ( "Añadir" );
 
 		this.nuevas_fuentes = false;
 		this.fuentes_view = new TreeViewFuentes ();
 		this.fuentes_view.set_model ( liststore_fuente );
 		this.fuentes_view.cursor_changed.connect ( elegir_fuente );
-
+ 
 		Gtk.Container contenido =  this.get_content_area () as Box;
 		contenido.add ( toolbar );
 		contenido.add ( this.fuentes_view );
@@ -70,11 +74,11 @@ public class Nomeolvides.FuentesDialog : Gtk.Dialog {
 	{
 		 switch (response_id)
 		{
-    		case ResponseType.APPLY:
-        		add_fuente_dialog();
-       			break;
-    		case ResponseType.CLOSE:
+    		case ResponseType.OK:
         		this.hide ();
+       			break;
+    		case ResponseType.CANCEL:
+        		this.destroy ();
         		break; 
         }
     }

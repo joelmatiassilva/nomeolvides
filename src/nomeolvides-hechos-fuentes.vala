@@ -19,6 +19,7 @@
 
 using Gtk;
 using Nomeolvides;
+using Gee;
 
 public class Nomeolvides.HechosFuentes : GLib.Object {
 	private string directorio_configuracion ;
@@ -81,5 +82,39 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 				}
 			}
 		}	
+	}
+
+	public ListStoreFuentes temp () {
+
+		GLib.Value fuente_value;
+		Fuente fuente;
+		ListStoreFuentes temp = new ListStoreFuentes ();
+		TreeIter iterador;
+		
+		this.fuentes_liststore.get_iter_first ( out iterador );
+		
+		do {
+			this.fuentes_liststore.get_value (iterador, 4, out fuente_value);
+			fuente = fuente_value as Fuente;
+			temp.agregar_fuente( fuente );
+		}while ( this.fuentes_liststore.iter_next ( ref iterador) );
+		        
+		return temp;
+	}
+	
+	public ArrayList<string> lista_de_archivos () {
+		TreeIter iter;
+		Value value_fuente;
+		Fuente fuente;
+		ArrayList<string> retorno = new ArrayList<string> ();
+
+		this.fuentes_liststore.get_iter_first(out iter);
+		do {
+			this.fuentes_liststore.get_value(iter, 4, out value_fuente);
+			fuente = value_fuente as Fuente;
+			retorno.add ( fuente.direccion_fuente + fuente.nombre_archivo );
+		}while (this.fuentes_liststore.iter_next(ref iter));
+
+		return retorno;
 	}
 }

@@ -32,7 +32,7 @@ public class Nomeolvides.ListStoreFuentes : ListStore {
 	}
 
 	public void agregar_fuente ( Fuente fuente ) {		
-		if (fuente.verificar_fuente () ) {		
+		if (fuente.verificar_fuente () ) {
 			this.append ( out this.iterador );
 			this.set ( this.iterador,
 		                         0,fuente.nombre_fuente,

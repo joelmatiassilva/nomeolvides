@@ -28,6 +28,7 @@ public class Nomeolvides.DialogoHecho : Dialog
 	protected ListStoreFuentes lista_fuentes;
 	protected ComboBox combo_fuentes;
 	protected SelectorFecha fecha;
+	protected Entry fuente_entry;
 	public Hecho respuesta { get; protected set; }
 	
 	public DialogoHecho (Nomeolvides.Window ventana, HechosFuentes fuentes )
@@ -40,10 +41,11 @@ public class Nomeolvides.DialogoHecho : Dialog
 		
 		var nombre_label = new Label.with_mnemonic ("Nombre: ");
 		var fecha_label = new Label.with_mnemonic ("Fecha: ");
-		var fuente_label = new Label.with_mnemonic ("Guardar en: ");
-		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
+		var archivo_label = new Label.with_mnemonic ("Guardar en: ");
+		var fuente_label = new Label.with_mnemonic ("Fuente: ");		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
 		
 		this.nombre_entry = new Entry ();
+		this.fuente_entry = new Entry ();
 		
 		this.combo_fuentes = new ComboBox ();
 		this.fecha = new SelectorFecha ();
@@ -66,10 +68,12 @@ public class Nomeolvides.DialogoHecho : Dialog
 
 		box_labels.pack_start (nombre_label, false, false, 5);		
 		box_labels.pack_start (fecha_label, false, false, 5);
+		box_labels.pack_start (archivo_label, false, false, 5);
 		box_labels.pack_start (fuente_label, false, false, 5);
 		box_widgets.pack_start (nombre_entry, false, false, 0);
 		box_widgets.pack_start (fecha, false, false, 0);
 		box_widgets.pack_start (combo_fuentes, false, false, 0);
+		box_widgets.pack_start (fuente_entry, false, false, 0);
 		
 		box_hecho.pack_start (box_labels, true, false, 0);
 		box_hecho.pack_start (box_widgets, true, true, 0);
@@ -91,7 +95,8 @@ public class Nomeolvides.DialogoHecho : Dialog
 										 this.fecha.get_anio (),
 			                             this.fecha.get_mes (),
 			                             this.fecha.get_dia (),
-		  								 this.get_archivo_elegido());
+		  								 this.get_archivo_elegido (),
+			                             this.fuente_entry.get_text ());
 		}
 	}
 

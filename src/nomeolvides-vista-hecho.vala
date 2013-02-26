@@ -24,6 +24,7 @@ public class Nomeolvides.VistaHecho : Box {
 	private Label label_nombre;
 	private Label label_fecha;
 	private TextView text_descripcion;
+	private Label label_fuente;
 	
 	public VistaHecho () {
 		this.set_orientation ( Orientation.VERTICAL );
@@ -33,16 +34,20 @@ public class Nomeolvides.VistaHecho : Box {
 		this.label_nombre = new Label.with_mnemonic ("");
 		this.label_fecha = new Label.with_mnemonic ("");
 		this.text_descripcion = new TextView ();
+		this.label_fuente = new Label.with_mnemonic ("");
 
 		this.label_nombre.set_width_chars ( 30 );
-		this.text_descripcion.set_wrap_mode (WrapMode.WORD);
 		this.label_fecha.set_width_chars ( 30 );
+		this.text_descripcion.set_wrap_mode (WrapMode.WORD);
+		this.label_fuente.set_width_chars ( 30 );
 		
 		this.label_fecha.set_alignment ( 0, 0 );
+		this.label_fuente.set_alignment ( 0, 0 );
 
 		this.pack_start ( this.label_nombre, false, false, 0 );
 		this.pack_start ( this.label_fecha, false, false, 0 );
 		this.pack_start ( this.text_descripcion, false, false, 0 );
+		this.pack_start ( this.label_fuente, false, false, 0 );
 	}
 
 	public bool set_datos_hecho ( Hecho a_mostrar ) {
@@ -52,6 +57,12 @@ public class Nomeolvides.VistaHecho : Box {
 			this.label_nombre.set_markup ("<span font_size=\"x-large\" font_weight=\"heavy\">"+ a_mostrar.nombre +"</span>");
 			this.label_fecha.set_markup ("<span font_style=\"italic\">"+ a_mostrar.fecha_to_string () +"</span>");
 			this.text_descripcion.buffer.text = a_mostrar.descripcion;
+			if (a_mostrar.fuente != "") {
+				this.label_fuente.set_markup ("Fuente: <span font_style=\"italic\">"+ a_mostrar.fuente +"</span>");
+				this.label_fuente.visible = true;
+			} else {
+				this.label_fuente.visible = false;
+			}
 
 			retorno = true;
 		}

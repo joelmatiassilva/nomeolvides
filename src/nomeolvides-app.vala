@@ -90,11 +90,10 @@ public class Nomeolvides.App : Gtk.Application
 		
 		var fuente_dialogo = new FuentesDialog ( this.window, this.fuentes.temp() );
 		fuente_dialogo.show_all ();
-
 		if ( fuente_dialogo.run () == ResponseType.OK ) {
-			if (fuente_dialogo.nuevas_fuentes == true) {
+			if (fuente_dialogo.cambios == true) {
 				this.fuentes.actualizar_fuentes_liststore ( fuente_dialogo.fuentes_view.get_model () as ListStoreFuentes);
-				this.window.cargar_fuentes_predefinidas ( this.fuentes );
+				this.window.actualizar_fuentes_predefinidas ( this.fuentes );
 			}
 		}
 		fuente_dialogo.destroy ();

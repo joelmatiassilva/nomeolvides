@@ -74,6 +74,10 @@ public class Nomeolvides.ViewAnios : TreeView {
 		}
 	}
 
+	public void borrar_datos () {
+		this.lista.clear ();
+	}
+
 	private int ordenar_anios (Gtk.TreeModel model2, Gtk.TreeIter iter1, Gtk.TreeIter iter2) {
 		GLib.Value val1;
 		GLib.Value val2;

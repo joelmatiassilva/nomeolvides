@@ -257,14 +257,22 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 	public void cargar_fuentes_predefinidas ( HechosFuentes fuentes ) {		
 		int indice;
+		ArrayList<string> archivos = fuentes.lista_de_archivos ();
 
 		this.fuentes = fuentes;
 		
-		for (indice = 0; indice < fuentes.fuentes_liststore.archivos.size; indice++ ) {
-			this.open_file ( fuentes.fuentes_liststore.archivos[indice] );
+		for (indice = 0; indice < archivos.size; indice++ ) {
+			this.open_file (archivos[indice] );
 		}
 	}
 
+	public void actualizar_fuentes_predefinidas ( HechosFuentes fuentes ) {
+		this.hechos_view.borrar_datos ();
+		this.anios_view.borrar_datos ();
+
+		this.cargar_fuentes_predefinidas ( fuentes );
+	}
+	
 	public void show_visible () {
 		this.show_all ();
 		this.scroll_vista_hecho.hide ();

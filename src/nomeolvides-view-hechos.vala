@@ -92,6 +92,11 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 		return retorno;
 	}
 
+	public void borrar_datos () {
+		this.hechos_anios.clear ();
+		this.cache_hechos_anios.clear ();
+	}
+
 	public Hecho get_hecho_cursor () {
 		TreePath path;
 		TreeViewColumn columna;

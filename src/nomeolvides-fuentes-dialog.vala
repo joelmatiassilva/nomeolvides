@@ -25,7 +25,7 @@ public class Nomeolvides.FuentesDialog : Gtk.Dialog {
 	private ToolButton aniadir_fuente_button;
 	private ToolButton editar_fuente_button;
 	private ToolButton borrar_fuente_button;
-	public bool nuevas_fuentes { get; private set; }
+	public bool cambios { get; private set; }
 	public Button boton_aniadir;
 		
 	public FuentesDialog (Nomeolvides.Window ventana, ListStoreFuentes liststore_fuente) {
@@ -60,7 +60,7 @@ public class Nomeolvides.FuentesDialog : Gtk.Dialog {
 
 		this.boton_aniadir = new Button.with_label ( "Añadir" );
 
-		this.nuevas_fuentes = false;
+		this.cambios = false;
 		this.fuentes_view = new TreeViewFuentes ();
 		this.fuentes_view.set_model ( liststore_fuente );
 		this.fuentes_view.cursor_changed.connect ( elegir_fuente );
@@ -92,7 +92,7 @@ public class Nomeolvides.FuentesDialog : Gtk.Dialog {
 		if (add_dialog.run() == ResponseType.APPLY) {
 			liststore = this.fuentes_view.get_model () as ListStoreFuentes;
 			liststore.agregar_fuente (add_dialog.respuesta);
-			this.nuevas_fuentes = true;
+			this.cambios = true;
 		}
 		
 		add_dialog.destroy ();
@@ -104,10 +104,10 @@ public class Nomeolvides.FuentesDialog : Gtk.Dialog {
 
 		if (borrar_dialog.run() == ResponseType.APPLY) {
 			this.fuentes_view.eliminar_fuente ( this.fuentes_view.get_fuente_cursor () );
-			borrar_dialog.destroy ();
-		} else {
-			borrar_dialog.destroy ();
 		}
+		borrar_dialog.destroy ();
+
+		this.cambios = true;
 	}
 
 	private void set_buttons_visible ( bool cambiar ) {

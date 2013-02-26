@@ -45,7 +45,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-edit-hecho-dialog.vala \
 	nomeolvides-add-fuente-dialog.vala \
 	nomeolvides-selector-fecha.vala \
-	nomeolvides-borrar-fuente-dialogo.vala
+	nomeolvides-borrar-fuente-dialogo.vala \
+	nomeolvides-edit-fuente-dialog.vala
 
 nomeolvides_VALAFLAGS = \
 	--pkg gee-1.0 \

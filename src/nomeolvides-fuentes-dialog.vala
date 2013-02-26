@@ -46,6 +46,7 @@ public class Nomeolvides.FuentesDialog : Gtk.Dialog {
 		separador.set_expand ( true );
 		separador.draw = false;
 
+		editar_fuente_button.clicked.connect ( edit_fuente_dialog );
 		borrar_fuente_button.clicked.connect ( borrar_fuente_dialog );
 		aniadir_fuente_button.clicked.connect ( add_fuente_dialog );
 
@@ -96,6 +97,23 @@ public class Nomeolvides.FuentesDialog : Gtk.Dialog {
 		}
 		
 		add_dialog.destroy ();
+	}
+
+	private void edit_fuente_dialog () {
+		ListStoreFuentes liststore;
+		
+		var edit_dialog = new EditFuenteDialog ();
+		edit_dialog.set_datos ( this.fuentes_view.get_fuente_cursor () );
+		edit_dialog.show_all ();
+
+		if (edit_dialog.run() == ResponseType.APPLY) {
+			liststore = this.fuentes_view.get_model () as ListStoreFuentes;
+			this.fuentes_view.eliminar_fuente ( this.fuentes_view.get_fuente_cursor () );
+			liststore.agregar_fuente (edit_dialog.respuesta);
+			this.cambios = true;
+		}
+		
+		edit_dialog.destroy ();
 	}
 
 	private void borrar_fuente_dialog () {	

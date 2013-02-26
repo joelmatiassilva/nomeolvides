@@ -21,7 +21,7 @@ using Gtk;
 using Gee;
 using Nomeolvides;
 
-public class Nomeolvides.AddFuenteDialog : Dialog
+public class Nomeolvides.EditFuenteDialog : Dialog
 {
 	private Entry nombre_fuente_entry;
 	private Entry nombre_archivo_entry;
@@ -31,11 +31,11 @@ public class Nomeolvides.AddFuenteDialog : Dialog
 	private Button elegir_archivo;
 	public Fuente respuesta { get; protected set; }
 	
-	public AddFuenteDialog ( )
+	public EditFuenteDialog ( )
 	{
 		this.resizable = false;
 		this.modal = true;
-		this.title = "Agregar parámetos de una Base de Datos";
+		this.title = "Editar parámetro de la Base de Datos";
 		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
 		this.add_button (Stock.ADD , ResponseType.APPLY);
 		this.response.connect(on_response);
@@ -139,5 +139,11 @@ public class Nomeolvides.AddFuenteDialog : Dialog
 		}
 
 		elegir_archivo.destroy ();
+	}
+
+	public void set_datos (Fuente fuente) {
+		this.nombre_fuente_entry.set_text ( fuente.nombre_fuente );
+		this.nombre_archivo_entry.set_text ( fuente.nombre_archivo );
+		this.direccion_entry.set_text ( fuente.direccion_fuente );
 	}
 }

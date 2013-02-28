@@ -53,7 +53,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.edit_button.set_visible_horizontal ( false );
 		this.delete_button.is_important = true;
 		this.delete_button.set_visible_horizontal ( false );
-
+		
 		this.separador.set_expand ( true );
 		this.separador.draw = false;
 		

@@ -272,6 +272,24 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 		this.cargar_fuentes_predefinidas ( fuentes );
 	}
+
+	public void enviar_hecho () {
+		Hecho hecho = this.hechos_view.get_hecho_cursor ();
+		if( hecho != null) {
+			string asunto = "Envío un hecho para contribuir con la base de datos oficial";
+			string cuerpo = hecho.a_json ();
+			string direccion = "fernando@softwareperonista.com.ar";
+  
+			string commando = @"xdg-email --subject '$asunto' --body '$cuerpo' $direccion"; 
+			//stdout.printf(@"$commando\n"); 
+  
+			try {
+				Process.spawn_command_line_async( commando );
+			} catch(SpawnError err) {
+				stdout.printf(err.message+"\n");
+			}
+		}
+	}	
 	
 	public void show_visible () {
 		this.show_all ();

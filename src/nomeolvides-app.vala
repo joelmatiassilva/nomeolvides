@@ -31,6 +31,7 @@ public class Nomeolvides.App : Gtk.Application
 	private const GLib.ActionEntry[] actions_app_menu = {
 		{ "create-about-dialog", create_about_dialog },
 		{ "exportar", exportar },
+		{ "enviar", enviar_hecho },
 		{ "window-destroy", salir_app },
 		{ "config-fuentes-dialog", config_fuentes_dialog }
 	};
@@ -57,6 +58,7 @@ public class Nomeolvides.App : Gtk.Application
 		
 		this.application_menu.append ( "Configurar Fuentes", "app.config-fuentes-dialog" );
 		this.application_menu.append ( "Exportar", "app.exportar" );
+		this.application_menu.append ( "Enviar un hecho por email", "app.enviar" );
 		this.application_menu.append ( "Acerca de Nomeolvides", "app.create-about-dialog" );
 		this.application_menu.append ( "Salir", "app.window-destroy" );
 		
@@ -101,6 +103,10 @@ public class Nomeolvides.App : Gtk.Application
 
 	private void exportar () {
 		this.window.save_as_file_dialog ();
+	}
+
+	private void enviar_hecho () {
+		this.window.enviar_hecho ();
 	}
 
 	public App ()

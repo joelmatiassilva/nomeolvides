@@ -38,7 +38,7 @@ public class Nomeolvides.Fuente : GLib.Object{
 			this.nombre_fuente = this.sacarDatoJson (json, "nombre");
 			this.nombre_archivo = this.sacarDatoJson (json, "archivo");
 			this.direccion_fuente = this.sacarDatoJson (json, "path");
-			this.tipo_fuente = FuentesTipo.LOCAL;
+			this.tipo_fuente = FuentesTipo.convertir ( this.sacarDatoJson ( json, "tipo" ) );
 		} else {
 			this.nombre_fuente = "null";
 			this.nombre_archivo = "null";
@@ -65,7 +65,7 @@ public class Nomeolvides.Fuente : GLib.Object{
 		retorno += "\"nombre\":\"" + this.nombre_fuente + "\",";
 		retorno += "\"archivo\":\"" + this.nombre_archivo + "\",";
 		retorno += "\"path\":\"" + this.direccion_fuente + "\",";
-		retorno += "\"tipo\":\"" + "local" + "\"";
+		retorno += "\"tipo\":\"" + this.tipo_fuente.to_string () + "\"";
 
 		retorno +="}}";	
 		
@@ -82,5 +82,33 @@ public class Nomeolvides.Fuente : GLib.Object{
 
 
 public enum FuentesTipo {
-	LOCAL
+	LOCAL,
+	HTTP;
+
+	public string to_string() {
+        switch (this) {
+            case LOCAL:
+                return "Local";
+
+            case HTTP:
+                return "HTTP";
+
+			default:
+                return "";
+		}
+	}
+
+	public static FuentesTipo convertir (string cadena)
+	{
+		switch (cadena) {
+            case "Local":
+                return FuentesTipo.LOCAL;
+
+			case "HTTP":
+                return FuentesTipo.HTTP;
+
+			default:
+                return FuentesTipo.LOCAL;
+		}
+	}
 }

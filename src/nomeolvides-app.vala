@@ -32,7 +32,7 @@ public class Nomeolvides.App : Gtk.Application
 		{ "create-about-dialog", create_about_dialog },
 		{ "exportar", exportar },
 		{ "window-destroy", salir_app },
-		{ "config-fuentes-dialog", config_fuentes_dialog }
+		{ "config-db-dialog", config_db_dialog }
 	};
 
 	private void create_window ()
@@ -55,7 +55,7 @@ public class Nomeolvides.App : Gtk.Application
 	public void create_app_menu () {
 		this.application_menu = new GLib.Menu ();
 		
-		this.application_menu.append ( "Configurar Fuentes", "app.config-fuentes-dialog" );
+		this.application_menu.append ( "Configurar Bases de Datos", "app.config-db-dialog" );
 		this.application_menu.append ( "Exportar", "app.exportar" );
 		this.application_menu.append ( "Acerca de Nomeolvides", "app.create-about-dialog" );
 		this.application_menu.append ( "Salir", "app.window-destroy" );
@@ -86,7 +86,7 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.destroy ();
 	}
 
-	private void config_fuentes_dialog () {
+	private void config_db_dialog () {
 		
 		var fuente_dialogo = new FuentesDialog ( this.window, this.fuentes.temp() );
 		fuente_dialogo.show_all ();

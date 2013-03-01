@@ -43,5 +43,4 @@ public class Nomeolvides.ListStoreFuentes : ListStore {
 			this.archivos.add ( fuente.direccion_fuente + fuente.nombre_archivo );
 		}	
 	}
-
 }

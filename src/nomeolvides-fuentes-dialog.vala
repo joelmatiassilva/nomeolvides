@@ -29,7 +29,7 @@ public class Nomeolvides.FuentesDialog : Gtk.Dialog {
 	public Button boton_aniadir;
 		
 	public FuentesDialog (Nomeolvides.Window ventana, ListStoreFuentes liststore_fuente) {
-		this.set_title ("Fuentes predeterminadas de hechos históricos");
+		this.set_title ("Bases de Datos predeterminadas de hechos históricos");
 		this.set_modal ( true );
 		this.set_transient_for ( ventana as Gtk.Window );
 
@@ -58,8 +58,6 @@ public class Nomeolvides.FuentesDialog : Gtk.Dialog {
 		this.add_button ( Stock.CANCEL , ResponseType.CANCEL );
 		this.add_button ( Stock.OK , ResponseType.OK );
 		this.response.connect(on_response);
-
-		this.boton_aniadir = new Button.with_label ( "Añadir" );
 
 		this.cambios = false;
 		this.fuentes_view = new TreeViewFuentes ();

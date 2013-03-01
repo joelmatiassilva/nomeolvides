@@ -24,13 +24,13 @@ using Nomeolvides;
 public class Nomeolvides.AddHechoDialog : Nomeolvides.DialogoHecho {
 	
 	public AddHechoDialog ( Nomeolvides.Window ventana, HechosFuentes fuentes ) {
-		base (ventana, fuentes);
+		base (ventana, fuentes.get_fuentes_locales ());
 
 		this.set_title ("Añadir un Hecho Histórico");
 		
 		this.response.connect(on_response);
 		this.nombre_entry.activate.connect(on_activate);
-		this.add_button (Stock.ADD , ResponseType.APPLY);		
+		this.add_button (Stock.ADD , ResponseType.APPLY);
 	}
 
 

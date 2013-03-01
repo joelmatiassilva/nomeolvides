@@ -40,7 +40,7 @@ public class Nomeolvides.EditFuenteDialog : Dialog
 		this.add_button (Stock.ADD , ResponseType.APPLY);
 		this.response.connect(on_response);
 		
-		var nombre_fuente_label = new Label.with_mnemonic ("Nombre de la Fuente: ");
+		var nombre_fuente_label = new Label.with_mnemonic ("Nombre de la Base de Datos: ");
 		var nombre_archivo_label = new Label.with_mnemonic ("Nombre del Archivo: ");
 		var direccion_label = new Label.with_mnemonic ("Dirección del Archivo: ");
 	//	var tipo_fuente_label = new Label.with_mnemonic ("Tipo de Fuente: ");

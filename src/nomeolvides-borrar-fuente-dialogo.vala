@@ -23,12 +23,13 @@ using Nomeolvides;
 public class Nomeolvides.BorrarFuenteDialogo : Dialog {
 	public BorrarFuenteDialogo ( Fuente fuente_a_borrar ) {
 		this.set_modal ( true );
+		this.title = "Borrar Base de Datos";
 		Label pregunta = new Label.with_mnemonic ( "" );
 		Label fuente_nombre = new Label.with_mnemonic ( "" );
 		Label fuente_archivo = new Label.with_mnemonic ( "" );
 		Label fuente_direccion = new Label.with_mnemonic ( "" );
 
-		pregunta.set_markup ( "<big>¿Está seguro que desea borrar la siguiente Fuente local?</big>" );
+		pregunta.set_markup ( "<big>¿Está seguro que desea borrar la siguiente Base de Datos?</big>" );
 		fuente_nombre.set_markup ( "<span font_weight=\"heavy\">"+ fuente_a_borrar.nombre_fuente +"</span>");
 		fuente_archivo.set_markup ( "del archivo <span font_style=\"italic\">"+ fuente_a_borrar.nombre_archivo +"</span>");
 		fuente_direccion.set_markup ( "en <span font_style=\"italic\">"+ fuente_a_borrar.direccion_fuente +"</span>");

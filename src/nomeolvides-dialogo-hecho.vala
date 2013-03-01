@@ -31,7 +31,7 @@ public class Nomeolvides.DialogoHecho : Dialog
 	protected Entry fuente_entry;
 	public Hecho respuesta { get; protected set; }
 	
-	public DialogoHecho (Nomeolvides.Window ventana, HechosFuentes fuentes )
+	public DialogoHecho (Nomeolvides.Window ventana, ListStoreFuentes fuentes_liststore )
 	{
 		this.resizable = true;
 		this.modal = true;
@@ -42,7 +42,8 @@ public class Nomeolvides.DialogoHecho : Dialog
 		var nombre_label = new Label.with_mnemonic ("Nombre: ");
 		var fecha_label = new Label.with_mnemonic ("Fecha: ");
 		var archivo_label = new Label.with_mnemonic ("Guardar en: ");
-		var fuente_label = new Label.with_mnemonic ("Fuente: ");		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
+		var fuente_label = new Label.with_mnemonic ("Fuente: ");
+		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
 		
 		this.nombre_entry = new Entry ();
 		this.fuente_entry = new Entry ();
@@ -50,7 +51,7 @@ public class Nomeolvides.DialogoHecho : Dialog
 		this.combo_fuentes = new ComboBox ();
 		this.fecha = new SelectorFecha ();
 
-		this.lista_fuentes = fuentes.fuentes_liststore;
+		this.lista_fuentes = fuentes_liststore;
 
 		var descripcion_frame = new Frame( "Descripcion" );
 		descripcion_frame.set_shadow_type(ShadowType.ETCHED_IN);

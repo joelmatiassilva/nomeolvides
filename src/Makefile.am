@@ -50,7 +50,7 @@ nomeolvides_SOURCES = \
 
 nomeolvides_VALAFLAGS = \
 	--pkg gee-1.0 \
-	--pkg gtk+-3.0
+	--pkg gtk+-3.0 -g
 
 nomeolvides_LDFLAGS = \
 	-Wl,--export-dynamic

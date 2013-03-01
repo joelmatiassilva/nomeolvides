@@ -141,22 +141,42 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		delete_dialog.destroy ();
 	}
 
-	public void open_file ( string archivo ) {
-		string todo;
+	public void open_file ( string nombre_archivo, FuentesTipo tipo ) {
+		File archivo = null;
+		uint8[] contenido;
+		string todo = "";
 		string[] lineas;
 		Hecho nuevoHecho;
 		int i;	
 
+		if (tipo == FuentesTipo.LOCAL) {
+			try {
+				archivo = File.new_for_path ( nombre_archivo );
+			}  catch (Error e) {
+				error (e.message);
+			}
+		}
+		
+		if (tipo == FuentesTipo.HTTP) {
+			try {
+				archivo = File.new_for_uri ( nombre_archivo );
+				
+			}  catch (Error e) {
+				error (e.message);
+			}
+		}
+		
 		try {
-			FileUtils.get_contents (archivo, out todo);
+			archivo.load_contents(null ,out contenido, null);
 		}  catch (Error e) {
 			error (e.message);
 		}
 		
+		todo = (string) contenido;
 		lineas = todo.split_set ("\n");
 
 		for (i=0; i < (lineas.length - 1); i++) {
-        	nuevoHecho = new Hecho.json(lineas[i], archivo);
+        	nuevoHecho = new Hecho.json(lineas[i], nombre_archivo);
 			if ( nuevoHecho.nombre != "null" ) {
 				this.hechos_view.agregar_hecho(nuevoHecho);
 			}
@@ -171,7 +191,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		abrir_archivo.set_transient_for ( this as Window );
 
 		if (abrir_archivo.run () == ResponseType.ACCEPT) {
-            this.open_file ( abrir_archivo.get_filename () );
+            this.open_file ( abrir_archivo.get_filename (), FuentesTipo.LOCAL );
 		}
 
 		abrir_archivo.close ();
@@ -199,7 +219,7 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		ArrayList<Hecho> lista;
 		string archivo;
 		string a_guardar = "";
-		ArrayList<string> lista_archivos = this.fuentes.lista_de_archivos ();
+		ArrayList<string> lista_archivos = this.fuentes.lista_de_archivos ( FuentesTipo.LOCAL);
 		lista = this.hechos_view.lista_de_hechos ();
 	
 		for (i=0; i < lista_archivos.size; i++) {
@@ -258,12 +278,16 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 	public void cargar_fuentes_predefinidas ( HechosFuentes fuentes ) {		
 		int indice;
-		ArrayList<string> archivos = fuentes.lista_de_archivos ();
+		ArrayList<string> locales = fuentes.lista_de_archivos ( FuentesTipo.LOCAL );
+		ArrayList<string> http = fuentes.lista_de_archivos ( FuentesTipo.HTTP );
 
 		this.fuentes = fuentes;
 		
-		for (indice = 0; indice < archivos.size; indice++ ) {
-			this.open_file (archivos[indice] );
+		for (indice = 0; indice < locales.size; indice++ ) {
+			this.open_file (locales[indice], FuentesTipo.LOCAL );
+		}
+		for (indice = 0; indice < http.size; indice++ ) {
+			this.open_file (http[indice], FuentesTipo.HTTP );
 		}
 	}
 

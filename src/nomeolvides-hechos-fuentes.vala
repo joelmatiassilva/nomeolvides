@@ -102,7 +102,7 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 		return temp;
 	}
 	
-	public ArrayList<string> lista_de_archivos () {
+	public ArrayList<string> lista_de_archivos (FuentesTipo tipo) {
 		TreeIter iter;
 		Value value_fuente;
 		Fuente fuente;
@@ -112,7 +112,9 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 		do {
 			this.fuentes_liststore.get_value(iter, 4, out value_fuente);
 			fuente = value_fuente as Fuente;
-			retorno.add ( fuente.direccion_fuente + fuente.nombre_archivo );
+			if (fuente.tipo_fuente == tipo) {
+				retorno.add ( fuente.direccion_fuente + fuente.nombre_archivo );
+			}
 		}while (this.fuentes_liststore.iter_next(ref iter));
 
 		return retorno;

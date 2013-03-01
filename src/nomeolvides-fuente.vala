@@ -81,7 +81,7 @@ public class Nomeolvides.Fuente : GLib.Object{
 }
 
 
-public enum FuentesTipo {
+public enum Nomeolvides.FuentesTipo {
 	LOCAL,
 	HTTP;
 

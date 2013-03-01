@@ -102,6 +102,21 @@ public class Nomeolvides.Hecho : GLib.Object {
 		}
 	}
 
+	public string nombre_para_archivo () {
+		string retorno = this.nombre;
+
+		retorno = retorno.replace (" ","-");
+		retorno = retorno.down();
+		retorno = retorno.replace ("á", "a");
+		retorno = retorno.replace ("é", "e");
+		retorno = retorno.replace ("í", "i");
+		retorno = retorno.replace ("ó", "o");
+		retorno = retorno.replace ("ú", "u");
+		retorno = retorno.replace ("ñ", "ni");
+
+		return retorno;
+	}
+
 	private string ponerSaltoDeLinea ( string inicial ) {
 
 		string saltoDeLinea = "\n";

@@ -278,17 +278,16 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		Hecho hecho = this.hechos_view.get_hecho_cursor ();
 		if( hecho != null) {
 			string asunto = "Envío un hecho para contribuir con la base de datos oficial";
-			string cuerpo = "Estimados quisiera contribuir con este hecho a mejorar la base de datos oficial de Nomeolvides.";
-			string direccion = "fernando@softwareperonista.com.ar";
-			string archivo = GLib.Environment.get_user_config_dir () + "/nomeolvides/"+hecho.nombre+".json";
+			string cuerpo = "Estimados, quisiera contribuir con este hecho a mejorar la base de datos oficial de Nomeolvides.";
+			string direccion = "fernando@softwareperonista.com.ar, andres@softwareperonista.com.ar";
+			string archivo = GLib.Environment.get_tmp_dir () + "/"+ hecho.nombre_para_archivo() +".json";
 
 			try {
 				FileUtils.set_contents (archivo, hecho.a_json ());
 			}  catch (Error e) {
 				error (e.message);
 			}
-			string commando = @"xdg-email --subject '$asunto' --body '$cuerpo' --attach '$archivo' $direccion"; 
-			//stdout.printf(@"$commando\n"); 
+			string commando = @"xdg-email --subject '$asunto' --body '$cuerpo' --attach '$archivo' $direccion";
   
 			try {
 				Process.spawn_command_line_async( commando );

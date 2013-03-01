@@ -1,3 +1,20 @@
+Versión 0.4
+
+Está la segunda versión de prueba.
+
+* Se puede gestionar bases de datos de hechos hitóricos.
+* Se muestra claramente qué año se está mostrando.
+* Se mejoró el diálogo de ingreso de datos.
+* Se puede detallar de qué fuente bibliográfica se tomó el hecho.
+* Se creó la base de datos oficial de hechos históricos de Nomeolvides(bastante vacía aún), la cual se carga al inicio de la aplicación.
+* Se permite enviar a los desarrolladores hechos nuevos para agregar a la base de datos oficial.
+* Se arrglaron algunos bugs menores.
+
+Versión 0.2.1
+
+* Se agregó el application menu.
+* Se agregó el diálogo "Acerca de..."
+
 Versión 0.2
 
 Esta es la primer versión de prueba. Ya cuenta con las acciones básicas para usar la aplicación:

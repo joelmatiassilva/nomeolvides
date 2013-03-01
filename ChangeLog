@@ -1,4 +1,72 @@
 
+v0.4 / 2013-02-28 
+==================
+
+  * Ahora en el diálogo de añadir hechos sólo se listan las bases de datos locales. Se actualizafon los nombre de "Fuentes" a "Bases de datos"
+  * Merge branch 'dev'
+  * Se agregó la Fuente Oficial por defecto
+  * Ahora se ven correctamente el tipo de fuente en el dialogo de las fuentes
+  * Ahora carga archivos remotos
+  * Ahora el archivo con el hecho a enviar se guarda en la carpeta temporal del usuario, en gral /tmp. Ahora el nombre del archivo es el nombre del hecho, pero sin espacios ni caracteres "raros".
+  * Ahora el botón para enviar aparece en la toolbar al elegir un hecho. Ahora al enviar un hecho, el mismo se envia como un archivo adjunto.
+  * Se agregó la función FuenteTipo.to_string Se agregó la función FuenteTipo.convertir Ahora se carga el tipo correctamente en Nomeolvides.Fuentes.json Ahora se guarda correctamente el tipo en Nomeolvides.Fuentes.a_json
+  * Ahora se pueden enviar hechos, de a uno, a los desarrolladores. Todo está hecho para que sea muy mejorable. fixed #39
+  * Merge branch 'master' of github.com:softwareperonista/nomeolvides
+  * Ahora se pueden editar las fuentes agregadas. fixed #30 fixed #35 (gracias Fernando Fernandez!)
+  * Se corrigió el bug que hacía que al borrar una fuente no dejaran de mostrarse los hechos de la misma en la aplicación hasta que sse reinicie la misma
+  * Se agregó la fuente a la vista del hecho. closes #38
+  * Se agregó el campo Fuente(cita) a la clase hecho. rel #38
+  * Merge branch 'master' of github.com:softwareperonista/nomeolvides
+  * Ahora cuando se eelimina el último Hecho de una Fuente, al guardar, esta se vacaía correctamente. fixes #43
+  * Ahora el dialogo de de gestión de fuentes tiene una toolbar para añadir, borrar o editar. Por ahora solo funciona borrar. Se hiciron cambios menores en la redacción del código en algunos archivos.
+  * Se eliminó un printf con fines de debug
+  * Se solucionó un warning en lalinea que crea el directorio de configuración
+  * Ahora hay que apretar Aplicar en el dialogo de configuracion de fuentes para confirmar las fuentes agregadas. fixes #42
+  * Se modificó el dialogo de configuracion de fuentes, ahora el boton añadir no emite respuesta en el dialogo. rel #42
+  * Se reemplazó el botón "Guardar como" de la toolbar por "exportar" en el appmenu. closes #41
+  * Se eliminario y corrigieron algunas lineas del commit anterior
+  * Se elimino la variable Nomeolvides.Window.anio_label, dado que no se usaba Se agregó una señal al cambiar el año mostrado en Nomeolvides.ViewHechos Solucionado el bug que no mostraba el año en el label de la toolbar al inciar el programa. fixes #14
+  * Se solucionó un bug con los saltos de linea en los archivos json.
+  * Ahora las fuentes predeterminadas se guardan y se cargan al inicio de la app desde un archivo en $HOME/.config/nomeolvides Se cambió el nombre de la función Hecho.aJson por Hecho.a_json. Se agregó la función Fuente.a_json
+  * Se arregló un pequeño bug al cargar una fuente sin hechos.
+  * Se rediseñó el diálogo de agregar/editar hechos para que sea más estático y funcional.
+  * Merge branch 'dev'
+  * Se hizo más amistosa la forma de elegir la fecha cuando se agrega/edita un hecho.
+  * Merge branch 'master' of github.com:softwareperonista/nomeolvides
+  * Se modificó el label de la toolbar para hacerlo mas entendible. rel #14
+  * Se agregó un label con el año seleccionado a la toolbar. rel #14
+  * Se cambió en diálogo para añadir fuentes para corregir un bug si se apretaba el botón Cancelar.
+  * Se modificó el dialogo de añadir Fuentes para que se puede elegir un archivo desde un OpenFileDialog.
+  * Ahora los diálogos de editar y de agregar hechos muestran el nombre de la fuente y no la dirección.
+  * Ahora el usuario puede agregar Fuentes de Hechos históricos. Cuando se agrega una fuente de hecho histórico se actualizan los datos en Nomeolvides.Windows.
+  * Se cambió el nombre de la clase Nomeolvides.AddDialog a Nomeolvides.AddHechoDialog, y su respectivo archivo. Se cambió el nombre de la clase Nomeolvides.EditDialig a Nomeolvides.EditHechoDialog y su respectivo archivo.
+  * Se mejoró la implementación de Nomeolvides.DialogoHecho en Nomeolvides.AddDialog y Nomeolvides.editDialog usando el constructo de la clase madre: base.
+  * Ahora el AppMenu se crea dinámicamente, para evitar problemas con la ubicación del archivo .ui.
+  * Se creo la clase Nomeolvides.FuentesDialog. Nomeolvides.HechosFuentes ahora hereda de GLib.Object y ya no de Gtk.Dialog. Todo esto para separar las tareas referentes a las fuentes del dialogo de configuración.
+  * Se hicieron todos los diálogos modal y además se hizo que impidan interactuar con otra ventana de la aplicación mientras están abiertos.
+  * Se actualizaron README y README.md
+  * Se arregló un bug en Nomeolvides.Window, por el que no guardaba todos los hechos al presionar "Guardar". Se corregieron algunos errores en los hechos de prueba.
+  * Se agregó el tipo de fuente FuenteTipo y se modificaron las lineas respectivas para usarlo. Referente al issue #40
+  * Se mejoró el ícono.
+  * Se mergeo mmi rama dev con master.
+  * Merge branch 'dev'
+  * Ahora se puede elegir y cambiar el archivo al que pertenece un hecho desde los dialogos de edición y creación. Se agregó un archivo más con hechos, para mejor prueba.
+  * Se agregó la variable Nomeolvides.Hecho.archivo_fuente, que contiene la dirección del archivo al que pertenece ese hecho. Ahora el botón Guardar de Nomeilvides.MainToolbar guarda los Hechos en el archivo que cada Hecho diga, en forma silenciosa. Se agregó el bontón Guardar Como a Nomeolvides.Toolbar el cual hace lo que antes hacía el bontón Guardar.
+  * Se cambió el widget descripcion de los dialogos para editar y añadir hechos de Gtk.Entry a Gtk.TextView Se creó la funcion Nomeolvides.DialogoHecho.crear_respuesta Ahora Nomeolvides.AddDialog.aplicar llama a Nomeolvides.DialogoHecho.crear_respuesta Ahora Nomeolvides.EditDialog.modificar llama a Nomeolvides.DialogoHecho.crear_respuesta
+  * Ahora Nomeolvides.Fuente hereda de GLib.Object. Ahora ListStoreFuentes ahora también guarda el objeto Fuente. Se creó la clase Nomeolvides.TreeViewFuentes para mejorar la lectura y distribución del código.
+  * Se puso el path relativo para cargar el archivo del app menu, ya que esta es la rama de desarrollo.
+  * Se crearon las clases Nomeolvides.Fuente y Nomeolvides.ListStoreFuente para mejorar el manejo de las fuentes predeterminadas. Debido a un problema que no pude solucionar Nomeolvides.ListStoreFuentes no guarda el objeto Nomeolvides.Fuente, porque no reconoce el typeof, por lo que esa parte del código se comentó hasta que se encuentre una solución.
+  * Se arregló un bug en dialogo de agregar fuente predetermindas.
+  * Se agregó el dialogo que muestra la fentes predeterminadas para cargar datos al inicio de la applicación. Se agregó la entrada al menu para el dialogo de fuentes predeterminadas. Se agregó la funciones necesarias para que al inicio se cargen las fuentes predeterminadas. Se agregó información del proyecto a configure.ac y se actualizó la versión.
+  * Se dividio la función Nomeolvides.Window.open_file para separa el dialogo selección de archivo de la apertura del archivo. Ahora están las funciones Nomeolvides.open_file y Nomeolvides.open_file_dialog Se dividio la función Nomeolvides.Window.save_file para separa el dialogo selección de archivo de la apertura del archivo. Ahora están las funciones Nomeolvides.save_file y Nomeolvides.save_file_dialog
+  * Ahora la versión del programa se llama usando Config.VERSION. La clase Nomeolvides.App, ya no tiene la variable miembro version.
+
+0.2.1 / 2013-01-25
+
+  * Se arregló el ícono para que se vea correctamente en Unity
+  * Se agregó el Application Menu
+  * Se crearon los branches 0.2 y estable Se renombró el tag v0.2 a 0.2
+
 0.2 / 2013-01-19 
 ==================
 

@@ -49,7 +49,9 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 		do {
 			this.fuentes_liststore.get_value(iter, 4, out value_fuente);
 			fuente = value_fuente as Fuente;
-			guardar += fuente.a_json () + "\n";
+			if (fuente.tipo_fuente == FuentesTipo.LOCAL) {
+				guardar += fuente.a_json () + "\n";
+			}
 		}while (this.fuentes_liststore.iter_next(ref iter));
 		
 		try {
@@ -65,6 +67,9 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 		Fuente nueva_fuente;
 		int i;	
 		File archivo_config = File.new_for_path (this.directorio_configuracion + this.archivo);
+
+		var fuente_oficial = new Fuente ( "Fuente oficial" , "base_de_datos.json", "https://dl.dropbox.com/u/14325890/nomeolvides/", FuentesTipo.HTTP );
+		this.fuentes_liststore.agregar_fuente ( fuente_oficial );
 		
 		if (archivo_config.query_exists () ) {
 			try {
@@ -74,7 +79,6 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 			}
 		
 			lineas = todo.split_set ("\n");
-
 			for (i=0; i < (lineas.length - 1); i++) {
         		nueva_fuente = new Fuente.json(lineas[i]);
 				if ( nueva_fuente.nombre_fuente != "null" ) {
